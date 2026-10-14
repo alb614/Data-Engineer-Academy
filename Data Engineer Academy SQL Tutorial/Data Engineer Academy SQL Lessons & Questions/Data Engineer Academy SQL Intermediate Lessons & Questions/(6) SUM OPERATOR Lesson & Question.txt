@@ -1,0 +1,100 @@
+Introduction: 
+The SQL SUM function is a powerful tool that allows you to calculate the total sum of numeric values in a specified column of a database table. This function is particularly useful when you need to perform numerical aggregations on your data, such as adding up sales amounts, calculating total expenses, or determining the sum of scores. The SUM function is commonly used in conjunction with the SELECT statement to perform aggregations and generate meaningful insights from your data. In this document, we will explore the syntax and usage of the SQL SUM function to enhance your data analysis skills and make your queries more informative.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL SUM function is as follows:
+
+SELECT SUM(numeric_column) AS sum_result FROM table_name;
+
+Calculating the Sum of Numeric Values: 
+The SUM function is applied to a specific numeric column to calculate the sum of all its values. For example:
+
+SELECT SUM(sales_amount) AS total_sales FROM sales;
+
+This query will retrieve the total sum of the "sales_amount" column in the "sales" table and display it as "total_sales."
+
+ 
+
+Summing Values with Conditions: 
+You can use the SUM function in combination with conditional statements, such as the WHERE clause, to calculate the sum of values that meet specific criteria. For instance:
+
+SELECT SUM(quantity_sold) AS total_sold_laptops FROM products WHERE product_name = 'Laptop';
+
+This query will calculate the total quantity of laptops sold by summing the "quantity_sold" values in the "products" table where the product name is 'Laptop.'
+
+ 
+
+Summing Values with GROUP BY: 
+The SUM function can be used with the GROUP BY clause to calculate the sum of numeric values within groups based on a particular column's values. This is useful for generating group-level statistics. For example:
+
+SELECT department, SUM(salary) AS total_salary_expense FROM employees GROUP BY department;
+
+This query will group employees by their respective departments and calculate the total salary expense in each department.
+
+ 
+
+Handling NULL Values: 
+The SUM function ignores NULL values and only includes non-null values in its calculation. If all values in the specified column are NULL, the result will be NULL as well. For example:
+
+SELECT SUM(total_amount) AS total_revenue FROM orders;
+
+This query will calculate the total revenue from the "orders" table, excluding any NULL values in the "total_amount" column.
+
+ 
+
+Conclusion: 
+The SQL SUM function is a valuable tool for performing numerical aggregations and gaining valuable insights into your data. By understanding and utilizing the examples and concepts covered in this document, you can leverage the SUM function to perform data analysis effectively on your edtech platform.
+
+ 
+
+Question:
+Retrieve the department and the total salary (sum of salaries) as "TotalSalary" for each department. Display the results in descending order based on the total salary expenses.
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+
+Sample Input:
+| employees                                     |
+|-----------------------------------------------|
+| employee_id | first_name | last_name | department | salary | manager_id |
+|-------------|------------|-----------|------------|--------|------------|
+| 1           | John       | Doe       | Sales      | 65000.00| 3          |
+| 2           | Jane       | Smith     | Finance    | 75000.00| 4          |
+| 3           | Mike       | Johnson   | Sales      | 80000.00| 5          |
+| 4           | Emily      | Davis     | IT         | 70000.00| 5          |
+| 5           | Robert     | Brown     | HR         | 90000.00| NULL       |
+| 6           | Maria      | Garcia    | Finance    | 78000.00| 4          |
+| 7           | Alex       | Lee       | HR         | 85000.00| 5          |
+
+
+Constraints:
+The input table employees contains valid data.
+
+
+Output Format:
+A result set with columns:
+department (varchar)
+TotalSalary (decimal)
+
+
+Sample Output:
+| department | TotalSalary |
+|------------|-------------|
+| HR         | 175000.00   |
+| Sales      | 145000.00   |
+| Finance    | 153000.00   |
+| IT         | 70000.00    |
+
+
+Explanation:
+The results include the department and the total salary (sum of salaries) as "TotalSalary" for each department. The output is ordered in descending order based on the total salary expenses.

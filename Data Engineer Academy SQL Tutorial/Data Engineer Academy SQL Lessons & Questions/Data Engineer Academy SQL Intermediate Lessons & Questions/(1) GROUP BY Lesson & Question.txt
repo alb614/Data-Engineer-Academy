@@ -1,0 +1,107 @@
+Introduction: 
+The SQL GROUP BY clause is a powerful tool that allows you to group rows of data based on the values in one or more columns of a database table. This function is particularly useful when you need to perform aggregate functions on specific groups of data, such as calculating totals, averages, counts, or other statistical measures. The GROUP BY clause is commonly used in conjunction with aggregate functions like SUM, COUNT, AVG, etc., to obtain valuable insights from your data. In this document, we will explore the syntax and usage of the SQL GROUP BY clause to enhance your data analysis skills and make your queries more informative.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL GROUP BY clause is as follows:
+
+SELECT column1, column2, ..., aggregate_function(columnX) AS alias FROM table_name GROUP BY column1, column2, ...;
+
+Grouping Rows Based on Columns: 
+The GROUP BY clause is applied to one or more columns, allowing you to group rows with similar values in those columns together. For example:
+
+SELECT department, COUNT(*) AS employee_count FROM employees GROUP BY department;
+
+This query will group employees by their respective departments and count the number of employees in each department.
+
+ 
+
+Using GROUP BY with Aggregate Functions:
+The GROUP BY clause is typically used in conjunction with aggregate functions, such as COUNT, SUM, AVG, MIN, or MAX. This enables you to calculate aggregated values within each group. For example:
+
+SELECT department, AVG(salary) AS average_salary FROM employees GROUP BY department;
+
+This query will group employees by department and calculate the average salary for each department.
+
+ 
+
+Filtering Data with HAVING Clause: 
+You can further filter the grouped data using the HAVING clause. The HAVING clause acts as a filter for aggregated results, allowing you to include only those groups that meet specific criteria. For example:
+
+SELECT department, AVG(salary) AS average_salary FROM employees GROUP BY department HAVING AVG(salary) > 50000;
+
+This query will calculate the average salary for each department and include only those departments where the average salary is greater than 50,000.
+
+ 
+
+Handling NULL Values: 
+When using GROUP BY, be aware that NULL values are treated as a single group. If you want to exclude NULL values from grouping, you can use the WHERE clause to filter them before applying GROUP BY.
+
+ 
+
+Combining GROUP BY with ORDER BY: 
+You can use the ORDER BY clause along with GROUP BY to sort the grouped data based on specific criteria, making it easier to analyze the results. For example:
+
+SELECT product_category, COUNT(*) AS product_count FROM products GROUP BY product_category ORDER BY product_count DESC;
+
+This query will group products by their categories and display the product count in descending order, showing the most popular categories first.
+
+ 
+
+Conclusion: 
+The SQL GROUP BY clause is a powerful tool for aggregating data into meaningful groups and obtaining valuable insights from your data. By understanding and utilizing the examples and concepts covered in this document, you can leverage the GROUP BY clause to perform data analysis effectively on your edtech platform.
+
+ 
+
+Question:
+Retrieve the department and the total salary expenses (sum of salaries) as "TotalSalaryExpenses" for each department. Display the results in descending order based on the "TotalSalaryExpenses".
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+
+Sample Input:
+| employees                                     |
+|-----------------------------------------------|
+| employee_id | first_name | last_name | department | salary | manager_id |
+|-------------|------------|-----------|------------|--------|------------|
+| 1           | John       | Doe       | Sales      | 65000.00| 3          |
+| 2           | Jane       | Smith     | Finance    | 75000.00| 4          |
+| 3           | Mike       | Johnson   | Sales      | 80000.00| 5          |
+| 4           | Emily      | Davis     | IT         | 70000.00| 5          |
+| 5           | Robert     | Brown     | HR         | 90000.00| NULL       |
+| 6           | Maria      | Garcia    | Finance    | 78000.00| 4          |
+| 7           | Alex       | Lee       | HR         | 85000.00| 5          |
+
+
+Constraints:
+The input table employees contains valid data.
+
+
+Output Format:
+A result set with columns:
+department (varchar)
+TotalSalaryExpenses (decimal)
+
+
+Sample Output:
+| department | TotalSalaryExpenses |
+|------------|----------------------|
+| HR         | 175000.00            |
+| Finance    | 153000.00            |
+| Sales      | 145000.00            |
+| IT         | 70000.00             |
+
+
+
+
+Explanation:
+The results include the department and the total salary expenses (sum of salaries) as "TotalSalaryExpenses" for each department. The output is ordered in descending order based on the "TotalSalaryExpenses."

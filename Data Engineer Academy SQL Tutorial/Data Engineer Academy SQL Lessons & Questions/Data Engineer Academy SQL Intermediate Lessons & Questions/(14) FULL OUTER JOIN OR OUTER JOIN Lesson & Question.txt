@@ -1,0 +1,122 @@
+Introduction: 
+The SQL FULL OUTER JOIN is a powerful tool that allows you to combine data from two or more tables based on a common column, including both matching and non-matching records from both tables. This function is particularly useful when you need to retrieve data from both tables, ensuring that all records from both tables are included in the result, whether they have matching values or not. The FULL OUTER JOIN is commonly used in conjunction with the SELECT statement to merge data and gain comprehensive insights from your database. In this document, we will explore the syntax and usage of the SQL FULL OUTER JOIN to enhance your data retrieval skills and make your queries more informative on your edtech platform.
+
+Note on FULL OUTER JOIN in MySQL
+
+MySQL does not support FULL OUTER JOIN natively. Unlike databases such as PostgreSQL, SQL Server, and Oracle, where FULL OUTER JOIN is a built-in join type, MySQL requires a workaround (typically combining a LEFT JOIN and a RIGHT JOIN with UNION) to achieve the same result.
+
+Because this behavior is MySQL-specific and often confusing for learners, make sure to watch the video provided in this lesson, where the difference is explained visually and step-by-step, including how FULL OUTER JOIN works in other SQL dialects and how to simulate it in MySQL.
+
+Basic Syntax: 
+The basic syntax of the SQL FULL OUTER JOIN is as follows:
+
+SELECT column1, column2, ... FROM table1 FULL OUTER JOIN table2 ON table1.columnX = table2.columnY;
+
+Joining Tables with Complete and Incomplete Matches: 
+The FULL OUTER JOIN retrieves all the records from both the left table (table1) and the right table (table2) based on the specified condition in the ON clause. It includes matching records as well as non-matching records from both tables. For example:
+
+SELECT customers.customer_id, customers.customer_name, orders.order_id, orders.order_date FROM customers FULL OUTER JOIN orders ON customers.customer_id = orders.customer_id;
+
+This query will retrieve all customer and order data, including both matched orders and customers, as well as non-matched orders and customers.
+
+ 
+
+Retrieving Data from Multiple Tables: 
+You can use the FULL OUTER JOIN to combine data from more than two tables by extending the JOIN clauses and ON conditions. For example:
+
+SELECT order_items.order_id, order_items.product_name, customers.customer_name, shipments.shipment_status FROM order_items FULL OUTER JOIN orders ON order_items.order_id = orders.order_id FULL OUTER JOIN customers ON orders.customer_id = customers.customer_id FULL OUTER JOIN shipments ON orders.order_id = shipments.order_id;
+
+This query will retrieve product information along with customer names and shipment status for all order items. It will display NULL values for the shipment-related columns if there are no matching shipments for the orders.
+
+ 
+
+Combining FULL OUTER JOIN with Other Joins: 
+The FULL OUTER JOIN can be combined with other join types like INNER JOIN, LEFT JOIN, or RIGHT JOIN to create complex queries that suit your data analysis requirements.
+
+ 
+
+Handling NULL Values: 
+Since the FULL OUTER JOIN includes non-matching records from both tables and displays NULL values for those records, it is essential to handle NULL values appropriately when performing calculations or aggregations.
+
+ 
+
+Performance Considerations: 
+The FULL OUTER JOIN may not be as performant as other types of joins, especially when dealing with large datasets. It involves processing more records and can lead to slower query execution.
+
+ 
+
+Conclusion: 
+The SQL FULL OUTER JOIN is a valuable tool for combining data from multiple tables while including both complete and incomplete matches for comprehensive data analysis. By understanding and utilizing the examples and concepts covered in this document, you can leverage the FULL OUTER JOIN to merge data effectively and perform comprehensive data analysis on your edtech platform.
+
+ 
+
+Question:
+Retrieve a list of customer_id, customer_name and their corresponding order_id, order_date and order_amount for customers who have placed an order. For other customers order details can be null as they haven't placed an order.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+
+
+Sample Input:
+| customers                                     |
+|-----------------------------------------------|
+| customer_id | customer_name | age | city | email             | address               |
+|-------------|----------------|-----|------|-------------------|-----------------------|
+| 1           | John Doe       | 30  | NY   | john.doe@email.com| 123 Main Street       |
+| 2           | Jane Smith     | 25  | LA   | jane.smith@email.com| 456 Oak Avenue        |
+| 3           | Mike Johnson   | 35  | SF   | mike.j@email.com  | 789 Pine Boulevard    |
+| 4           | Emily Davis    | 28  | CHI  | emily.d@email.com | 101 Elm Street        |
+
+| orders                                  |
+|----------------------------------------|
+| order_id | order_date | order_amount  | customer_id | order_status | shipping_address     |
+|----------|------------|---------------|-------------|--------------|-----------------------|
+| 101      | 2023-01-15 | 120.00        | 1           | Completed    | 123 Main Street       |
+| 102      | 2023-02-20 | 250.00        | 1           | Shipped      | 123 Main Street       |
+| 103      | 2023-03-10 | 180.00        | 2           | Completed    | 456 Oak Avenue        |
+| 104      | 2023-04-05 | 300.00        | 3           | Completed    | 789 Pine Boulevard    |
+| 105      | 2023-05-12 | 150.00        | 2           | Shipped      | 456 Oak Avenue        |
+| 106      | 2023-06-08 | 200.00        | 1           | Completed    | 123 Main Street       |
+
+
+Constraints:
+The input tables customers and orders contain valid data.
+
+
+Output Format:
+A result set with columns:
+customer_id (int)
+customer_name (varchar)
+order_id (int)
+order_date (date)
+order_amount (decimal)
+shipping_address   varchar
+
+
+Sample Output:
+| customer_id | customer_name | order_id | order_date | order_amount |
+|-------------|----------------|----------|------------|--------------|
+| 1           | John Doe       | 101      | 2023-01-15 | 120.00       |
+| 1           | John Doe       | 102      | 2023-02-20 | 250.00       |
+| 2           | Jane Smith     | 103      | 2023-03-10 | 180.00       |
+| 3           | Mike Johnson   | 104      | 2023-04-05 | 300.00       |
+| 2           | Jane Smith     | 105      | 2023-05-12 | 150.00       |
+| 1           | John Doe       | 106      | 2023-06-08 | 200.00       |
+| 4           | Emily Davis    | NULL     | NULL       | NULL         |
+

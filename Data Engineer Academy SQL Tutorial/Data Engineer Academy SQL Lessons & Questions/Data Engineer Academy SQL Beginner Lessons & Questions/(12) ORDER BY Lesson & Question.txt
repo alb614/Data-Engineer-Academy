@@ -1,0 +1,103 @@
+Introduction: 
+The SQL ORDER BY clause is a fundamental feature that allows you to sort the results of your SQL queries in a specified order. It is used in conjunction with the SELECT statement to arrange the retrieved rows based on one or more columns' values. Sorting data is crucial for presenting information in a meaningful and organized manner. In this document, we will explore the syntax and usage of the SQL ORDER BY clause to enhance your data presentation skills and make your queries more informative.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL ORDER BY clause is as follows:
+
+SELECT column1, column2, ... FROM table_name ORDER BY column1 [ASC|DESC], column2 [ASC|DESC], ...;
+
+Sorting in Ascending and Descending Order: 
+The ORDER BY clause can sort data in either ascending (ASC) or descending (DESC) order. By default, the sorting is done in ascending order if the sorting order is not explicitly specified. For example:
+
+SELECT first_name, last_name FROM employees ORDER BY first_name ASC, last_name DESC;
+
+This query will sort the employee names in ascending order of their first names and in descending order of their last names.
+
+ 
+
+Sorting by Multiple Columns:
+You can use the ORDER BY clause to sort data based on multiple columns. In such cases, the data is sorted by the first column specified, and if two rows have the same value in that column, the secondary column is used to break the tie, and so on. For example:
+
+SELECT product_name, unit_price, category FROM products ORDER BY category ASC, unit_price DESC;
+
+This query will sort the products by their category in ascending order, and within each category, the products will be sorted in descending order of their unit prices.
+
+ 
+
+Sorting with Numeric and Text Columns:
+When sorting numeric columns, the values are ordered based on their numerical magnitude. For text (string) columns, the sorting is done based on the character sequence following the collation rules of the database. For example:
+
+SELECT product_name, unit_price FROM products ORDER BY unit_price DESC;
+
+This query will sort the products in descending order of their unit prices, assuming the unit_price column is of a numeric data type.
+
+ 
+
+Sorting with Dates:
+Date columns can also be sorted using the ORDER BY clause. The sorting is done based on the chronological order of dates. For example:
+
+SELECT customer_name, order_date FROM orders ORDER BY order_date ASC;
+
+This query will sort the orders in ascending order of their order dates.
+
+ 
+
+Limiting Sorted Results: 
+You can combine the ORDER BY clause with the LIMIT clause to retrieve a specified number of sorted records. For example:
+
+SELECT product_name, unit_price FROM products ORDER BY unit_price DESC LIMIT 10;
+
+This query will retrieve the top 10 most expensive products sorted in descending order of their unit prices.
+
+ 
+
+Conclusion: 
+The SQL ORDER BY clause is an essential tool for organizing and presenting data in a meaningful way. By understanding and utilizing the examples and concepts covered in this document, you can sort your SQL query results effectively and improve data presentation on your edtech platform.
+
+ 
+
+Question:
+Retrieve the product_id, product_name, category and unit_price of products. Order it by products higher to lower prices.
+
+Table: products 
+
+ColumnName          DataType
+product_id          int
+product_name        varchar 
+category            varchar
+unit_price          decimal
+
+
+Sample Input:
+products 
+| product_id | product_name | category | unit_price |
+|------------|--------------|----------|------------|
+| 1          | Laptop       | Electronics | 800.00    |
+| 2          | Smartphone   | Electronics | 500.00    |
+| 3          | Coffee Maker | Appliances  | 50.00     |
+| 4          | Blender       | Appliances | 200.00    |
+| 5          | Headphones    | Electronics | 120.00    |
+
+
+Constraints:
+The input table products contains valid data.
+
+
+Output Format:
+A result set with columns:
+product_id (int)
+product_name (varchar)
+category (varchar)
+unit_price (decimal)
+
+
+Sample Output:
+| product_id | product_name | category    | unit_price |
+|------------|--------------|-------------|------------|
+| 1          | Laptop       | Electronics | 800.00     |
+| 2          | Smartphone   | Electronics | 500.00     |
+| 4          | Blender       | Appliances  | 200.00     |
+| 5          | Headphones    | Electronics | 120.00     |
+| 3          | Coffee Maker | Appliances  | 50.00      |

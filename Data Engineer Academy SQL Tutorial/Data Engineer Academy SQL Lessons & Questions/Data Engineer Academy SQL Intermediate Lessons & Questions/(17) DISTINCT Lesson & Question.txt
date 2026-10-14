@@ -1,0 +1,105 @@
+Introduction: 
+The SQL DISTINCT keyword is a powerful tool that allows you to retrieve unique or distinct values from a specified column in a database table. This function is particularly useful when you need to eliminate duplicate records and focus on obtaining unique data elements. The DISTINCT keyword is commonly used in conjunction with the SELECT statement to filter out redundant data and streamline query results. In this document, we will explore the syntax and usage of the SQL DISTINCT keyword to enhance your data retrieval skills and make your queries more informative on your edtech platform.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL DISTINCT keyword is as follows:
+
+SELECT DISTINCT column1, column2, ... FROM table_name;
+
+ 
+Retrieving Unique Values: 
+The DISTINCT keyword is applied to one or more columns to return only the unique values in those columns. It ensures that duplicate records are eliminated from the query results. For example:
+
+SELECT DISTINCT department FROM employees;
+
+This query will retrieve the unique departments from the "employees" table, excluding any duplicate entries.
+
+ 
+
+Using DISTINCT with Multiple Columns: 
+You can use the DISTINCT keyword with multiple columns to retrieve unique combinations of values across those columns. This is especially useful when dealing with composite keys or multi-dimensional data. For example:
+
+SELECT DISTINCT first_name, last_name FROM customers;
+
+This query will retrieve unique combinations of first names and last names from the "customers" table, ensuring that no duplicates are included.
+
+ 
+
+Limiting Distinct Results: 
+You can combine the DISTINCT keyword with other SQL clauses, such as ORDER BY or WHERE, to refine your query and obtain more targeted results. For example:
+
+SELECT DISTINCT product_name FROM products WHERE price > 1000 ORDER BY product_name;
+
+This query will retrieve unique product names from the "products" table where the price is greater than 1000, and the results will be ordered alphabetically.
+
+ 
+
+Handling NULL Values: 
+When using the DISTINCT keyword, be aware that it treats NULL values as distinct entities. If your data contains NULL values, they will be included in the query results as separate entries. To handle NULL values, consider using the COALESCE or IFNULL functions to replace NULL with a default value before applying DISTINCT.
+
+ 
+
+DISTINCT with Aggregate Functions:
+The DISTINCT keyword can also be used with aggregate functions like COUNT, SUM, AVG, etc., to perform calculations on unique data elements. For example:
+
+SELECT COUNT(DISTINCT department) AS total_departments FROM employees;
+
+This query will count the number of unique departments in the "employees" table.
+
+ 
+
+Conclusion: 
+The SQL DISTINCT keyword is a valuable tool for removing duplicate values and retrieving unique data elements from your queries. By understanding and utilizing the examples and concepts covered in this document, you can leverage the DISTINCT keyword to streamline data retrieval and perform targeted analysis on your edtech platform.
+
+ 
+
+Question:
+Retrieve all unique departments. Display department.
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+
+Sample Input:
+| employees                                  |
+|--------------------------------------------|
+| employee_id | first_name | last_name | department | salary | manager_id |
+|-------------|------------|-----------|------------|--------|------------|
+| 1           | John       | Doe       | Sales      | 60000  | 3          |
+| 2           | Jane       | Smith     | Marketing  | 55000  | 4          |
+| 3           | Mike       | Johnson   | IT         | 70000  | 5          |
+| 4           | Emily      | Davis     | Finance    | 80000  | 6          |
+| 5           | Chris      | Evans     | Sales      | 65000  | 3          |
+| 6           | Emma       | Wilson    | Marketing  | 60000  | 4          |
+| 7           | David      | Lee       | IT         | 75000  | 5          |
+
+
+Constraints:
+The input table employees contains valid data.
+
+
+Output Format:
+A result set with a column:
+department (varchar)
+
+
+Sample Output:
+| department |
+|------------|
+| Sales      |
+| Marketing  |
+| IT         |
+| Finance    |
+
+
+Explanation:
+The output includes all unique departments from the employees table.

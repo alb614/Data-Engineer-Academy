@@ -1,0 +1,115 @@
+Introduction: 
+The SQL RIGHT JOIN is a powerful tool that allows you to combine data from two or more tables based on a common column, even if there are incomplete matches in the first table. This function is particularly useful when you need to retrieve data from one table and include any matching records from another table, or simply display NULL values for non-matching records in the first table. The RIGHT JOIN is commonly used in conjunction with the SELECT statement to merge data and gain comprehensive insights from your database. In this document, we will explore the syntax and usage of the SQL RIGHT JOIN to enhance your data retrieval skills and make your queries more informative on your edtech platform.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL RIGHT JOIN is as follows:
+
+SELECT column1, column2, ... FROM table1 RIGHT JOIN table2 ON table1.columnX = table2.columnY;
+
+Joining Tables with Complete Matches: 
+The RIGHT JOIN retrieves all the records from the right table (table2) and any matching records from the left table (table1) based on the specified condition in the ON clause. If there are no matching records in table1, NULL values are used for columns from table1. For example:
+
+SELECT orders.order_id, orders.order_date, customers.customer_name FROM orders RIGHT JOIN customers ON orders.customer_id = customers.customer_id;
+
+This query will retrieve the order ID, order date, and customer name for all orders, including those without corresponding customers. Non-matching customers will display NULL values for the customer-related columns.
+
+ 
+
+Retrieving Data from Multiple Tables: 
+You can use the RIGHT JOIN to combine data from more than two tables by extending the JOIN clauses and ON conditions. For example:
+
+SELECT order_items.order_id, order_items.product_name, customers.customer_name, shipments.shipment_status FROM order_items RIGHT JOIN orders ON order_items.order_id = orders.order_id RIGHT JOIN customers ON orders.customer_id = customers.customer_id LEFT JOIN shipments ON orders.order_id = shipments.order_id;
+
+This query will retrieve product information along with customer names and shipment status for all order items, even if they do not have related shipments or customers.
+
+ 
+
+Combining RIGHT JOIN with Other Joins:
+The RIGHT JOIN can be combined with other join types like INNER JOIN or LEFT JOIN to create complex queries that suit your data analysis requirements.
+
+ 
+
+Handling NULL Values: 
+When using the RIGHT JOIN, be prepared to deal with NULL values in columns from the left table (table1) for non-matching records. Use appropriate functions like COALESCE or IFNULL to handle NULL values when performing calculations or aggregations.
+
+ 
+
+RIGHT JOIN vs. LEFT JOIN: 
+It's essential to understand the difference between RIGHT JOIN and LEFT JOIN. While RIGHT JOIN includes all records from the right table and matching records from the left table, LEFT JOIN includes all records from the left table and matching records from the right table.
+
+ 
+
+Conclusion: 
+The SQL RIGHT JOIN is a valuable tool for combining data from multiple tables, even when there are incomplete matches in the first table. By understanding and utilizing the examples and concepts covered in this document, you can leverage the RIGHT JOIN to merge data effectively and perform comprehensive data analysis on your edtech platform.
+
+ 
+
+Question:
+Exercise: Retrieve a list of orders with their order_id, order_date, order_amount  and the corresponding customer information (customer_name and email). Also include customers who have not made any orders.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+
+Sample Input:
+| customers                                     |
+|-----------------------------------------------|
+| customer_id | customer_name | age | city | email             | address               |
+|-------------|----------------|-----|------|-------------------|-----------------------|
+| 1           | John Doe       | 30  | NY   | john.doe@email.com| 123 Main Street       |
+| 2           | Jane Smith     | 25  | LA   | jane.smith@email.com| 456 Oak Avenue        |
+| 3           | Mike Johnson   | 35  | SF   | mike.j@email.com  | 789 Pine Boulevard    |
+
+| orders                                  |
+|----------------------------------------|
+| order_id | order_date | order_amount  | customer_id | order_status | shipping_address     |
+|----------|------------|---------------|-------------|--------------|-----------------------|
+| 101      | 2023-01-15 | 120.00        | 1           | Completed    | 123 Main Street       |
+| 102      | 2023-02-20 | 250.00        | 1           | Shipped      | 123 Main Street       |
+| 103      | 2023-03-10 | 180.00        | 2           | Completed    | 456 Oak Avenue        |
+| 104      | 2023-04-05 | 300.00        | 3           | Completed    | 789 Pine Boulevard    |
+| 105      | 2023-05-12 | 150.00        | 2           | Shipped      | 456 Oak Avenue        |
+| 106      | 2023-06-08 | 200.00        | 1           | Completed    | 123 Main Street       |
+
+
+Constraints:
+The input tables customers and orders contain valid data.
+
+
+Output Format:
+A result set with columns:
+order_id (int)
+order_date (date)
+order_amount (decimal)
+customer_name (varchar)
+email (varchar)
+
+
+Sample Output:
+| order_id | order_date | order_amount | customer_name | email                |
+|----------|------------|--------------|---------------|----------------------|
+| 101      | 2023-01-15 | 120.00       | John Doe      | john.doe@email.com   |
+| 102      | 2023-02-20 | 250.00       | John Doe      | john.doe@email.com   |
+| 103      | 2023-03-10 | 180.00       | Jane Smith    | jane.smith@email.com |
+| 104      | 2023-04-05 | 300.00       | Mike Johnson  | mike.j@email.com     |
+| 105      | 2023-05-12 | 150.00       | Jane Smith    | jane.smith@email.com |
+| 106      | 2023-06-08 | 200.00       | John Doe      | john.doe@email.com   |

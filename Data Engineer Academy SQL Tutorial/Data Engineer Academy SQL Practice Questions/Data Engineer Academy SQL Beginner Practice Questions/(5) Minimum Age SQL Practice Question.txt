@@ -1,0 +1,9 @@
+Question:
+Write an SQL query to find the minimum age among all customers in the customers_prc table.
+
+Tables: customers_prc
+ColumnName		Datatype
+customerid 		INT
+name 			VARCHAR
+age 			INT
+city 			VARCHAR

@@ -1,0 +1,91 @@
+Introduction: 
+The SQL TRIM function is a valuable tool used to remove leading and trailing spaces (or specified characters) from a given string. This function is indispensable for tasks that involve cleaning and formatting text data, ensuring data integrity and consistency. By mastering the TRIM function, you can efficiently remove unwanted spaces, improve data quality, and enhance your data manipulation capabilities. This document provides a comprehensive understanding of the TRIM function, its syntax, use cases, and practical examples to empower your data cleansing skills on your edtech platform.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the TRIM function is as follows:
+
+TRIM([characters FROM] string_expression)
+
+Understanding TRIM: The TRIM function is used to remove leading and trailing spaces from a given string. You can also specify specific characters to remove.
+
+ 
+
+Common Use Cases:
+a. Data Cleansing: Removing spaces that may cause inconsistency.
+
+b. Data Formatting: Ensuring consistent formatting of text data.
+
+c. User Input Processing: Trimming spaces from user-provided input.
+
+ 
+
+Practical Examples:
+Example 1 - Removing Leading and Trailing Spaces:
+
+SELECT TRIM(' ' FROM product_name) AS cleaned_name FROM products;
+
+Example 2 - Removing Trailing Characters:
+
+SELECT product_id, TRIM(TRAILING ' ' FROM product_name) AS trimmed_product_name, unit_price FROM products;
+
+
+Specifying Characters to Remove:
+You can use the optional "FROM" keyword followed by characters you want to remove. For example, TRIM('.,?!' FROM text) removes periods, commas, question marks, and exclamation marks.
+
+Handling Multibyte Characters:
+
+Depending on the database and character encoding, TRIM might behave differently with multibyte characters.
+
+ 
+
+Best Practices:
+a. Use TRIM to ensure consistent data formatting and integrity.
+
+b. Be cautious when specifying characters to remove to avoid unintended data loss.
+
+c. Test the behavior of TRIM with multibyte characters if your data involves them.
+
+ 
+
+Conclusion: 
+SQL TRIM function is a valuable asset for removing leading and trailing spaces from strings, facilitating data cleansing and formatting. By understanding the TRIM function's syntax, applications, and practical examples provided in this document, you can confidently eliminate unwanted spaces, improve data quality, and enhance your data manipulation capabilities on your edtech platform. This knowledge empowers you to efficiently manage textual content and maintain consistency within your database.
+
+ 
+
+Question:
+Retrieve customer information including customer_id, customer_name as "FullName", trimming the address as TrimmedAddress and City.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Constraints:
+The input table customers contains valid data.
+
+Sample Input:
+customers
+| customer_id | customer_name | age | city | email | address              |
+|-------------|---------------|-----|------|-------|----------------------|
+| 1           | John Doe      | 30  | NYC  | jdoe@gmail.com | 123 Main Street      |
+| 2           | Jane Smith    | 25  | LA   | jsmith@yahoo.com | 456 Oak Avenue       |
+| 3           | Mike Johnson  | 35  | CHI  | mjohnson@gmail.com | 789 Pine Boulevard   |
+
+Sample Output:
+| customer_id | FullName      | TrimmedAddress       | city |
+|-------------|---------------|----------------------|------|
+| 1           | John Doe      | 123 Main Street      | NYC  |
+| 2           | Jane Smith    | 456 Oak Avenue       | LA   |
+| 3           | Mike Johnson  | 789 Pine Boulevard   | CHI  |
+
+Explanation:
+The "FullName" column contains the customer_name.
+The "TrimmedAddress" column contains the trimmed address.
+The city column is displayed as it is.

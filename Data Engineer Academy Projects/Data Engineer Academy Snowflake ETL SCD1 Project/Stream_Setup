@@ -1,0 +1,16 @@
+-- A stream will capture any changed records from our
+-- source table.
+
+-- Set up the context by setting the role, warehouse
+-- and schema to be used.
+USE ROLE ACCOUNTADMIN;
+USE WAREHOUSE COMPUTE_WH;
+USE SCHEMA SCD1_DB.PUBLIC;
+
+-- Create the stream on the source table.
+CREATE OR REPLACE STREAM SCD1_DB.PUBLIC.CUSTOMER_STREAM
+ON TABLE SCD1_DB.PUBLIC.CUSTOMER_SOURCE
+APPEND_ONLY = TRUE;
+
+-- Test to see if the stream was created successfully.
+SELECT * FROM SCD1_DB.PUBLIC.CUSTOMER_STREAM;

@@ -1,0 +1,138 @@
+Introduction: 
+ 
+
+The SQL EXTRACT function is a powerful tool used to retrieve specific components (such as year, month, day, hour, minute, and second) from a given date or time value. This function is crucial for tasks that involve analyzing and manipulating temporal data for various insights. By mastering the EXTRACT function, you can efficiently extract meaningful information, perform date-based calculations, and enhance your data analysis capabilities. This document provides a comprehensive understanding of the EXTRACT function, its syntax, use cases, and practical examples to empower your data processing skills on your edtech platform.
+
+ 
+
+Basic Syntax: 
+ 
+
+The basic syntax of the EXTRACT function is as follows:
+
+EXTRACT(field FROM source)
+
+ 
+
+Understanding EXTRACT: 
+ 
+
+The EXTRACT function is used to retrieve specific components (fields) from date or time values.
+
+ 
+
+Common Use Cases:
+ 
+
+a. Date Analysis: Extracting year, month, or day for trend analysis.
+
+b. Time Analysis: Retrieving hours and minutes for time-based insights.
+
+c. Date Calculations: Performing calculations based on extracted components.
+
+ 
+
+Practical Examples:
+ 
+
+Example 1 - Extracting Year:
+
+SELECT EXTRACT(YEAR FROM order_date) AS order_year FROM orders;
+
+Example 2 - Analyzing Month:
+
+SELECT EXTRACT(MONTH FROM hire_date) AS hire_month FROM employees;
+
+Example 3 - Time-based Calculations:
+
+SELECT order_id, EXTRACT(HOUR FROM order_time) AS order_hour FROM orders;
+
+ 
+
+Available Fields:
+ 
+
+Common fields include YEAR, MONTH, DAY, DAYOFWEEK, HOUR, MINUTE, and SECOND.
+
+Handling Time Zones:
+
+Consider time zone differences when working with date and time values.
+
+ 
+
+Best Practices:
+ 
+
+a. Utilize EXTRACT for analyzing and manipulating date and time data.
+
+b. Combine EXTRACT with other functions for more sophisticated calculations.
+
+c. Verify data consistency before performing date-based operations.
+
+ 
+
+Conclusion: 
+ 
+
+SQL EXTRACT function is a valuable asset for retrieving specific components from date and time values, facilitating date-based analysis and calculations. By understanding the EXTRACT function's syntax, applications, and practical examples provided in this document, you can confidently extract meaningful information, perform temporal analysis, and enhance your data processing capabilities on your edtech platform. This knowledge empowers you to efficiently manage temporal data and gain insights into trends and patterns.
+
+ 
+
+Exercise:
+Retrieve all orders displaying order_id, order_status, order_amount and month of order_date as "MonthInWords". Also fetch and display customer_id and customer_name who have ordered.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+
+Constraints:
+The input tables (customers and orders) contain valid data.
+
+
+Sample Input:
+| customers                                      |
+|-----------------------------------------------|
+| customer_id | customer_name | age | city | email | address              |
+|-------------|---------------|-----|------|-------|----------------------|
+| 1           | John Doe      | 30  | NYC  | ...   | 123 Main Street      |
+| 2           | Jane Smith    | 25  | LA   | ...   | 456 Oak Avenue       |
+| 3           | Mike Johnson  | 35  | CHI  | ...   | 789 Pine Boulevard   |
+
+orders                                        
+| order_id | order_date  | order_amount | customer_id | order_status | shipping_address    |
+|----------|-------------|--------------|-------------|--------------|----------------------|
+| 101      | 2023-05-15  | 500.00       | 1           | Shipped      | 123 Main Street      |
+| 102      | 2023-06-20  | 750.00       | 2           | Delivered    | 456 Oak Avenue       |
+| 103      | 2023-07-25  | 300.00       | 1           | Pending      | 123 Main Street      |
+| 104      | 2023-08-30  | 1000.00      | 3           | Shipped      | 789 Pine Boulevard   |
+
+
+Sample Output:
+| order_id | order_status | order_amount | MonthInWords | customer_id | customer_name |
+|----------|--------------|--------------|--------------|-------------|----------------|
+| 101      | Shipped      | 500.00       | May          | 1           | John Doe       |
+| 102      | Delivered    | 750.00       | June         | 2           | Jane Smith     |
+| 103      | Pending      | 300.00       | July         | 1           | John Doe       |
+| 104      | Shipped      | 1000.00      | August       | 3           | Mike Johnson   |
+
+
+Explanation:
+The "MonthInWords" column contains the month name of the order_date.
+The result set includes information about the orders and the corresponding customers.

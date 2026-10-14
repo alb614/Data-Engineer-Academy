@@ -1,0 +1,10 @@
+Question:
+Write an SQL query to find the product name with the highest price in the products_prc table.
+
+Tables: products_prc
+ColumnName		Datatype
+productid		INT
+productname 	VARCHAR
+price 			DECIMAL
+category        VARCHAR
+quantityinstock INT

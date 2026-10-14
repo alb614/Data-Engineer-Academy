@@ -1,0 +1,71 @@
+Introduction: 
+The SQL JOIN operation on multiple keys is a powerful technique that allows you to combine data from two or more tables based on multiple common columns. This function is particularly useful when you need to retrieve data from your database with more complex relationships between tables. By joining on multiple keys, you can create more precise connections and gain comprehensive insights from your database. In this document, we will explore the syntax and usage of SQL JOIN on multiple keys to enhance your data retrieval skills and make your queries more informative on your edtech platform.
+
+ 
+
+Basic Syntax: 
+The basic syntax of SQL JOIN on multiple keys is as follows:
+
+SELECT column1, column2, ... FROM table1 JOIN table2 ON table1.columnX = table2.columnY AND table1.columnA = table2.columnB;
+
+
+Combining Tables on Multiple Keys: 
+The JOIN operation on multiple keys combines data from two or more tables based on the specified conditions in the ON clause. By matching multiple columns, you establish more complex relationships between the tables, resulting in a more precise data merge. For example:
+
+SELECT orders.order_id, orders.order_date, customers.customer_name FROM orders JOIN customers ON orders.customer_id = customers.customer_id AND orders.shipping_address = customers.address;
+
+This query will retrieve the order ID, order date, and customer name for orders that have matching customer IDs and the same shipping address.
+
+ 
+
+JOIN on Multiple Keys with More Tables: 
+You can use the JOIN operation on multiple keys with more than two tables to create even more intricate connections and relationships among your data. For example:
+
+SELECT orders.order_id, order_items.product_name, customers.customer_name, shipments.shipment_status FROM orders JOIN order_items ON orders.order_id = order_items.order_id JOIN customers ON orders.customer_id = customers.customer_id AND orders.shipping_address = customers.address LEFT JOIN shipments ON orders.order_id = shipments.order_id;
+
+This query will retrieve product information, customer names, and shipment status for orders with matching customer IDs and shipping addresses. If shipments exist for the orders, they will be included; otherwise, NULL values will be displayed for the shipment-related columns.
+
+ 
+
+Handling Complex Relationships: 
+Using SQL JOIN on multiple keys allows you to handle more complex relationships between tables, enabling you to join data based on multiple attributes that define their connections.
+
+ 
+
+Performance Considerations: 
+While Joining on multiple keys can provide more accurate data retrieval, it can also impact query performance, especially with large datasets. It is essential to optimize your database and use proper indexing to maintain efficient query execution.
+
+ 
+
+Combining JOIN on Multiple Keys with Other Clauses:
+You can combine JOIN on multiple keys with other clauses like WHERE, GROUP BY, HAVING, ORDER BY, etc., to perform more complex data analysis and manipulation.
+
+ 
+
+Conclusion: 
+The SQL JOIN operation on multiple keys is a valuable tool for combining data from multiple tables with more complex relationships. By understanding and utilizing the examples and concepts covered in this document, you can leverage JOIN on multiple keys to create precise connections and perform comprehensive data analysis on your edtech platform.
+
+ 
+
+Question:
+Retrieve customer_id, customer_name and address along with their order_id, order_date, order_amount, order_status and shipping_address of customers whose address and shipping address match.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address             varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar

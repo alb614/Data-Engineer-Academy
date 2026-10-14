@@ -1,0 +1,12 @@
+Question:
+
+
+Write an SQL query to find the total number of orders in the Orders table.
+
+Tables: orders_prc
+
+ColumnName		Datatype
+order_id		INT		 
+customer_id		INT
+order_date		DATE
+amount			INT

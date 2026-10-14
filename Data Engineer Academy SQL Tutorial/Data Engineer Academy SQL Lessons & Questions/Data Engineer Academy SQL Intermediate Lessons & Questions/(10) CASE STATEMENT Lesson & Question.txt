@@ -1,0 +1,151 @@
+Introduction: 
+The SQL CASE statement is a powerful tool that allows you to apply conditional logic to your SQL queries. This function is particularly useful when you need to perform different actions based on specific conditions within your data. The CASE statement enables you to create custom expressions, transform data, and generate new result sets based on various conditions. In this document, we will explore the syntax and usage of the SQL CASE statement to enhance your data manipulation skills and make your queries more versatile on your edtech platform.
+
+ 
+
+Basic Syntax:
+The basic syntax of the SQL CASE statement is as follows:
+
+ 
+
+SELECT column1, column2, ...,    
+ CASE WHEN condition1 THEN result1
+ WHEN condition2 THEN result2 ...        
+ ELSE default_result    
+ END AS alias
+FROM table_name;
+ 
+
+ 
+
+Simple CASE Statement: 
+The simple CASE statement checks a single expression against multiple conditions and returns the result associated with the first condition that evaluates to true. If no condition is satisfied, the ELSE clause provides a default result. For example:
+
+ 
+
+SELECT product_name,       
+ CASE 
+       WHEN category_id = 1 THEN 'Electronics'           
+       WHEN category_id = 2 THEN 'Clothing'           
+       WHEN category_id = 3 THEN 'Home and Kitchen'           
+ ELSE 'Other'       
+ END AS category
+ FROM products;
+This query will categorize products based on their category_id and display the corresponding category name. If the category_id does not match any condition, it will be labeled as 'Other.'
+
+ 
+
+Searched CASE Statement: 
+The searched CASE statement evaluates multiple conditions independently and returns the result of the first condition that is true. There is no specific expression being compared in the searched CASE statement. For example:
+
+SELECT product_name,       
+ CASE WHEN price >= 1000 THEN 'Expensive'           
+ WHEN price >= 500 AND price < 1000 THEN 'Moderate'           
+ ELSE 'Affordable'       
+ END AS price_category
+ FROM products;
+ 
+
+This query will assign price categories to products based on their price range. Products with a price greater than or equal to 1000 are labeled as 'Expensive,' those with a price between 500 and 1000 are labeled as 'Moderate,' and the rest are labeled as 'Affordable.'
+
+ 
+
+Using CASE with Aggregate Functions:
+The CASE statement can be used in conjunction with aggregate functions to perform conditional aggregations. For example:
+
+SELECT department,       
+ COUNT(*) AS total_employees,       
+ SUM(CASE WHEN is_manager = 1 THEN 1 ELSE 0 END) AS total_managers
+ FROM employees GROUP BY department;
+ 
+
+This query will calculate the total number of employees and the number of managers in each department.
+
+ 
+
+Nesting CASE Statements: 
+You can nest CASE statements within each other to perform more complex conditional logic. For example:
+
+SELECT order_id,       
+CASE WHEN order_status = 'Cancelled' THEN 'Cancelled'           
+ELSE (CASE WHEN is_shipped = 1 THEN 'Shipped'
+ELSE 'Pending'
+END)   
+END AS order_status
+FROM orders;
+ 
+
+This query will determine the order status based on whether it is 'Cancelled,' 'Shipped,' or 'Pending.'
+
+ 
+
+Using CASE in UPDATE Statements: 
+The CASE statement can also be used in UPDATE statements to modify data based on specific conditions. For example:
+
+UPDATE products SET stock_status =CASE WHEN stock_quantity > 0 THEN 'In Stock' ELSE 'Out of Stock END;
+
+This update statement will set the stock_status of products to 'In Stock' if their stock_quantity is greater than 0, otherwise, it will set it to 'Out of Stock.'
+
+ 
+
+Conclusion: 
+The SQL CASE statement is a versatile tool that allows you to apply conditional logic to your SQL queries. By understanding and utilizing the examples and concepts covered in this document, you can leverage the CASE statement to perform data transformation, custom expressions, and conditional aggregations on your edtech platform.
+
+ 
+
+Question:
+Retrieve the product_name, unit_price and a column named "PriceCategory" that categorizes products into three groups: "Low", "Medium", and "High" based on their price ranges. Use the following criteria:
+
+1. "Low" for products with price less than 200.
+2. "Medium" for products with price between 200 and 500.
+3. "High" for products with price greater than 500.
+
+Table: products 
+
+ColumnName          DataType
+product_id          int
+product_name        varchar 
+category            varchar
+unit_price          decimal
+
+
+Sample Input:
+| products                                     |
+|-----------------------------------------------|
+| product_id | product_name | category | unit_price |
+|------------|--------------|----------|------------|
+| 1          | Laptop       | Electronics | 800.00  |
+| 2          | Smartphone   | Electronics | 300.00  |
+| 3          | Headphones    | Electronics | 120.00  |
+| 4          | Microwave     | Appliances  | 250.00  |
+| 5          | Refrigerator  | Appliances  | 600.00  |
+| 6          | Blender       | Appliances  | 50.00   |
+| 7          | Desk Chair    | Furniture   | 180.00  |
+
+
+
+Constraints:
+The input table products contains valid data.
+
+
+Output Format:
+A result set with columns:
+product_name (varchar)
+unit_price (decimal)
+PriceCategory (varchar)
+
+
+Sample Output:
+| product_name   | unit_price | PriceCategory |
+|----------------|------------|----------------|
+| Laptop         | 800.00     | High           |
+| Smartphone     | 300.00     | Medium         |
+| Headphones     | 120.00     | Low            |
+| Microwave      | 250.00     | Medium         |
+| Refrigerator   | 600.00     | High           |
+| Blender        | 50.00      | Low            |
+| Desk Chair     | 180.00     | Low            |
+
+
+Explanation:
+The results include the product_name, unit_price, and a column named "PriceCategory" that categorizes products based on their price ranges. The output is categorized into "Low," "Medium," and "High" according to the specified criteria.

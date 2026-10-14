@@ -1,0 +1,112 @@
+Introduction: 
+The SQL JOIN operation with a Comparison Operator is a powerful tool that allows you to combine data from two or more tables based on specific conditions using comparison operators. This function is particularly useful when you need to retrieve data from your database by applying various comparison conditions to join multiple tables. The JOIN operation with a Comparison Operator enables you to merge data and gain precise insights from your database. In this document, we will explore the syntax and usage of the SQL JOIN with Comparison Operator to enhance your data retrieval skills and make your queries more informative on your edtech platform.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL JOIN with Comparison Operator is as follows:
+
+SELECT column1, column2, ... FROM table1 JOIN table2 ON table1.columnX = table2.columnY AND table1.columnZ > table2.columnW;
+
+Combining Tables with Comparison Operator: 
+ The JOIN operation with Comparison Operator combines data from two or more tables based on specific conditions defined using comparison operators (e.g., >, <, >=, <=, =, <>). The ON clause specifies the columns from each table that should be matched based on these conditions. For example:
+
+SELECT orders.order_id, orders.order_date, customers.customer_name FROM orders JOIN customers ON orders.customer_id = customers.customer_id AND orders.order_total > 1000;
+
+This query will retrieve the order ID, order date, and customer name for orders where the order total is greater than 1000.
+
+ 
+
+JOIN with Multiple Tables and Comparison Operator:
+You can use the JOIN operation with more than two tables and apply multiple comparison operators to filter data across the joined tables. For example:
+
+SELECT orders.order_id, order_items.product_name, customers.customer_name FROM orders JOIN order_items ON orders.order_id = order_items.order_id AND order_items.unit_price < 50 JOIN customers ON orders.customer_id = customers.customer_id AND customers.country = 'USA';
+
+This query will retrieve the order ID, product name, and customer name for order items with a unit price less than 50, placed by customers located in the USA.
+
+ 
+
+Handling Complex Conditions: 
+The JOIN operation with Comparison Operator allows you to handle more complex conditions by combining multiple comparison operators and logical operators (AND, OR) in the ON clause. For example:
+
+SELECT orders.order_id, orders.order_date, customers.customer_name FROM orders JOIN customers ON orders.customer_id = customers.customer_id AND (orders.order_total > 1000 OR customers.country = 'Canada');
+
+This query will retrieve the order ID, order date, and customer name for orders where the order total is greater than 1000 or customers are from Canada.
+
+ 
+
+Combining JOIN with Other Clauses: 
+The JOIN with Comparison Operator can be combined with other clauses like WHERE, GROUP BY, HAVING, ORDER BY, etc., to perform more complex data analysis.
+
+ 
+
+Conclusion: 
+The SQL JOIN with Comparison Operator is a valuable tool for combining data from multiple tables while applying specific conditions using comparison operators. By understanding and utilizing the examples and concepts covered in this document, you can leverage the JOIN with Comparison Operator to merge data effectively and perform precise data analysis on your edtech platform.
+
+ 
+
+Question:
+Retrieve a list of customer_id and customer_name and their corresponding order_id, order_date and order_amount, but only for orders with a total amount at least 500.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+
+Sample Input:
+| customers                                     |
+|-----------------------------------------------|
+| customer_id | customer_name | age | city | email             | address               |
+|-------------|----------------|-----|------|-------------------|-----------------------|
+| 1           | John Doe       | 30  | NY   | john.doe@email.com| 123 Main Street       |
+| 2           | Jane Smith     | 25  | LA   | jane.smith@email.com| 456 Oak Avenue        |
+| 3           | Mike Johnson   | 35  | SF   | mike.j@email.com  | 789 Pine Boulevard    |
+
+| orders                                  |
+|----------------------------------------|
+| order_id | order_date | order_amount  | customer_id | order_status | shipping_address     |
+|----------|------------|---------------|-------------|--------------|-----------------------|
+| 101      | 2023-01-15 | 120.00        | 1           | Completed    | 123 Main Street       |
+| 102      | 2023-02-20 | 150.00        | 1           | Shipped      | 123 Main Street       |
+| 103      | 2023-03-10 | 180.00        | 2           | Completed    | 456 Oak Avenue        |
+| 104      | 2023-04-05 | 600.00        | 3           | Completed    | 789 Pine Boulevard    |
+| 105      | 2023-05-12 | 520.00        | 2           | Shipped      | 456 Oak Avenue        |
+| 106      | 2023-06-08 | 200.00        | 1           | Completed    | 123 Main Street       |
+| 107      | 2023-07-15 | 800.00        | 2           | Shipped      | 456 Oak Avenue        |
+
+
+Output Format:
+A result set with columns:
+customer_id (int)
+customer_name (varchar)
+order_id (int)
+order_date (date)
+order_amount (decimal)
+
+
+Sample Output:
+| customer_id | customer_name | order_id | order_date | order_amount |
+|-------------|----------------|----------|------------|--------------|
+| 3           | Mike Johnson   | 104      | 2023-04-05 | 600.00       |
+| 2           | Jane Smith      | 105      | 2023-05-12 | 520.00       |
+| 1           | John Doe       | 107      | 2023-07-15 | 800.00       |
+
+
+Explanation:
+The output includes the customer_id, customer_name, order_id, order_date, and order_amount for orders with a total amount at least 500. The results are based on the modified sample input.

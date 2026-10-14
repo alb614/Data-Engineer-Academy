@@ -1,0 +1,102 @@
+Introduction: 
+The SQL NOT operator is a powerful tool that allows you to negate a condition in SQL queries, enabling more precise data filtering. It is used in combination with other comparison operators (such as =, <>, >, <, etc.) and logical operators (such as AND, OR) in the WHERE clause to retrieve rows that do not meet a specific condition. By using the NOT operator, you can exclude certain records from the result set, which is essential for fine-tuning your data retrieval in SQL. In this document, we will explore the syntax and usage of the SQL NOT operator to enhance your data filtering skills.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL NOT operator is as follows:
+
+SELECT * FROM employees WHERE NOT department = 'Sales';
+
+Using the NOT Operator: The NOT operator is placed before the condition in the WHERE clause to negate it. When the NOT operator is used, the rows that do not satisfy the condition will be included in the result set. For example:
+
+SELECT * FROM employees WHERE NOT department = 'Sales';
+
+This query will retrieve employees from the "employees" table who do not work in the 'Sales' department.
+
+ 
+
+Practical Examples:
+a. Negating Equality: Suppose you have a table of products, and you want to retrieve products that are not from the 'Electronics' category. You can use the NOT operator as follows:
+
+SELECT * FROM products WHERE NOT category = 'Electronics';
+
+This query will retrieve products that do not belong to the 'Electronics' category.
+
+b. Combining NOT with Other Operators: The NOT operator can be combined with other comparison and logical operators to create more complex conditions. For instance:
+
+SELECT * FROM orders WHERE NOT (order_amount > 1000 OR order_status = 'Pending');
+
+This query will retrieve orders with an order amount less than or equal to 1000 and not having a status of 'Pending.'
+
+ 
+
+Operator Precedence: 
+When combining multiple operators, including NOT, it's essential to consider operator precedence. Parentheses can be used to control the order of evaluation explicitly.
+
+ 
+
+Handling NULL Values: 
+The NOT operator can be used to filter rows based on NULL values as well.
+
+For example:
+
+SELECT * FROM employees WHERE manager_id IS NOT NULL;
+
+This query will retrieve employees who have a valid manager (i.e., manager_id is not NULL).
+
+ 
+
+Conclusion: 
+The SQL NOT operator is a valuable tool for negating conditions and performing precise data filtering in SQL queries. By understanding and utilizing the examples and concepts covered in this document, you can effectively exclude specific records from your result set and obtain more accurate data from your database.
+
+ 
+
+Question:
+Retrieve the employee_id, first_name, last_name, and department of employees who are not in the "Marketing" or "IT" departments.
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+
+Sample Input:
+employees 
+| employee_id | first_name | last_name | department | salary | manager_id |
+|-------------|------------|-----------|------------|--------|------------|
+| 1           | John       | Doe       | Sales      | 65000.00| 3          |
+| 2           | Jane       | Smith     | Finance    | 75000.00| 4          |
+| 3           | Mike       | Johnson   | Sales      | 80000.00| 5          |
+| 4           | Emily      | Davis     | IT         | 70000.00| 5          |
+| 5           | Robert     | Brown     | HR         | 90000.00| NULL       |
+
+
+Constraints:
+The input table employees contains valid data.
+
+
+Output Format:
+A result set with columns:
+employee_id (int)
+first_name (varchar)
+last_name (varchar)
+department (varchar)
+
+
+Sample Output:
+| employee_id | first_name | last_name | department |
+|-------------|------------|-----------|------------|
+| 1           | John       | Doe       | Sales      |
+| 2           | Jane       | Smith     | Finance    |
+| 3           | Mike       | Johnson   | Sales      |
+| 5           | Robert     | Brown     | HR         |
+
+
+Explanation:
+Employees who are not in the "Marketing" or "IT" departments are retrieved.

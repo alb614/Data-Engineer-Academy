@@ -1,0 +1,117 @@
+Introduction: 
+The SQL Window Function ROW_NUMBER() is a powerful tool for assigning a unique sequential integer to each row within a result set. This function is particularly useful for ranking, pagination, and generating unique identifiers. By mastering ROW_NUMBER(), you can efficiently manage ordered data and facilitate various data manipulation tasks. This document provides a comprehensive understanding of the SQL Window Function ROW_NUMBER(), its syntax, use cases, and practical examples, empowering your data manipulation skills on your edtech platform.
+
+Introduction to ROW_NUMBER() Window Function:
+
+ROW_NUMBER() assigns a unique integer to each row within a partitioned and ordered result set.
+
+It does not impact the original data; it provides a temporary sequential rank.
+
+ 
+
+Common Use Cases:
+a. Ranking: Assigning a unique rank to each row based on a specified order.
+
+b. Pagination: Selecting a specific range of rows for display or analysis.
+
+c. Generating Unique Identifiers: Creating unique identifiers for records.
+
+ 
+
+Syntax of ROW_NUMBER() Window Function:
+The basic syntax of ROW_NUMBER() is:
+
+ROW_NUMBER() OVER (PARTITION BY partition_expression ORDER BY order_expression)
+
+ 
+
+Practical Examples:
+ 
+
+Example 1 - Ranking Products by Price:
+
+SELECT product_name, unit_price, ROW_NUMBER() OVER (ORDER BY unit_price DESC) AS price_rank FROM products;
+
+Example 2 - Paginating Employee Records:
+
+SELECT employee_id, first_name, last_name, ROW_NUMBER() OVER (ORDER BY last_name) AS row_num FROM employees WHERE row_num BETWEEN 11 AND 20;
+
+Displaying rows 11 to 20
+
+Example 3 - Generating Unique IDs:
+
+SELECT order_id, ROW_NUMBER() OVER (ORDER BY order_date) AS unique_order_id FROM orders;
+
+
+
+Customizing ROW_NUMBER() Function:
+Use ORDER BY clause to specify the column(s) for ranking.
+
+Use PARTITION BY clause to create ranking groups within partitions.
+
+ 
+
+Benefits of ROW_NUMBER() Window Function: 
+a. Sequential Ranking: Assign unique sequential numbers to rows.
+
+b. Efficient Pagination: Easily select specific result set ranges.
+
+c. Creating Unique Identifiers: Generate temporary unique identifiers.
+
+ 
+
+Best Practices:
+a. Understand the purpose and requirements of ROW_NUMBER().
+
+b. Combine ROW_NUMBER() with other window functions for advanced analyses.
+
+c. Verify the results by testing with sample data before implementing.
+
+ 
+
+Conclusion: 
+SQL Window Function ROW_NUMBER() offers a simple yet effective way to assign unique sequential numbers to rows, enhancing your data manipulation capabilities. By understanding the syntax, applications, and practical examples provided in this document, you can confidently use ROW_NUMBER() for ranking, pagination, and unique identifier generation on your edtech platform. This knowledge empowers you to manage ordered data effectively and perform analyses with precision.
+
+ 
+
+Question:
+Retrieve the top 3 orders with the highest order_amount values, along with their order_id, customer_id, order_date and order_amount. Additionally, assign a unique row number as "row_num"  to each of these orders based on the descending order of order_amount values. 
+
+Hint: Use LIMIT to restrict results to 3 rows
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Constraints:
+The input table orders contains valid data.
+
+
+Sample Input:
+orders                                        
+| order_id | order_date  | order_amount | customer_id | order_status | shipping_address    |
+|----------|-------------|--------------|-------------|--------------|----------------------|
+| 101      | 2023-05-15  | 500.00       | 1           | Shipped      | 123 Main Street      |
+| 102      | 2023-06-20  | 750.00       | 2           | Delivered    | 456 Oak Avenue       |
+| 103      | 2023-07-25  | 300.00       | 1           | Pending      | 123 Main Street      |
+| 104      | 2023-08-30  | 1000.00      | 3           | Shipped      | 789 Pine Boulevard   |
+| 105      | 2023-09-10  | 800.00       | 2           | Delivered    | 456 Oak Avenue       |
+
+
+Sample Output:
+| order_id | customer_id | order_date  | order_amount | row_num |
+|----------|-------------|-------------|--------------|---------|
+| 104      | 3           | 2023-08-30  | 1000.00      | 1       |
+| 105      | 2           | 2023-09-10  | 800.00       | 2       |
+| 102      | 2           | 2023-06-20  | 750.00       | 3       |
+
+
+Explanation:
+The result set contains the top 3 orders with the highest order_amount values.
+The "row_num" column represents the unique row number based on the descending order of order_amount values.

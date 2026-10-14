@@ -1,0 +1,113 @@
+Introduction: 
+The SQL UPPER and LOWER functions are essential tools used to convert text to uppercase and lowercase, respectively. These functions play a crucial role in ensuring consistent text formatting and enhancing data analysis capabilities. By mastering the UPPER and LOWER functions, you can efficiently transform text case, improve data quality, and enhance your data manipulation skills. This document provides a comprehensive understanding of the UPPER and LOWER functions, their syntax, use cases, and practical examples to empower your data processing capabilities on your edtech platform.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the UPPER function is as follows:
+
+UPPER(string_expression)
+
+The basic syntax of the LOWER function is as follows:
+
+LOWER(string_expression)
+
+ 
+
+Understanding UPPER & LOWER:
+The UPPER function converts text to uppercase.
+
+The LOWER function converts text to lowercase.
+
+ 
+
+Common Use Cases:
+a. Data Consistency: Ensuring uniform text formatting.
+
+b. Data Analysis: Making case-insensitive comparisons.
+
+c. Display Formatting: Presenting data in a consistent manner.
+
+ 
+
+Practical Examples:
+Example 1 - Uppercase Formatting:
+
+SELECT UPPER(product_name) AS capitalized_name FROM products;
+
+Example 2 - Case-Insensitive Comparison:
+
+SELECT product_name FROM products WHERE LOWER(product_name) = 'smartphone';
+
+Example 3 - Display Formatting:
+
+SELECT CONCAT(UPPER(first_name), ' ', LOWER(last_name)) AS formatted_name FROM customers;
+
+
+
+ 
+
+Case-Insensitive Comparisons:
+Using UPPER or LOWER in comparison queries ensures that comparisons are case-insensitive.
+
+ 
+
+Preserving Original Data:
+Always store original data without case modifications for future reference.
+
+ 
+
+Best Practices: 
+a. Utilize UPPER and LOWER for consistent data formatting.
+
+b. Use UPPER or LOWER in comparison queries for accurate results.
+
+c. Be cautious when applying UPPER or LOWER to data that will be used for case-sensitive operations.
+
+ 
+
+Conclusion: 
+SQL UPPER and LOWER functions are essential tools for transforming text case, ensuring uniform formatting, and enhancing data quality. By understanding the syntax, applications, and practical examples provided in this document, you can confidently convert text to uppercase or lowercase, improve data consistency, and enhance your data manipulation skills on your edtech platform. This knowledge empowers you to efficiently manage textual content and perform case-insensitive comparisons, contributing to accurate data analysis.
+
+ 
+
+Question:
+Retrieve product_id, converting product_name to uppercase as "ProductNameUpper", category to lowercase as "CategoryLower".
+
+Input Format: The products table with the following columns:
+
+ColumnName          DataType
+product_id          int
+product_name        varchar 
+category            varchar
+unit_price          decimal
+
+
+Output Format: A result set with columns:
+
+product_id (int)
+ProductNameUpper (varchar)
+CategoryLower (varchar)
+
+
+Sample Input:
+| product_id | product_name    | category    | unit_price |
+|------------|-----------------|-------------|------------|
+| 1          | Laptop          | Electronics | 1000.00    |
+| 2          | Smartphone      | Electronics | 500.00     |
+| 3          | Coffee Maker    | Appliances  | 50.00      |
+
+
+Sample Output:
+| product_id | ProductNameUpper  | CategoryLower |
+|------------|-------------------|---------------|
+| 1          | LAPTOP            | electronics   |
+| 2          | SMARTPHONE        | electronics   |
+| 3          | COFFEE MAKER      | appliances    |
+
+
+Explanation:
+The product_name is converted to uppercase as "ProductNameUpper".
+The category is converted to lowercase as "CategoryLower"
+ 
+

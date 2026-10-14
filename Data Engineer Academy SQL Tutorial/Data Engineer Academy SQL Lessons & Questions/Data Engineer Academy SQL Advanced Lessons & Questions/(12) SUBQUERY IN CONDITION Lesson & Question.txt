@@ -1,0 +1,100 @@
+Introduction: 
+The SQL Subquery in Condition are a powerful tool in conditional logic, enabling you to embed queries within other queries to make data-driven decisions. Subqueries in conditional logic help you retrieve information from related tables, compare values, and apply filters based on specific conditions. By mastering subqueries in conditional logic, you can efficiently perform complex data analysis, improve decision-making, and enrich your data manipulation skills. This document provides a comprehensive understanding of using subqueries in conditional logic, their syntax, use cases, and practical examples to empower your data processing capabilities on your edtech platform.
+
+ 
+
+Introduction to Subqueries in Conditional Logic:
+Subqueries within conditional logic enable dynamic decision-making based on data relationships and values.
+
+Subqueries are used within WHERE, FROM, and HAVING clauses for tailored data retrieval.
+
+ 
+
+Common Use Cases:
+a. Filtered Selection: Retrieving rows based on related conditions.
+
+b. Subquery Comparisons: Comparing values with results from another query.
+
+c. Subqueries in CASE Statements: Using subqueries to generate conditional results.
+
+ 
+
+Practical Examples:
+ 
+
+Example 1 - Subquery in WHERE Clause:
+
+SELECT product_name, unit_price FROM products WHERE unit_price > (SELECT AVG(unit_price) FROM products);
+
+Example 2 - Subquery with IN Operator:
+
+SELECT customer_name FROM customers WHERE customer_id IN (SELECT customer_id FROM orders WHERE order_status = 'Shipped');
+
+Example 3 - Subquery in CASE Statement:
+
+SELECT product_name, CASE WHEN unit_price > (SELECT AVG(unit_price) FROM products) THEN 'Above Avg' ELSE 'Below Avg' END AS price_category FROM products;
+ 
+
+ 
+
+Subqueries with Aggregate Functions:
+Subqueries can be used with aggregate functions like SUM, COUNT, MAX, etc.
+
+ 
+
+Subqueries in Different Clauses:
+Subqueries can be used in various SQL clauses to achieve specific outcomes.
+
+ 
+
+Best Practices:
+a. Plan your query carefully to ensure that subqueries provide accurate results.
+
+b. Optimize queries for performance by using appropriate indexes.
+
+c. Verify subquery behavior with sample data before using it in production.
+
+ 
+
+Conclusion: 
+SQL subqueries in conditional logic provide a dynamic approach to decision-making and data manipulation, enabling customized data retrieval and analysis. By understanding the applications, syntax, and practical examples provided in this document, you can confidently create effective subqueries, tailor data selection to specific conditions, and make informed decisions based on your database on your edtech platform. This knowledge empowers you to handle complex conditional scenarios and extract meaningful insights from your data.
+
+ 
+
+Question:
+Retrieve product_id, product_name, unit_price and category that have a price higher than the average price of products within their respective categories.
+
+Table: products 
+
+ColumnName          DataType
+product_id          int
+product_name        varchar 
+category            varchar
+unit_price          decimal
+
+
+Constraints:
+The input table products contains valid data.
+
+
+Sample Input:
+products                                     
+| product_id | product_name   | category  | unit_price |
+|------------|-----------------|-----------|------------|
+| 1          | Laptop          | Electronics | 1000.00    |
+| 2          | Smartphone      | Electronics | 500.00     |
+| 3          | Coffee Maker    | Appliances  | 50.00      |
+| 4          | Blender          | Appliances | 30.00      |
+| 5          | Headphones       | Electronics | 80.00      |
+
+
+Sample Output:
+| product_id | product_name   | unit_price | category    |
+|------------|-----------------|------------|-------------|
+| 1          | Laptop          | 1000.00    | Electronics |
+| 3          | Coffee Maker    | 50.00      | Appliances  |
+
+
+Explanation:
+For the Electronics category, the average price is (1000 + 500 + 80) / 3 = 526.67. So, Laptop is selected as its prices is higher.
+For the Appliances category, the average price is (50 + 30) / 2 = 40. So, Coffee Maker is selected as its price is higher.

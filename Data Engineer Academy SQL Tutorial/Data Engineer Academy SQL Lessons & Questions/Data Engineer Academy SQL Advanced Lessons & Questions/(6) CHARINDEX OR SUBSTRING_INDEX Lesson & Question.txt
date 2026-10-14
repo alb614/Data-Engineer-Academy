@@ -1,0 +1,100 @@
+Introduction: 
+The SQL CHARINDEX function is a powerful tool used to determine the position of a specified substring within a given string. This function is indispensable for tasks that involve identifying the presence of a specific text segment within larger content. By mastering the CHARINDEX function, you can efficiently locate substrings, validate data, and enhance your data processing capabilities. This document provides a comprehensive understanding of the CHARINDEX function, its syntax, use cases, and practical examples to empower your data manipulation skills on your edtech platform.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the CHARINDEX function is as follows:
+
+CHARINDEX(substring, string_expression)
+
+Understanding CHARINDEX: The CHARINDEX function is employed to find the position of a specified substring within a given string.
+
+ 
+
+Common Use Cases:
+ a. Searching for Keywords: Identifying specific keywords or terms within text data.
+
+b. Validating Data: Verifying the presence of required information in a dataset.
+
+c. Extracting Information: Using the identified position for data extraction.
+
+ 
+
+Practical Examples:
+Example 1 - Searching for Keywords:
+
+SELECT product_name FROM products WHERE CHARINDEX('premium', product_description) > 0;
+SELECT product_name FROM products WHERE SUBSTRING_INDEX(product_description, 'premium') > 0;
+
+Example 2 - Validating Data:
+
+SELECT order_id FROM orders WHERE CHARINDEX('@', customer_email) > 0;
+SELECT order_id FROM orders WHERE SUBSTRING_INDEX(customer_email, '@') > 0;
+
+Example 3 - Extracting Information:
+
+SELECT SUBSTRING(text_data, CHARINDEX('[', text_data) + 1, CHARINDEX(']', text_data) - CHARINDEX('[', text_data) - 1) AS extracted_data FROM content; SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(text_data, '[', -1), ']', 1) AS extracted_data FROM content;
+
+ 
+
+Result Interpretation:
+The CHARINDEX function returns the position of the substring within the string.
+
+If the substring is not found, CHARINDEX returns 0.
+
+ 
+
+Handling Case Sensitivity: 
+CHARINDEX is case-insensitive. Use COLLATE for case-sensitive searches.
+
+ 
+Best Practices:
+a. Use CHARINDEX to locate substrings dynamically and efficiently.
+
+b. Combine CHARINDEX with other functions for more complex data manipulation.
+
+c. Consider handling cases where the substring is not found (returns 0).
+
+ 
+
+Conclusion: 
+SQL CHARINDEX function is a valuable asset for locating substrings within strings, facilitating accurate data manipulation and analysis. By understanding the CHARINDEX function's syntax, applications, and practical examples provided in this document, you can confidently identify specific text segments, validate data, and enhance your data processing capabilities on your edtech platform. This knowledge empowers you to efficiently manage and leverage textual information to gain insights from your database.
+
+ 
+
+Question:
+Exercise: Retrieve the customer_name along with their email as "EmailDomain". 
+
+Note: You may use 'SUBSTRING_INDEX' here to solve the question which is MYSQL compatible.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Constraints:
+The input table customers contains valid data.
+
+Sample Input:
+customers
+| customer_id | customer_name | age | city | email | address              |
+|-------------|---------------|-----|------|-------|----------------------|
+| 1           | John Doe      | 30  | NYC  | jdoe@gmail.com | 123 Main Street      |
+| 2           | Jane Smith    | 25  | LA   | jsmith@yahoo.com | 456 Oak Avenue       |
+| 3           | Mike Johnson  | 35  | CHI  | mjohnson@gmail.com | 789 Pine Boulevard   |
+
+Sample Output:
+| customer_name | EmailDomain         |
+|---------------|----------------------|
+| John Doe      | gmail.com            |
+| Jane Smith    | yahoo.com            |
+| Mike Johnson  | gmail.com            |
+
+Explanation:
+The "EmailDomain" column contains the domain part of the "email" column for each customer.

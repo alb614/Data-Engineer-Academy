@@ -1,0 +1,91 @@
+Introduction:
+Date and time functions in SQL allow you to work with dates, times, and timestamps in your database. They are essential for tasks such as filtering data for a specific period, calculating time intervals, or formatting date outputs for reports. These functions help you analyze trends, track activity, and create time-based summaries with ease.
+
+In this lesson, we’ll start with the most basic yet widely used date/time functions: retrieving the current date, current time, and current date and time from your database. These are particularly useful when you need to log events, run reports, or compare values to “today’s date.”
+
+Basic Syntax:
+The syntax varies slightly depending on the SQL dialect (MySQL, PostgreSQL, SQL Server, Oracle), but the concept is the same — you call the function without any arguments to return the current system date/time.
+
+General example:
+
+SELECT CURRENT_DATE;     -- Current date
+SELECT CURRENT_TIME;     -- Current time
+SELECT CURRENT_TIMESTAMP;-- Current date and time
+Getting the Current Date:
+In MySQL:
+
+SELECT CURDATE() AS current_date;
+This returns the current date (e.g., 2025-08-09).
+
+In PostgreSQL:
+SELECT CURRENT_DATE AS current_date;
+
+In SQL Server:
+SELECT CAST(GETDATE() AS DATE) AS current_date;
+Getting the Current Time:
+In MySQL:
+SELECT CURTIME() AS current_time;
+This returns the current time in HH:MM:SS format.
+
+In PostgreSQL:
+SELECT CURRENT_TIME AS current_time;
+
+In SQL Server:
+SELECT CAST(GETDATE() AS TIME) AS current_time;
+Getting Both Date and Time:
+In MySQL:
+SELECT NOW() AS current_datetime;
+
+In PostgreSQL:
+SELECT CURRENT_TIMESTAMP AS current_datetime;
+
+In SQL Server:
+SELECT GETDATE() AS current_datetime;
+Practical Example:
+Imagine you have a logins table and want to find all users who logged in today.
+
+SELECT user_id, login_time
+FROM logins
+WHERE DATE(login_time) = CURDATE();
+This ensures you only see logins from today’s date.
+
+Conclusion:
+These “current date/time” functions are the foundation for working with time-based data in SQL. By understanding them, you can easily compare timestamps, filter for today’s data, or generate time-stamped records. In the next lesson, we’ll explore how to extract specific parts of a date — like year, month, and day — for more detailed analysis.
+
+Exercise:
+Retrieve all orders and display the following (after displaying current dates and times delete them from select to get the question passed marker):
+
+order_id
+
+order_status
+
+order_amount
+
+customer_id
+
+customer_name
+
+The current date as ReportDate
+
+The current time as ReportTime
+
+The current date and time as ReportGeneratedAt
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar

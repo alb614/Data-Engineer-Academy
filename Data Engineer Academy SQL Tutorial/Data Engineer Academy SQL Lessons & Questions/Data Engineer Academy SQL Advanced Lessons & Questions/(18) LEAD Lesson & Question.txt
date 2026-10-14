@@ -1,0 +1,115 @@
+Introduction: 
+The SQL Window Function LEAD() is a powerful tool that enables you to access data from subsequent rows within a result set. This function allows you to gain insights into the next rows without complex self-joins or subqueries. LEAD() is particularly useful for comparing values, tracking trends, and performing time-series analysis. By mastering LEAD(), you can efficiently analyze data dependencies and make informed decisions based on future values. This document provides a comprehensive understanding of the SQL Window Function LEAD(), its syntax, use cases, and practical examples, empowering your data manipulation skills on your edtech platform.
+
+Introduction to LEAD() Window Function:
+
+LEAD() provides access to values in subsequent rows of a result set.
+
+This function eliminates the need for self-joins or subqueries for future row data.
+
+ 
+
+Common Use Cases:
+a. Trend Analysis: Analyzing the change in values over time.
+
+b. Comparative Analysis: Comparing current and future values for insights.
+
+c. Lagging Metrics: Identifying trends in data that evolve over time.
+
+ 
+
+Syntax of LEAD() Window Function:
+The basic syntax of LEAD() is:
+
+LEAD(column, offset, default_value) OVER (ORDER BY order_expression)
+
+ 
+
+Practical Examples:
+ 
+
+Example 1 - Analyzing Sales Growth:
+
+SELECT date, sales_amount, LEAD(sales_amount, 1, 0) OVER (ORDER BY date) AS next_day_sales FROM sales;
+
+Example 2 - Comparing Monthly Revenues:
+
+SELECT month, revenue, LEAD(revenue) OVER (ORDER BY month) AS next_month_revenue FROM monthly_reports;
+
+Example 3 - Detecting Changes in Stock Price:
+
+SELECT date, stock_price, LEAD(stock_price) OVER (ORDER BY date) AS next_day_price_change FROM stock_prices;
+ 
+
+ 
+
+Customizing LEAD() Function:
+Use the offset parameter to specify how many rows ahead to look.
+
+The default_value parameter determines the value if no subsequent row exists.
+
+ 
+
+Benefits of LEAD() Window Function:
+a. Streamlined Analysis: Access subsequent row data without complex queries.
+
+b. Simplified Trend Detection: Easily identify trends and changes in data.
+
+c. Enhanced Decision-Making: Make informed decisions based on future values.
+
+ 
+
+Best Practices:
+a. Understand the purpose and application of LEAD() function.
+
+b. Combine LEAD() with other window functions for advanced insights.
+
+c. Verify results by testing with representative data samples.
+
+ 
+
+Conclusion: 
+SQL Window Function LEAD() is a valuable asset for analysing data dependencies and trends in subsequent rows. By comprehending the syntax, use cases, and practical examples provided in this document, you can confidently use LEAD() to perform trend analysis, comparative assessments, and future-value tracking on your edtech platform. This knowledge empowers you to gain insights into data relationships and anticipate changes more effectively.
+
+ 
+
+Question:
+Retrieve a list of products along with their product_name, category and unit_price, including the name as "next_product_name" and price as "next_product_price" of the next higher-priced product within the same category. Additionally add 'X' to name in case where it is the last product in the list as per higher price logic and '0' for the price.
+
+Table: products 
+
+ColumnName          DataType
+product_id          int
+product_name        varchar 
+category            varchar
+unit_price          decimal
+
+
+Constraints:
+The input table products contains valid data.
+
+
+Sample Input:
+products
+| product_id | product_name   | category  | unit_price |
+|------------|-----------------|-----------|------------|
+| 1          | Laptop          | Electronics | 1000.00    |
+| 2          | Smartphone      | Electronics | 500.00     |
+| 3          | Coffee Maker    | Appliances  | 50.00      |
+| 4          | Blender          | Appliances | 30.00      |
+| 5          | Headphones       | Electronics | 80.00      |
+
+
+Sample Output:
+| product_name   | category    | unit_price | next_product_name | next_product_price |
+|-----------------|-------------|------------|-------------------|--------------------|
+| Laptop          | Electronics | 1000.00    | Smartphone        | 500.00             |
+| Smartphone      | Electronics | 500.00     | Headphones         | 80.00              |
+| Headphones       | Electronics | 80.00      | X                 | 0.00               |
+| Coffee Maker    | Appliances  | 50.00      | Blender            | 30.00              |
+| Blender          | Appliances  | 30.00      | X                 | 0.00               |
+
+
+Explanation:
+For each product, "next_product_name" represents the name of the next higher-priced product within the same category.
+"next_product_price" represents the price of the next higher-priced product. If the current product is the last in its category, 'X' is added to the name, and '0' is used for the price.

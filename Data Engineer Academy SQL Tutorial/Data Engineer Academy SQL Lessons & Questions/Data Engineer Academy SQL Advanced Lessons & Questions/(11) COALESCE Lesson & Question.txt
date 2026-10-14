@@ -1,0 +1,105 @@
+Introduction: 
+The SQL COALESCE function is a valuable tool used to handle null values effectively by providing a fallback value. This function is essential for tasks that involve data validation, calculation, and presentation, ensuring reliable data processing and analysis. By mastering the COALESCE function, you can efficiently manage null values, enhance data quality, and enrich your data manipulation skills. This document provides a comprehensive understanding of the COALESCE function, its syntax, use cases, and practical examples to empower your data processing capabilities on your edtech platform.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the COALESCE function is as follows:
+
+COALESCE(expression1, expression2, ...)
+
+ 
+
+Understanding COALESCE: 
+The COALESCE function is used to return the first non-null value among the provided expressions.
+
+
+Common Use Cases:
+a. Data Validation: Replacing null values with meaningful defaults.
+
+b. Calculation: Performing operations involving potentially null values.
+
+c. Data Presentation: Ensuring data consistency in reports and outputs.
+
+ 
+
+Practical Examples:
+Example 1 - Data Validation:
+
+SELECT product_name, COALESCE(unit_price, 0.00) AS adjusted_price FROM products;
+
+Example 2 - Calculation:
+
+SELECT order_id, COALESCE(quantity * unit_price, 0) AS total_amount FROM order_details;
+
+Example 3 - Data Presentation:
+
+SELECT CONCAT(first_name, ' ', COALESCE(last_name, '')) AS full_name FROM customers;
+ 
+
+Handling Multiple Expressions:
+COALESCE can take multiple expressions, evaluating them in order until a non-null value is found.
+
+Practical Null Handling:
+
+COALESCE is particularly useful when you want to replace nulls with a default value.
+
+ 
+
+Best Practices: 
+a. Utilize COALESCE to manage null values and ensure reliable data processing.
+
+b. Combine COALESCE with other functions for more complex data manipulation.
+
+ c. Choose meaningful default values that align with your data context.
+
+ 
+
+Conclusion: 
+SQL COALESCE function is a crucial tool for handling null values, facilitating effective data validation, calculations, and presentation. By understanding the COALESCE function's syntax, applications, and practical examples provided in this document, you can confidently manage null values, enhance data quality, and enrich your data manipulation capabilities on your edtech platform. This knowledge empowers you to efficiently process and analyze data while maintaining consistency and accuracy.
+
+ 
+Question:
+Find out all the employee_id, employee first_name as "employee_first_name", their manager first_name as "manager_name" and manager_id. Employees who do not have a manager or they are highest in hierarchy, assign 'Manager' as the columnar value for "manager_name" and "X" as 'manager_id'.
+
+Input Format: The employees table with the following columns:
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+Output Format: A result set with columns:
+employee_id (int)
+employee_first_name (varchar)
+manager_name (varchar)
+manager_id (varchar)
+
+Constraints:
+The input table employees contains valid data.
+
+Sample Input:
+| employee_id | first_name | last_name | department | salary | manager_id |
+|-------------|------------|-----------|------------|--------|------------|
+| 1           | John       | Doe       | IT         | 5000.00| 3          |
+| 2           | Jane       | Smith     | Finance    | 6000.00| 4          |
+| 3           | Mike       | Johnson   | IT         | 7000.00| 5          |
+| 4           | Emily      | Davis     | Finance    | 5500.00| 5          |
+| 5           | Robert     | Brown     | CEO        | 10000.00| NULL      |
+
+Sample Output:
+| employee_id | employee_first_name | manager_name | manager_id |
+|-------------|---------------------|--------------|------------|
+| 1           | John                | Mike         | 3          |
+| 2           | Jane                | Emily        | 4          |
+| 3           | Mike                | Robert       | 5          |
+| 4           | Emily               | Robert       | 5          |
+| 5           | Robert              | Manager      | X          |
+
+
+Explanation:
+The employee_first_name is the first_name of the employee.
+The manager_name is the first_name of the employee's manager. If there is no manager, 'Manager' is assigned.
+The manager_id is the manager_id of the employee. If there is no manager, 'X' is assigned.

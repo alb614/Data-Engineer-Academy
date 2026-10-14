@@ -1,0 +1,94 @@
+Introduction: 
+The SQL IN operator is a valuable tool that simplifies data filtering in SQL queries when dealing with multiple values. It allows you to specify a list of values, and the query will retrieve rows that match any of those values. This is particularly useful when you need to filter data based on multiple options or when you want to avoid using multiple OR conditions. In this document, we will explore the syntax and usage of the SQL IN operator to enhance your data retrieval skills.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL IN operator is as follows:
+
+SELECT column1, column2, ... FROM table_name WHERE column_name IN (value1, value2, value3, ...);
+
+Using the IN Operator: 
+The IN operator checks if the value of a column matches any value in the specified list. For example:
+
+SELECT * FROM products WHERE category IN ('Electronics', 'Appliances', 'Office Supplies');
+
+This query will retrieve products from the "products" table that belong to any of the specified categories: 'Electronics,' 'Appliances,' or 'Office Supplies.'
+
+ 
+
+Practical Examples:
+a. Filtering Data with Multiple Options: Suppose you have a table of employees and you want to retrieve employees from specific departments. Instead of using multiple OR conditions, you can use the IN operator as follows:
+
+SELECT * FROM employees WHERE department IN ('Sales', 'Marketing', 'Customer Support');
+
+This query will retrieve employees from the specified departments.
+
+b. Using Subqueries with IN: The IN operator can also be used with subqueries to retrieve data based on values from another table. For example:
+
+SELECT * FROM orders WHERE customer_id IN (SELECT customer_id FROM customers WHERE country = 'USA');
+
+This query will retrieve orders from customers located in the 'USA.'
+
+ 
+
+Combining the IN Operator: 
+The IN operator can be combined with other operators and logical operators to create more complex conditions. For example:
+
+SELECT * FROM products WHERE (unit_price > 100 AND category IN ('Electronics', 'Appliances')) OR (category = 'Office Supplies');
+
+This query will retrieve products with a unit price greater than 100 and belonging to the 'Electronics' or 'Appliances' category, as well as products in the 'Office Supplies' category.
+
+ 
+
+Conclusion: 
+The SQL IN operator is a powerful tool for simplifying data filtering with multiple values in SQL queries. By understanding and utilizing the examples and concepts covered in this document, you can effectively filter data based on multiple options and streamline your SQL queries.
+
+ 
+
+Question:
+Retrieve the product_id, product_name, and unit_price of products that belong to either the "Electronics" or "Appliances" category.
+
+Table: products 
+
+ColumnName          DataType
+product_id          int
+product_name        varchar 
+category            varchar
+unit_price          decimal
+
+
+Constraints:
+The input table products contains valid data.
+
+
+Sample Input:
+products
+| product_id | product_name | category  | unit_price |
+|------------|--------------|-----------|------------|
+| 1          | Laptop       | Electronics | 800.00    |
+| 2          | Smartphone   | Electronics | 500.00    |
+| 3          | Coffee Maker | Appliances  | 50.00     |
+| 4          | Blender       | Appliances | 200.00    |
+| 5          | Headphones    | Electronics | 120.00    |
+
+
+Output Format:
+A result set with columns:
+product_id (int)
+product_name (varchar)
+unit_price (decimal)
+
+
+Sample Output:
+| product_id | product_name | unit_price |
+|------------|--------------|------------|
+| 1          | Laptop       | 800.00     |
+| 2          | Smartphone   | 500.00     |
+| 3          | Coffee Maker | 50.00      |
+| 4          | Blender       | 200.00     |
+| 5          | Headphones    | 120.00     |
+
+
+Explanation:
+The products belonging to either the "Electronics" or "Appliances" category are retrieved along with their product_id, product_name, and unit_price.

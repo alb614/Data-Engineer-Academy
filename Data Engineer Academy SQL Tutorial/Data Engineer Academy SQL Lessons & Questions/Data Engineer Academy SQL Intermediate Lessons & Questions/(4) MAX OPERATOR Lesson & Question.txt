@@ -1,0 +1,105 @@
+Introduction: 
+The SQL MAX function is a powerful tool that enables you to retrieve the largest value from a specified column in a database table. This function is particularly useful when you need to identify the maximum or highest value of a specific attribute. The MAX function is commonly used in conjunction with the SELECT statement to perform aggregations and obtain meaningful insights from your data. In this document, we will explore the syntax and usage of the SQL MAX function to enhance your data analysis skills and make your queries more informative.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL MAX function is as follows:
+
+SELECT MAX(column_name) AS max_value FROM table_name;
+
+Finding the Maximum Value: 
+The MAX function is applied to a specific column, and it returns the largest value present in that column. You can use it on various data types, such as numeric values, dates, or text (string) values. For example:
+
+SELECT MAX(salary) AS max_salary FROM employees;
+
+This query will retrieve the largest (maximum) salary from the "employees" table and display it as "max_salary."
+
+ 
+
+Using MAX with Other Functions: 
+The MAX function can also be used in combination with other SQL functions to derive more complex insights from your data. For instance, you can use it with the GROUP BY clause to find the largest value for each group within the data. For example:
+
+SELECT department, MAX(salary) AS max_salary FROM employees GROUP BY department;
+
+This query will group employees by their respective departments and show the maximum salary for each department.
+
+ 
+
+Handling NULL Values: 
+When using the MAX function, it is essential to be aware of NULL values in the column. The MAX function ignores NULL values and only considers non-null values to determine the maximum. If all values in the specified column are NULL, the result will be NULL as well. For example:
+
+SELECT MAX(date_joined) AS latest_join_date FROM employees;
+
+This query will retrieve the latest join date from the "employees" table, excluding any NULL values.
+
+ 
+
+Combining MAX with Conditional Statements:
+You can use the MAX function with conditional statements, such as the WHERE clause, to find the largest value based on specific criteria. For example:
+
+SELECT MAX(order_amount) AS largest_order_amount FROM orders WHERE order_status = 'Completed';
+
+This query will retrieve the largest order amount from the "orders" table where the order status is 'Completed.'
+
+ 
+
+Conclusion: 
+The SQL MAX function is a valuable tool for identifying the largest value in a column, providing valuable insights into your data. By understanding and utilizing the examples and concepts covered in this document, you can leverage the MAX function to perform data analysis effectively on your edtech platform.
+
+ 
+
+Question:
+Retrieve the employee details (employee_id, first_name, last_name, department, salary) of the employee with the highest salary in each department.
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+
+Sample Input:
+| employees                                     |
+|-----------------------------------------------|
+| employee_id | first_name | last_name | department | salary | manager_id |
+|-------------|------------|-----------|------------|--------|------------|
+| 1           | John       | Doe       | Sales      | 60000.00| 3          |
+| 2           | Jane       | Smith     | Marketing    | 55000.00| 4          |
+| 3           | Mike       | Johnson   | Sales      | 65000.00| NULL          |
+| 4           | Emily      | Lee     | Finance         | 70000.00| 5          |
+| 5           | David     | Wang     | Finance         | 75000.00| NULL       |
+| 6           | Laura      | Garcia    | Marketing    | 58000.00| 4          |
+| 7           | Richard       | Kim       | HR         | 52000.00 | 7          |
+| 8           | Karen       | Lee       | Sales         | 63000.00 | 3          |
+| 9           | Daniel       | Chen       | Finance         | 72000.00 | 5         |
+| 10           | Sarah       | Liu       | Marketing         | 59000.00 | 4         |
+
+Constraints:
+The input table employees contains valid data.
+
+
+Output Format:
+A result set with columns:
+employee_id (int)
+first_name (varchar)
+last_name (varchar)
+department (varchar)
+salary (decimal)
+
+
+Sample Output:
+| employee_id | first_name | last_name | department | salary   |
+|-------------|------------|-----------|------------|----------|
+| 3           | Mike       | Johnson   | Sales      | 65000.00 |
+| 4           | David      | Wang     | Finance         | 75000.00 |
+| 6           | Richard      | Kim    | HR    | 52000.00 |
+| 7           | Sarah       | Liu       | Marketing         | 59000.00 |
+
+
+Explanation:
+For each department, the employee with the highest salary is selected.

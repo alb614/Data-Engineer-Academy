@@ -1,0 +1,98 @@
+-- dbt Fundamentals (Part 3: Set up dbt - Getting Started - Setting Up A Trial Snowflake Account): Create the warehouse, databases and schemas 
+create warehouse transforming;
+create database raw;
+create database analytics;
+create schema analytics.analytics;
+create schema raw.jaffle_shop;
+create schema raw.stripe;
+
+-- dbt Fundamentals (Part 3: Set up dbt - Getting Started - Setting Up A Trial Snowflake Account): Create the CUSTOMERS table in the JAFFLE_SHOP schema
+create or replace table raw.jaffle_shop.customers
+(
+    id integer,
+    first_name varchar,
+    last_name varchar
+);
+
+-- dbt Fundamentals (Part 3: Set up dbt - Getting Started - Setting Up A Trial Snowflake Account): Copy the data from the S3 bucket external stage into the 
+-- CUSTOMERS table
+copy into raw.jaffle_shop.customers (id, first_name, last_name)
+from 's3://dbt-tutorial-public/jaffle_shop_customers.csv'
+file_format = 
+(
+    type = 'CSV'
+    field_delimiter = ','
+    skip_header = 1
+);
+
+-- dbt Fundamentals (Part 3: Set up dbt - Getting Started - Setting Up A Trial Snowflake Account): Select the data loaded into the CUSTOMERS table to check for 
+-- successful loading
+select * from raw.jaffle_shop.customers;
+
+-- dbt Fundamentals (Part 3: Set up dbt - Getting Started - Setting Up A Trial Snowflake Account): Create the ORDERS table in the JAFFLE_SHOP schema
+create or replace table raw.jaffle_shop.orders
+(
+    id integer,
+    user_id integer,
+    order_date date,
+    status varchar,
+    _etl_loaded_at timestamp default current_timestamp
+);
+
+-- dbt Fundamentals (Part 3: Set up dbt - Getting Started - Setting Up A Trial Snowflake Account): Copy the data from the S3 bucket external stage into the 
+-- ORDERS table
+copy into raw.jaffle_shop.orders (id, user_id, order_date, status)
+from 's3://dbt-tutorial-public/jaffle_shop_orders.csv'
+file_format = 
+(
+    type = 'CSV'
+    field_delimiter = ','
+    skip_header = 1
+);
+
+-- dbt Fundamentals (Part 3: Set up dbt - Getting Started - Setting Up A Trial Snowflake Account): Select the data loaded into the ORDERS table to check for 
+-- successful loading
+select * from raw.jaffle_shop.orders;
+
+-- dbt Fundamentals (Part 3: Set up dbt - Getting Started - Setting Up A Trial Snowflake Account): Create the PAYMENT table in the JAFFLE_SHOP schema
+create or replace table raw.stripe.payment
+(
+    id integer,
+    orderid integer,
+    paymentmethod varchar,
+    status varchar,
+    amount integer,
+    created date,
+    _batched_at timestamp default current_timestamp
+);
+
+-- dbt Fundamentals (Part 3: Set up dbt - Getting Started - Setting Up A Trial Snowflake Account): Copy the data from the S3 bucket external stage into the 
+-- PAYMENT table
+copy into raw.stripe.payment (id, orderid, paymentmethod, status, amount, created)
+from 's3://dbt-tutorial-public/stripe_payments.csv'
+file_format = 
+(
+    type = 'CSV'
+    field_delimiter = ','
+    skip_header = 1
+);
+
+-- dbt Fundamentals (Part 3: Set up dbt - Getting Started - Setting Up A Trial Snowflake Account): Select the data loaded into the PAYMENT table to check for 
+-- successful loading
+select * from raw.stripe.payment;
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+-- dbt Fundamentals (Part 4: Models - Building your First Model - Troubleshooting dbt run): Dropping the STG_JAFFLE_SHOP__CUSTOMERS view in order to check usage of 
+-- dbt command
+drop view analytics.dbt_aborrero.stg_jaffle_shop__customers;
+
+-- dbt Fundamentals (Part 4: Models - Building your First Model - Troubleshooting dbt run): Dropping the STG_JAFFLE_SHOP__ORDERS view in order to check usage of 
+-- dbt command
+drop view analytics.dbt_aborrero.stg_jaffle_shop__orders;
+
+-- dbt Fundamentals (Part 4: Models - Building your First Model - Practice): Use a select statement to view the RAW.STRIPE.PAYMENT table
+select * from raw.stripe.payment;
+
+-- dbt Fundamentals (Part 4: Models - Building your First Model - Practice): Use a select statement to view the ANALYTICS.DBT_ABORRERO.DIM_CUSTOMERS table
+select * from analytics.dbt_aborrero.dim_customers;

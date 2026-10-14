@@ -1,0 +1,86 @@
+Introduction: 
+The SQL LIMIT clause is a powerful tool used to control the size of the result set returned by a query in SQL. It is particularly useful when dealing with large datasets, as it allows you to retrieve a specific number of rows from a table, starting from the beginning of the result set. In this document, we will explore the syntax and usage of the SQL LIMIT clause to enhance your data retrieval skills.
+
+
+Basic Syntax: 
+The basic syntax of the SQL LIMIT clause is as follows:
+
+SELECT column1, column2, ... FROM table_name LIMIT number_of_rows;
+
+Retrieving a Specified Number of Rows: 
+The LIMIT clause allows you to specify the maximum number of rows to be returned by the query. For example, to retrieve the first 10 rows from a table called "employees," you would use the following query:
+
+SELECT * FROM employees LIMIT 10;
+
+Practical Examples: 
+Let's explore some practical examples of using the SQL LIMIT clause:
+
+Example 1: Limiting Result Set Suppose you have a table called "products" with a large number of records, and you only want to see the first 5 products in the result set. You can use the LIMIT clause as follows:
+
+SELECT * FROM products LIMIT 5;
+
+Example 2: Combined with ORDER BY Often, you may want to retrieve a limited number of rows based on a specific ordering criterion. In this case, you can combine the LIMIT clause with the ORDER BY clause. For instance:
+
+SELECT product_name, unit_price FROM products ORDER BY unit_price DESC LIMIT 3;
+
+This query will retrieve the top 3 most expensive products based on their "unit_price."
+
+
+Offset with LIMIT: 
+Additionally, you can use the OFFSET keyword with the LIMIT clause to skip a certain number of rows and retrieve the subsequent ones. For instance:
+
+SELECT * FROM customers LIMIT 5 OFFSET 10;
+
+This query will return 5 rows from the "customers" table, starting from the 11th row.
+
+
+Compatibility with Different SQL Databases: 
+Although the LIMIT clause is widely supported in many SQL database systems (e.g., MySQL, PostgreSQL, SQLite), it is essential to note that some databases may use different syntax for limiting results, such as "TOP" in Microsoft SQL Server or "FETCH FIRST" in IBM Db2. Always refer to the documentation of the specific database you are working with to ensure compatibility.
+
+
+Conclusion: 
+The SQL LIMIT clause is a valuable tool for managing large datasets and optimizing query performance by restricting the number of rows returned. By using the examples and concepts covered in this document, you can control the size of the result set and improve the efficiency of your SQL queries. Practice incorporating the LIMIT clause into your queries to become proficient in data retrieval and analysis.
+
+
+Question:
+Select the employee with 3rd highest salary. Output should be only first name of the employee
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+
+Constraints:
+The input table employees contains valid data.
+
+
+Sample Input:
+employees
+| employee_id | first_name | last_name | department | salary | manager_id |
+|-------------|------------|-----------|------------|--------|------------|
+| 1           | John       | Doe       | IT         | 5000.00| 3          |
+| 2           | Jane       | Smith     | Finance    | 6000.00| 4          |
+| 3           | Mike       | Johnson   | IT         | 7000.00| 5          |
+| 4           | Emily      | Davis     | Finance    | 5500.00| 5          |
+| 5           | Robert     | Brown     | HR         | 10000.00| NULL      |
+
+
+Output Format:
+A result set with a single column:
+first_name (varchar)
+
+
+Sample Output:
+| first_name |
+|------------|
+| Emily      |
+
+
+Explanation:
+The employee with the 3rd highest salary is "Emily".

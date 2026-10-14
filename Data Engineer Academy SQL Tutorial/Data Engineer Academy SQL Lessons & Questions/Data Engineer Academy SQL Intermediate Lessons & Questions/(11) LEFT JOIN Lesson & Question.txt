@@ -1,0 +1,116 @@
+Introduction: 
+The SQL LEFT JOIN is a powerful tool that allows you to combine data from two or more tables based on a common column, even if there are incomplete matches in the second table. This function is particularly useful when you need to retrieve data from one table and include any matching records from another table, or simply display NULL values for non-matching records. The LEFT JOIN is commonly used in conjunction with the SELECT statement to merge data and gain comprehensive insights from your database. In this document, we will explore the syntax and usage of the SQL LEFT JOIN to enhance your data retrieval skills and make your queries more informative on your edtech platform.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL LEFT JOIN is as follows:
+
+SELECT column1, column2, ... FROM table1 LEFT JOIN table2 ON table1.columnX = table2.columnY;
+
+Joining Tables with Complete Matches:
+The LEFT JOIN retrieves all the records from the left table (table1) and any matching records from the right table (table2) based on the specified condition in the ON clause. If there are no matching records in table2, NULL values are used for columns from table2. For example:
+
+SELECT customers.customer_id, orders.order_id, orders.order_date FROM customers LEFT JOIN orders ON customers.customer_id = orders.customer_id;
+
+This query will retrieve the customer ID, order ID, and order date for all customers, including those who have not placed any orders. Non-matching orders will display NULL values for the order-related columns.
+
+ 
+
+Retrieving Data from Multiple Tables: 
+You can use the LEFT JOIN to combine data from more than two tables by extending the JOIN clauses and ON conditions. For example:
+
+SELECT customers.customer_id, customers.customer_name, orders.order_id, order_items.product_name FROM customers LEFT JOIN orders ON customers.customer_id = orders.customer_id LEFT JOIN order_items ON orders.order_id = order_items.order_id;
+
+This query will retrieve customer information along with order details and product names for all orders, even if they do not have related product items.
+
+ 
+
+Combining LEFT JOIN with Other Joins: 
+The LEFT JOIN can be combined with other join types like INNER JOIN or RIGHT JOIN to create complex queries that suit your data analysis requirements.
+
+ 
+
+Handling NULL Values:
+When using the LEFT JOIN, be prepared to deal with NULL values in columns from the right table (table2) for non-matching records. Use appropriate functions like COALESCE or IFNULL to handle NULL values when performing calculations or aggregations.
+
+ 
+
+LEFT JOIN vs. INNER JOIN: 
+It's essential to understand the difference between LEFT JOIN and INNER JOIN. While LEFT JOIN includes all records from the left table and matching records from the right table, INNER JOIN only includes records with matching values in both tables.
+
+ 
+
+Conclusion: 
+The SQL LEFT JOIN is a valuable tool for combining data from multiple tables, even when there are incomplete matches in the second table. By understanding and utilizing the examples and concepts covered in this document, you can leverage the LEFT JOIN to merge data effectively and perform comprehensive data analysis on your edtech platform.
+
+
+Question:
+Retrieve a list of customers who have placed at least one order, Fetch the customer_id and customer_name along with the total number of orders as "order_count" they have placed and the total amount as "total_amount" they have spent.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+
+Sample Input:
+| customers                                     |
+|-----------------------------------------------|
+| customer_id | customer_name | age | city | email             | address               |
+|-------------|----------------|-----|------|-------------------|-----------------------|
+| 1           | John Doe       | 30  | NY   | john.doe@email.com| 123 Main Street       |
+| 2           | Jane Smith     | 25  | LA   | jane.smith@email.com| 456 Oak Avenue        |
+| 3           | Mike Johnson   | 35  | SF   | mike.j@email.com  | 789 Pine Boulevard    |
+| 4           | Emily Davis    | 28  | CHI  | emily.d@email.com | 101 Elm Street        |
+
+| orders                                  |
+|----------------------------------------|
+| order_id | order_date | order_amount  | customer_id | order_status | shipping_address     |
+|----------|------------|---------------|-------------|--------------|-----------------------|
+| 101      | 2023-01-15 | 120.00        | 1           | Completed    | 123 Main Street       |
+| 102      | 2023-02-20 | 250.00        | 1           | Shipped      | 123 Main Street       |
+| 103      | 2023-03-10 | 180.00        | 2           | Completed    | 456 Oak Avenue        |
+| 104      | 2023-04-05 | 300.00        | 3           | Completed    | 789 Pine Boulevard    |
+| 105      | 2023-05-12 | 150.00        | 2           | Shipped      | 456 Oak Avenue        |
+| 106      | 2023-06-08 | 200.00        | 4           | Completed    | 101 Elm Street        |
+
+
+Constraints:
+The input tables customers and orders contain valid data.
+
+
+Output Format:
+A result set with columns:
+customer_id (int)
+customer_name (varchar)
+order_count (int)
+total_amount (decimal)
+
+
+Sample Output:
+| customer_id | customer_name | order_count | total_amount |
+|-------------|----------------|-------------|--------------|
+| 1           | John Doe       | 2           | 370.00       |
+| 2           | Jane Smith     | 2           | 330.00       |
+| 3           | Mike Johnson   | 1           | 300.00       |
+| 4           | Emily Davis    | 1           | 200.00       |
+
+
+Explanation:
+The results include the customer_id and customer_name along with the total number of orders as "order_count" and the total amount as "total_amount" they have spent. The output is based on the provided sample input.

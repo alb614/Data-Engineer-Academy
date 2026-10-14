@@ -1,0 +1,73 @@
+Introduction:
+The DATE_FORMAT() function in MySQL allows you to display date and time values in a custom, human-friendly format.
+Instead of showing dates in the default YYYY-MM-DD format, you can format them to match reporting needs, cultural preferences, or business requirements.
+
+It is especially useful when:
+
+You want to display dates in day/month/year format.
+
+You need to show weekday names (e.g., Monday, Tuesday).
+
+You want to extract parts of a date (e.g., month name, year, time).
+
+Syntax
+
+DATE_FORMAT(date, format)
+date → The date/datetime value you want to format.
+
+format → A format string containing specifiers for how the date should be displayed.
+
+Common Format Specifiers
+
+| Specifier | Meaning                  | Example Output |
+| --------- | ------------------------ | -------------- |
+| `%Y`      | 4-digit year             | 2025           |
+| `%y`      | 2-digit year             | 25             |
+| `%M`      | Full month name          | August         |
+| `%m`      | Month number (01–12)     | 08             |
+| `%d`      | Day of month (01–31)     | 11             |
+| `%b`      | Abbreviated month name   | Aug            |
+| `%W`      | Full weekday name        | Monday         |
+| `%a`      | Abbreviated weekday name | Mon            |
+| `%H`      | Hour (00–23)             | 14             |
+| `%h`      | Hour (01–12)             | 02             |
+| `%i`      | Minutes                  | 05             |
+| `%s`      | Seconds                  | 09             |
+| `%p`      | AM/PM                    | PM             |
+Example
+
+SELECT
+    order_id,
+    order_date,
+    DATE_FORMAT(order_date, '%M %d, %Y') AS formatted_date,
+    DATE_FORMAT(order_date, '%W at %h:%i %p') AS friendly_time
+FROM orders;
+What it does:
+
+First DATE_FORMAT → Displays August 11, 2025
+
+Second DATE_FORMAT → Displays Monday at 02:05 PM
+
+Practice Question:
+
+Write a query to display each customer’s name, their order date in the format DD/MM/YYYY, and the weekday name of the order.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar

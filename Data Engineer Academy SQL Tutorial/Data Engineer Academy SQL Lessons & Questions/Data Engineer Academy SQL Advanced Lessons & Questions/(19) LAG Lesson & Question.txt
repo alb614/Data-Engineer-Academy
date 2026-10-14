@@ -1,0 +1,111 @@
+Introduction:
+The SQL Window Function LAG() is a powerful tool that allows you to access data from preceding rows within a result set. With LAG(), you can gain insights into historical values without complex self-joins or subqueries. This function is particularly useful for tracking trends, comparing values, and conducting time-series analysis. By mastering LAG(), you can efficiently analyze data dependencies and make informed decisions based on past values. This document provides a comprehensive understanding of the SQL Window Function LAG(), its syntax, use cases, and practical examples, empowering your data manipulation skills on your edtech platform.
+
+ 
+
+Introduction to LAG() Window Function:
+LAG() provides access to values in preceding rows of a result set.
+
+This function eliminates the need for intricate self-joins or subqueries to access past row data.
+
+Common Use Cases: a. Historical Analysis: Analyzing changes in data values over time. b. Comparative Analysis: Comparing current and past values for insights. c. Leading Metrics: Identifying trends that evolve over time.
+
+ 
+
+Syntax of LAG() Window Function:
+The basic syntax of LAG() is:
+
+LAG(column, offset, default_value) OVER (ORDER BY order_expression)
+
+ 
+
+Practical Examples:
+ 
+
+Example 1 - Monitoring Stock Price Trends:
+
+SELECT date, stock_price, LAG(stock_price, 1, 0) OVER (ORDER BY date) AS previous_day_price FROM stock_prices;
+
+Example 2 - Tracking Quarterly Revenue Changes:
+
+SELECT quarter, revenue, LAG(revenue) OVER (ORDER BY quarter) AS previous_quarter_revenue FROM quarterly_reports;
+
+Example 3 - Analyzing Customer Behavior:
+
+SELECT purchase_date, purchase_amount, LAG(purchase_amount) OVER (ORDER BY purchase_date) AS previous_purchase_amount FROM customer_purchases;
+ 
+
+ 
+
+Customizing LAG() Function:
+Use the offset parameter to specify how many rows back to look.
+
+The default_value parameter determines the value if no preceding row exists.
+
+ 
+
+Benefits of LAG() Window Function:
+a. Streamlined Analysis: Access past row data without complex queries.
+
+b. Simplified Trend Analysis: Easily identify changes and trends in data.
+
+c. Improved Decision-Making: Make informed decisions based on historical values.
+
+ 
+
+Best Practices:
+a. Understand the purpose and application of LAG() function.
+
+b. Combine LAG() with other window functions for comprehensive insights.
+
+c. Validate results by testing with relevant data samples.
+
+ 
+
+Conclusion: 
+SQL Window Function LAG() is a valuable asset for analyzing historical data dependencies and trends in preceding rows. By comprehending the syntax, use cases, and practical examples provided in this document, you can confidently use LAG() to perform trend analysis, comparative assessments, and historical-value tracking on your edtech platform. This knowledge empowers you to understand data relationships and changes more effectively, facilitating data-driven decision-making.
+
+ 
+
+Question:
+Retrieves a list of orders along with their order_id, order_date, order_amount and customer_id, and includes the order_date as "previous_order_date" and order_amount as "previous_total_amount" of the previous order made by the same customer. 
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+
+Constraints:
+The input table orders contains valid data
+
+
+Sample Input:
+orders  
+| order_id | order_date  | order_amount | customer_id | order_status | shipping_address    |
+|----------|-------------|--------------|-------------|--------------|----------------------|
+| 1      | 2023-05-15  | 500.00       | 101           | Shipped      | 123 Main Street      |
+| 2      | 2023-06-20  | 750.00       | 102           | Delivered    | 456 Oak Avenue       |
+| 1      | 2023-07-25  | 300.00       | 103           | Pending      | 123 Main Street      |
+| 3      | 2023-08-30  | 1000.00      | 104           | Shipped      | 789 Pine Boulevard   |
+| 2      | 2023-09-10  | 800.00       | 105           | Delivered    | 456 Oak Avenue       |
+
+
+Sample Output:
+| order_id | order_date  | order_amount | customer_id | previous_order_date | previous_total_amount |
+|----------|-------------|--------------|-------------|----------------------|------------------------|
+| 1      | 2023-05-15  | 500.00       | 101           | NULL                 | 0.00                   |
+| 2      | 2023-06-20  | 750.00       | 102           | NULL                 | 0.00                   |
+| 1      | 2023-07-25  | 300.00       | 103           | 2023-05-15           | 500.00                 |
+| 3      | 2023-08-30  | 1000.00      | 104           | NULL                 | 0.00                   |
+| 2      | 2023-09-10  | 800.00       | 105           | 2023-06-20           | 750.00                 |
+
+
+Explanation:
+For each order, "previous_order_date" represents the order date of the previous order made by the same customer.
+"previous_total_amount" represents the total amount of the previous order. If there is no previous order, NULL is used for the date and '0.00' for the total amount.

@@ -1,0 +1,42 @@
+-- This selects the role to use with this account.
+USE ROLE ACCOUNTADMIN;
+
+-- This selects the warehouse to use with this account for 
+-- extracting, loading and transforming the loaded data.
+USE WAREHOUSE COMPUTE_WH;
+
+-- This creates the database in which the user seeks to 
+-- create the data objects.
+CREATE OR REPLACE DATABASE SCD1_DB;
+
+-- This creates a storage integration between Snowflake and 
+-- the AWS S3 bucket created for the purpose of loading data
+-- into the S3 bucket which can then be accessed by Snowflake.
+CREATE OR REPLACE STORAGE INTEGRATION SCD1_INT
+    TYPE = EXTERNAL_STAGE
+    STORAGE_PROVIDER = 'S3'
+    ENABLED = TRUE
+    STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::422725201341:role/scd1role'
+    STORAGE_ALLOWED_LOCATIONS = ('s3://scd1-data-bucket-alb2147deastudent1/data/');
+
+-- This provides information on the storage integration.
+-- This is useful to retrieve the IAM user ARN and the 
+-- AWS external ID.  These can be used to update the 
+-- trust policy under the trust relationship tab in the
+-- IAM roles page.
+    DESC INTEGRATION SCD1_INT;
+
+-- This is to create an external stage that allows for the
+-- loading of data into the AWS S3 bucket for accessibility
+-- through Snowflake.
+CREATE OR REPLACE STAGE SCD1_DB.PUBLIC.SCD1_STAGE
+STORAGE_INTEGRATION = SCD1_INT
+URL = 's3://scd1-data-bucket-alb2147deastudent1/data/';
+
+-- This is to check to make sure that the storage integration
+-- and the external stage are working as they should.
+ls @SCD1_DB.PUBLIC.SCD1_STAGE;
+    
+
+
+    

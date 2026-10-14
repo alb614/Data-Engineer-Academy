@@ -1,0 +1,93 @@
+Introduction: 
+The SQL AND operator is a powerful tool that allows you to combine multiple conditions in SQL queries to perform more precise data retrieval. It is used in the WHERE clause to specify that all conditions must be true for a row to be included in the result set. The AND operator plays a crucial role in narrowing down data based on multiple criteria, providing more accurate and targeted results. In this document, we will explore the syntax and usage of the SQL AND operator to enhance your data filtering skills.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL AND operator is as follows:
+
+SELECT column1, column2, ... FROM table_name WHERE condition1 AND condition2 AND condition3 ...;
+
+Using the AND Operator: 
+The AND operator is used to combine multiple conditions, and all conditions connected by AND must be true for a row to be included in the result set. For example:
+
+SELECT * FROM employees WHERE department = 'Sales' AND salary > 50000;
+
+This query will retrieve employees from the "employees" table who work in the 'Sales' department and have a salary greater than 50000.
+
+ 
+
+Practical Examples:
+a. Combining Multiple Conditions: Suppose you have a table of products, and you want to retrieve products from the 'Electronics' category with a unit price greater than 100. You can use the AND operator as follows:
+
+SELECT * FROM products WHERE category = 'Electronics' AND unit_price > 100;
+
+This query will retrieve products that satisfy both conditions.
+
+b. Complex Conditions: The AND operator can be used to create complex conditions involving multiple attributes. For example:
+
+SELECT * FROM orders WHERE (order_date >= '2023-01-01' AND order_date <= '2023-03-31') AND order_amount > 500;
+
+This query will retrieve orders with an order date between January 1, 2023, and March 31, 2023, and an order amount greater than 500.
+
+ 
+
+Combining AND with Other Operators: 
+The AND operator can be combined with other operators and logical operators to create even more complex conditions. For example:
+
+SELECT * FROM customers WHERE (age >= 18 AND age <= 30) AND (city = 'New York' OR city = 'Los Angeles');
+
+This query will retrieve customers aged between 18 and 30, residing in either 'New York' or 'Los Angeles.'
+
+ 
+
+Conclusion: 
+The SQL AND operator is a valuable tool for combining multiple conditions and narrowing down data based on precise criteria in SQL queries. By understanding and utilizing the examples and concepts covered in this document, you can effectively filter and retrieve targeted data from your database.
+
+ 
+
+Question:
+Retrieve the order_id, order_date and order_amount of orders with a "Status" of "Processing" and a "order_amount" greater than 300.
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+
+Sample Input:
+orders  
+| order_id | order_date | order_amount | customer_id | order_status | shipping_address |
+|----------|------------|--------------|-------------|--------------|-------------------|
+| 1        | 2023-03-15 | 100.00       | 101         | Pending      | 123 Main Street   |
+| 2        | 2023-05-20 | 400.00       | 102         | Processing  | 456 Oak Avenue    |
+| 3        | 2023-02-10 | 200.00       | 103         | Completed    | 789 Pine Boulevard|
+| 4        | 2023-06-25 | 500.00       | 104         | Processing  | 101 Elm Lane      |
+| 5        | 2023-04-05 | 120.00       | 105         | Shipped      | 202 Maple Street  |
+
+
+Constraints:
+The input table orders contains valid data.
+
+
+Output Format:
+A result set with columns:
+order_id (int)
+order_date (date)
+order_amount (decimal)
+
+
+Sample Output:
+| order_id | order_date | order_amount |
+|----------|------------|--------------|
+| 2        | 2023-05-20 | 400.00       |
+| 4        | 2023-06-25 | 500.00       |
+
+
+Explanation:
+The orders with order_id 2 and 4 have a "Status" of "Processing" and an "order_amount" greater than 300.

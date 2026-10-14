@@ -1,0 +1,30 @@
+create schema raw.dbt_learn_jinja;
+
+create or replace table raw.dbt_learn_jinja.orders__shopify
+(
+    order_id integer,
+    order_amount integer,
+    order_date timestamp
+);
+
+insert into raw.dbt_learn_jinja.orders__shopify(order_id, order_amount, order_date)
+values
+(1, 45, '2021-03-24T19:29:23'),
+(2, 35, '2021-03-25T09:31:38');
+
+select * from raw.dbt_learn_jinja.orders__shopify;
+
+
+create or replace table raw.dbt_learn_jinja.orders__amazon
+(
+    order_id integer,
+    order_amount integer,
+    order_date timestamp
+);
+
+insert into raw.dbt_learn_jinja.orders__amazon(order_id, order_amount, order_date)
+values
+(3, 45, '2021-03-26T01:26:23'),
+(4, 450, '2021-03-24T19:12:52');
+
+select * from raw.dbt_learn_jinja.orders__amazon;

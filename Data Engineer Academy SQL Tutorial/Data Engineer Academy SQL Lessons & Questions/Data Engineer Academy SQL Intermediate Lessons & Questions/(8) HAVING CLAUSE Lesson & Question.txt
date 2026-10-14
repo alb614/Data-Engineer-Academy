@@ -1,0 +1,97 @@
+Introduction: 
+The SQL HAVING clause is a powerful tool that allows you to filter the results of grouped data based on specific conditions. This function is particularly useful when you need to apply filtering on aggregated values obtained from the GROUP BY clause. The HAVING clause is commonly used in conjunction with aggregate functions like COUNT, SUM, AVG, etc., to refine your data analysis and gain more precise insights. In this document, we will explore the syntax and usage of the SQL HAVING clause to enhance your data analysis skills and make your queries more informative.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL HAVING clause is as follows:
+
+SELECT column1, column2, ..., aggregate_function(columnX) AS alias FROM table_name GROUP BY column1, column2, ... HAVING condition;
+
+Filtering Grouped Data: 
+The HAVING clause is used to filter the results obtained from the GROUP BY clause based on specific conditions. It allows you to include or exclude groups that meet the specified criteria. For example:
+
+SELECT department, AVG(salary) AS average_salary FROM employees GROUP BY department HAVING AVG(salary) > 50000;
+
+This query will group employees by their departments and calculate the average salary for each department. The HAVING clause will include only those departments where the average salary is greater than 50,000.
+
+ 
+
+Using HAVING with Aggregate Functions:
+The HAVING clause is typically used with aggregate functions like COUNT, SUM, AVG, MIN, or MAX. This enables you to filter groups based on aggregated values. For example:
+
+SELECT product_category, COUNT(*) AS product_count FROM products GROUP BY product_category HAVING COUNT(*) > 100;
+
+This query will group products by their categories and calculate the number of products in each category. The HAVING clause will include only those categories with more than 100 products.
+
+ 
+
+Combining HAVING with GROUP BY and WHERE: 
+You can combine the HAVING clause with GROUP BY and WHERE clauses to create complex queries with multiple filters. For example:
+
+SELECT department, AVG(salary) AS average_salary FROM employees WHERE is_active = 1 GROUP BY department HAVING AVG(salary) > 50000;
+
+This query will first filter active employees using the WHERE clause, then group them by department, and finally include only those departments with an average salary greater than 50,000.
+
+ 
+
+Logical Operators in HAVING: 
+You can use logical operators like AND, OR, and NOT within the HAVING clause to create more intricate conditions for filtering grouped data.
+
+ 
+
+Handling NULL Values: 
+Be cautious when using the HAVING clause with aggregate functions that involve NULL values. For accurate results, consider using the COALESCE or IFNULL functions to handle NULL values appropriately.
+
+ 
+
+Conclusion: 
+The SQL HAVING clause is a valuable tool for filtering grouped data and refining your data analysis. By understanding and utilizing the examples and concepts covered in this document, you can leverage the HAVING clause to perform more precise data analysis on your edtech platform.
+
+ 
+
+Question:
+Retrieve the department and the average salary (average of salaries) as "AverageSalary" for departments with an average salary greater than 60000. Display the results in descending order based on the "AverageSalary".
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+
+Sample Input:
+| employees                                     |
+|-----------------------------------------------|
+| employee_id | first_name | last_name | department | salary | manager_id |
+|-------------|------------|-----------|------------|--------|------------|
+| 1           | John       | Doe       | Sales      | 65000.00| 3          |
+| 2           | Jane       | Smith     | Finance    | 75000.00| 4          |
+| 3           | Mike       | Johnson   | Sales      | 80000.00| 5          |
+| 4           | Emily      | Davis     | IT         | 70000.00| 5          |
+| 5           | Robert     | Brown     | HR         | 90000.00| NULL       |
+| 6           | Maria      | Garcia    | Finance    | 78000.00| 4          |
+| 7           | Alex       | Lee       | HR         | 85000.00| 5          |
+
+
+Constraints:
+The input table employees contains valid data.
+
+
+Output Format:
+A result set with columns:
+department (varchar)
+AverageSalary (decimal)
+
+
+Sample Output:
+| department | AverageSalary |
+|------------|---------------|
+| HR         | 87500.00      |
+| Finance    | 76500.00      |
+| Sales      | 72500.00      |
+| IT         | 70000.00      |

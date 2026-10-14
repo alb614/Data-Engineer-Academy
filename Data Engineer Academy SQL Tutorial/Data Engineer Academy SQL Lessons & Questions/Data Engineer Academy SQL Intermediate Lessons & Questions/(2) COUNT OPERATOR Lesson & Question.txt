@@ -1,0 +1,114 @@
+Introduction: 
+The SQL COUNT function is a powerful tool that allows you to count the number of rows in a database table or the number of rows within groups when used with the GROUP BY clause. This function is valuable for obtaining insights into the size of datasets, identifying the occurrence of specific conditions, and generating statistical summaries. The COUNT function is commonly used in conjunction with the SELECT statement to perform aggregations and produce meaningful data analyses. In this document, we will explore the syntax and usage of the SQL COUNT function to enhance your data analysis skills and make your queries more informative.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL COUNT function is as follows:
+
+SELECT COUNT(column_name) AS count_result
+
+FROM table_name;
+
+ 
+
+Counting Rows in a Table:
+The COUNT function is applied to a specific column or the asterisk (*) symbol to count the total number of rows in a table. For example:
+
+SELECT COUNT(*) AS total_records FROM employees;
+
+This query will retrieve the total number of records (rows) present in the "employees" table and display it as "total_records."
+
+ 
+
+Counting Rows with Conditions: 
+You can use the COUNT function in combination with conditional statements, such as the WHERE clause, to count rows that meet specific criteria. For instance:
+
+SELECT COUNT(*) AS active_employees FROM employees WHERE is_active = 1;
+
+This query will count the number of active employees (where the "is_active" column value is 1) in the "employees" table.
+
+ 
+
+Counting Rows with GROUP BY: 
+The COUNT function can be used with the GROUP BY clause to count rows within groups based on a particular column's values. This is useful for generating group-level statistics. For example:
+
+SELECT department, COUNT(*) AS employees_count FROM employees GROUP BY department;
+
+This query will group employees by their respective departments and count the number of employees in each department.
+
+ 
+
+Handling NULL Values: 
+By default, the COUNT function includes NULL values in its calculation. However, you can exclude NULL values by using the COUNT(column_name) function on a specific column that does not contain NULL values. For example:
+
+SELECT COUNT(salary) AS non_null_salaries FROM employees;
+
+This query will count the number of non-NULL salary values in the "employees" table.
+
+ 
+
+Counting Distinct Values: 
+To count distinct (unique) values in a column, you can use the COUNT(DISTINCT column_name) syntax. This allows you to obtain unique occurrence counts. For example:
+
+SELECT COUNT(DISTINCT department) AS distinct_departments FROM employees;
+
+This query will count the number of unique departments in the "employees" table.
+
+ 
+
+Conclusion: 
+The SQL COUNT function is a versatile tool for obtaining valuable insights into the size of datasets and generating useful statistical summaries. By understanding and utilizing the examples and concepts covered in this document, you can leverage the COUNT function to perform data analysis effectively on your edtech platform.
+
+ 
+
+Question:
+Retrieve the department and the count of employees as "EmployeeCount" in each department. Display the results in descending order based on the "EmployeeCount".
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+
+Sample Input:
+| employees                                     |
+|-----------------------------------------------|
+| employee_id | first_name | last_name | department | salary | manager_id |
+|-------------|------------|-----------|------------|--------|------------|
+| 1           | John       | Doe       | Sales      | 65000.00| 3          |
+| 2           | Jane       | Smith     | Finance    | 75000.00| 4          |
+| 3           | Mike       | Johnson   | Sales      | 80000.00| 5          |
+| 4           | Emily      | Davis     | IT         | 70000.00| 5          |
+| 5           | Robert     | Brown     | HR         | 90000.00| NULL       |
+| 6           | Maria      | Garcia    | Finance    | 78000.00| 4          |
+| 7           | Alex       | Lee       | HR         | 85000.00| 5          |
+
+
+Constraints:
+The input table employees contains valid data.
+
+
+
+Output Format:
+A result set with columns:
+department (varchar)
+EmployeeCount (int)
+
+
+Sample Output:
+| department | EmployeeCount |
+|------------|---------------|
+| Sales      | 2             |
+| HR         | 2             |
+| Finance    | 2             |
+| IT         | 1             |
+
+
+Explanation:
+The results include the department and the count of employees in each department. The output is ordered in descending order based on the "EmployeeCount."

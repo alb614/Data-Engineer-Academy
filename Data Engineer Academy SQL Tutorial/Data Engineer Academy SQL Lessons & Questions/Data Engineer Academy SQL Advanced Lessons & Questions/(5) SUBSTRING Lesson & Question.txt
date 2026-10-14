@@ -1,0 +1,93 @@
+Introduction: 
+The SQL SUBSTRING function is a versatile tool used to extract specific portions of text or character data from a given string. This function is essential for data manipulation tasks that involve isolating specific information from a larger text. By mastering the SUBSTRING function, you can efficiently retrieve substrings, perform text analysis, and enhance your data processing capabilities. This document provides a comprehensive understanding of the SUBSTRING function, its syntax, use cases, and practical examples to empower your data manipulation skills on your edtech platform.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SUBSTRING function is as follows:
+
+SUBSTRING(string_expression, start_position, length)
+
+ 
+
+Understanding SUBSTRING: 
+The SUBSTRING function is used to extract a portion of a string based on the specified starting position and length.
+
+ 
+
+Common Use Cases:
+a. Extracting Names: Retrieving first names or last names from a full name.
+
+b. Data Cleansing: Removing unnecessary characters or spaces.
+
+c. Parsing Information: Separating data with delimiters for analysis.
+
+ 
+
+Practical Examples:
+Example 1 - Extracting First Names:
+
+SELECT SUBSTRING(full_name, 1, CHARINDEX(' ', full_name) - 1) AS first_name FROM employees;
+
+Example 2 - Removing Prefixes:
+
+SELECT SUBSTRING(product_name, 4, LEN(product_name)) AS cleaned_name FROM products;
+
+Example 3 - Parsing Dates:
+
+SELECT SUBSTRING(order_date, 6, 2) AS month FROM orders;
+
+Managing Position and Length:
+The start_position indicates where the extraction should begin (1-based index).
+
+The length parameter determines how many characters to extract.
+
+Handling Variable-Length Data:
+
+Use CHARINDEX to find the position of a delimiter or space within a string dynamically.
+
+ 
+
+Best Practices:
+a. Consider using the LEN or LENGTH function to calculate the length parameter dynamically.
+
+b. Validate the start_position and length values to avoid errors.
+
+ 
+
+Conclusion:
+SQL SUBSTRING function is a valuable tool for extracting substrings from character data, enabling precise data manipulation and analysis. By understanding the SUBSTRING function's syntax, applications, and practical examples provided in this document, you can confidently retrieve relevant information, cleanse data, and enhance data processing on your edtech platform. This knowledge empowers you to efficiently manage text data and gain valuable insights from your database.
+
+ 
+
+Question:
+Retrieve the first 5 characters of categories for all products. Display product_id, product_name and a new column with first 5 characters AS first_5_chars. 
+
+Table: products 
+
+ColumnName          DataType
+product_id          int
+product_name        varchar 
+category            varchar
+unit_price          decimal
+
+Constraints:
+The input table products contains valid data.
+
+Sample Input:
+products
+| product_id | product_name   | category  | unit_price |
+|------------|-----------------|-----------|------------|
+| 1          | Laptop          | Electronics | 1000.00    |
+| 2          | Smartphone      | Electronics | 500.00     |
+| 3          | Coffee Maker    | Appliances  | 50.00      |
+
+Sample Output:
+| product_id | product_name   | first_5_chars |
+|------------|-----------------|---------------|
+| 1          | Laptop          | Elect         |
+| 2          | Smartphone      | Elect         |
+| 3          | Coffee Maker    | Appli         |
+
+Explanation:
+The "first_5_chars" column contains the first 5 characters of the "category" column for each product.

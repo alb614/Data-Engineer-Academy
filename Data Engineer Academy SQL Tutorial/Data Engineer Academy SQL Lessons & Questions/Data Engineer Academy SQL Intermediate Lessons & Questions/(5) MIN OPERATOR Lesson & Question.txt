@@ -1,0 +1,98 @@
+Introduction: 
+The SQL MIN function is a powerful tool that allows you to retrieve the smallest value from a specified column in a database table. This function is particularly useful when you need to identify the minimum or lowest value of a specific attribute. The MIN function is commonly used in conjunction with the SELECT statement to perform aggregations and obtain meaningful insights from your data. In this document, we will explore the syntax and usage of the SQL MIN function to enhance your data analysis skills and make your queries more informative.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL MIN function is as follows:
+
+SELECT MIN(column_name) AS min_value FROM table_name;
+
+Finding the Minimum Value: 
+The MIN function is applied to a specific column, and it returns the smallest value present in that column. You can use it on various data types, such as numeric values, dates, or text (string) values. For example:
+
+SELECT MIN(salary) AS min_salary FROM employees;
+
+This query will retrieve the smallest (minimum) salary from the "employees" table and display it as "min_salary."
+
+ 
+
+Using MIN with Other Functions: 
+The MIN function can also be used in combination with other SQL functions to derive more complex insights from your data. For instance, you can use it with the GROUP BY clause to find the smallest value for each group within the data. For example:
+
+SELECT department, MIN(salary) AS min_salary FROM employees GROUP BY department;
+
+This query will group employees by their respective departments and show the minimum salary for each department.
+
+ 
+
+Handling NULL Values: 
+When using the MIN function, it is essential to be aware of NULL values in the column. The MIN function ignores NULL values and only considers non-null values to determine the minimum. If all values in the specified column are NULL, the result will be NULL as well. For example:
+
+SELECT MIN(date_joined) AS earliest_join_date FROM employees;
+
+This query will retrieve the earliest join date from the "employees" table, excluding any NULL values.
+
+ 
+
+Combining MIN with Conditional Statements: 
+You can use the MIN function with conditional statements, such as the WHERE clause, to find the smallest value based on specific criteria. For example:
+
+SELECT MIN(order_amount) AS smallest_order_amount FROM orders WHERE order_status = 'Completed';
+
+This query will retrieve the smallest order amount from the "orders" table where the order status is 'Completed.'
+
+ 
+
+Conclusion:
+The SQL MIN function is a valuable tool for identifying the smallest value in a column, providing valuable insights into your data. By understanding and utilizing the examples and concepts covered in this document, you can leverage the MIN function to perform data analysis effectively on your edtech platform.
+
+ 
+
+Question:
+Retrieve the employee details (employee_id, first_name, last_name, department, salary) of the employee with the lowest salary.
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+
+Sample Input:
+| employees                                     |
+|-----------------------------------------------|
+| employee_id | first_name | last_name | department | salary | manager_id |
+|-------------|------------|-----------|------------|--------|------------|
+| 1           | John       | Doe       | Sales      | 65000.00| 3          |
+| 2           | Jane       | Smith     | Finance    | 75000.00| 4          |
+| 3           | Mike       | Johnson   | Sales      | 80000.00| 5          |
+| 4           | Emily      | Davis     | IT         | 70000.00| 5          |
+| 5           | Robert     | Brown     | HR         | 60000.00| NULL       |
+
+
+Constraints:
+The input table employees contains valid data.
+
+
+Output Format:
+A result set with columns:
+employee_id (int)
+first_name (varchar)
+last_name (varchar)
+department (varchar)
+salary (decimal)
+
+
+Sample Output:
+| employee_id | first_name | last_name | department | salary   |
+|-------------|------------|-----------|------------|----------|
+| 5           | Robert     | Brown     | HR         | 60000.00 |
+
+
+Explanation:
+Employee with employee_id 5 has the lowest salary among all employees.

@@ -1,0 +1,93 @@
+Introduction: 
+The SQL UNION is a powerful operator that allows you to combine and consolidate data from multiple SELECT queries into a single result set. This feature is particularly useful when you need to retrieve data from different tables or conditions and present it as a unified output. The UNION operator enables you to merge datasets with the same number of columns and compatible data types, providing valuable insights for data analysis and reporting. In this document, we will explore the syntax, usage, and practical examples of SQL UNION to enhance your data retrieval skills and demonstrate its application on your edtech platform.
+
+ 
+
+Basic Syntax: 
+The basic syntax of SQL UNION is as follows:
+
+SELECT column1, column2, ... FROM table1 WHERE condition UNION SELECT column1, column2, ... FROM table2 WHERE condition;
+
+Understanding SQL UNION: 
+SQL UNION is used to combine the results of two or more SELECT queries into a single result set. It consolidates the data from each query, removing any duplicate rows by default, to provide a comprehensive view of the data.
+
+ 
+
+Practical Examples:
+Example  - Consolidating Data from Multiple Conditions: We have two tables, "orders" and "invoices," with similar structures, and we want to consolidate the order IDs and amounts from both tables for a specific customer.
+
+SELECT order_id, amount FROM orders WHERE customer_id = 101 UNION SELECT invoice_id AS order_id, total_amount AS amount FROM invoices WHERE customer_id = 101;
+
+Adding Duplicates with UNION ALL: By default, SQL UNION removes duplicate rows from the result set. If you want to include duplicate rows, use the UNION ALL operator.
+
+SELECT order_id, amount FROM orders UNION ALL SELECT invoice_id AS order_id, total_amount AS amount FROM invoices
+
+ 
+
+Understanding SQL UNION: 
+ SQL UNION combines the results of two or more SELECT queries into a single result set. It consolidates the data from each query, removing any duplicate rows by default, to provide a comprehensive view of the data.
+
+ 
+
+Use Cases for SQL UNION: 
+ SQL UNION is applicable when: a. Retrieving data from multiple tables with similar structures. b. Consolidating information from different conditions into a single dataset. c. Displaying aggregated data from multiple sources for analysis or reporting.
+
+ 
+
+Eliminating Duplicates: 
+By default, SQL UNION removes duplicate rows from the result set. If you want to include duplicate rows, use the UNION ALL operator instead of UNION.
+
+ 
+
+Column Compatibility: 
+To use UNION, the SELECT queries must have the same number of columns with compatible data types. If data types differ, consider using type conversion functions to ensure compatibility.
+
+ 
+
+Ordering Results: 
+The UNION operator does not guarantee any specific order for the result set. If you require a specific order, use the ORDER BY clause at the end of the UNION query.
+
+Combining Multiple SELECT Queries: You can combine more than two SELECT queries using multiple UNION operators.
+
+ 
+
+Best Practices: 
+a. Ensure that the SELECT queries in a UNION have the same number of columns and compatible data types.
+
+b. Use UNION ALL if you want to include duplicate rows in the result set.
+
+c. Consider using aliases for columns to provide meaningful names in the final result set. d. Use the ORDER BY clause to impose a specific order on the output if necessary.
+
+ 
+
+Conclusion: 
+SQL UNION is a valuable tool for combining and consolidating data from multiple SELECT queries, providing a unified and comprehensive result set. By understanding the syntax and applying practical examples provided in this document, you can leverage the UNION operator to consolidate datasets, remove duplicates, and perform sophisticated data analysis on your edtech platform.
+
+ 
+
+Question:
+Create a consolidated list of transactions from both the Orders and Invoices tables. The result should include:
+
+customer_id
+
+the transaction date (order_date from Orders and invoice_date from Invoices) as transaction_date
+
+the transaction amount (order_amount from Orders and total_amount from Invoices) as transaction_amount
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Table: invoices
+
+ColumnName      DataType
+invoice_id      int
+customer_id     int
+invoice_date    date
+total_amount    decimal

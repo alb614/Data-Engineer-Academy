@@ -1,0 +1,9 @@
+Question:
+Write an SQL query to find the average salary of all employees in the employees_prc table.
+
+Tables: employees_prc
+
+ColumnName		Datatype
+employeeid 		INT
+name 			VARCHAR
+salary 			DECIMAL

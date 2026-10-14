@@ -1,0 +1,103 @@
+Introduction: 
+The SQL BETWEEN operator is a useful tool that simplifies data retrieval in SQL queries when dealing with range-based conditions. It allows you to specify a range of values, and the query will retrieve rows that fall within that range. This is particularly valuable when filtering data based on numeric or date ranges. In this document, we will explore the syntax and usage of the SQL BETWEEN operator to enhance your data retrieval skills.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL BETWEEN operator is as follows:
+
+SELECT column1, column2, ... FROM table_name WHERE column_name BETWEEN value1 AND value2;
+
+Using the BETWEEN Operator: 
+The BETWEEN operator checks if the value of a column falls within the specified range, including the boundary values. For example:
+
+SELECT * FROM products WHERE unit_price BETWEEN 50 AND 100;
+
+This query will retrieve products from the "products" table with a unit price between 50 and 100.
+
+ 
+
+Practical Examples:
+a. Filtering Data with Numeric Ranges: Suppose you have a table of employees, and you want to retrieve employees with salaries between $40,000 and $60,000. You can use the BETWEEN operator as follows:
+
+SELECT * FROM employees WHERE salary BETWEEN 40000 AND 60000;
+
+This query will retrieve employees with salaries falling within the specified range.
+
+b. Using BETWEEN with Dates: The BETWEEN operator is also helpful for filtering data based on date ranges. For example:
+
+SELECT * FROM orders WHERE order_date BETWEEN '2023-01-01' AND '2023-03-31';
+
+This query will retrieve orders with order dates between January 1, 2023, and March 31, 2023.
+
+ 
+
+Combining the BETWEEN Operator: 
+The BETWEEN operator can be combined with other operators and logical operators to create more complex conditions. For example:
+
+SELECT * FROM products WHERE (unit_price BETWEEN 50 AND 100) AND (category = 'Electronics');
+
+This query will retrieve electronics products with a unit price between 50 and 100.
+
+NOT BETWEEN Operator: In addition to the BETWEEN operator, there is a NOT BETWEEN operator, which allows you to retrieve rows that fall outside the specified range. For example:
+
+SELECT * FROM employees WHERE salary NOT BETWEEN 40000 AND 60000;
+
+This query will retrieve employees with salaries outside the range of $40,000 and $60,000.
+
+ 
+
+Conclusion:
+The SQL BETWEEN operator is a valuable tool for simplifying data retrieval based on range-based conditions in SQL queries. By understanding and utilizing the examples and concepts covered in this document, you can effectively filter data within specific ranges and streamline your SQL queries.
+
+ 
+
+Question:
+ Retrieve the order_id, order_date, and order_amount of orders placed between January 1, 2023, and June 30, 2023.
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+
+Sample Input:
+orders 
+| order_id | order_date | order_amount | customer_id | order_status | shipping_address |
+|----------|------------|--------------|-------------|--------------|-------------------|
+| 1        | 2023-03-15 | 100.00       | 101         | Pending      | 123 Main Street   |
+| 2        | 2023-05-20 | 150.00       | 102         | Shipped      | 456 Oak Avenue    |
+| 3        | 2023-02-10 | 200.00       | 103         | Completed    | 789 Pine Boulevard|
+| 4        | 2023-06-25 | 80.00        | 104         | Pending      | 101 Elm Lane      |
+| 5        | 2023-04-05 | 120.00       | 105         | Shipped      | 202 Maple Street  |
+
+
+Constraints:
+The input table orders contains valid data.
+
+
+Output Format:
+A result set with columns:
+order_id (int)
+order_date (date)
+order_amount (decimal)
+
+
+Sample Output:
+| order_id | order_date | order_amount |
+|----------|------------|--------------|
+| 1        | 2023-03-15 | 100.00       |
+| 2        | 2023-05-20 | 150.00       |
+| 3        | 2023-02-10 | 200.00       |
+| 4        | 2023-06-25 | 80.00        |
+| 5        | 2023-04-05 | 120.00       |
+
+
+
+Explanation:
+The orders with order_id 1, 2, 3, 4, and 5 that were placed between January 1, 2023, and June 30, 2023.

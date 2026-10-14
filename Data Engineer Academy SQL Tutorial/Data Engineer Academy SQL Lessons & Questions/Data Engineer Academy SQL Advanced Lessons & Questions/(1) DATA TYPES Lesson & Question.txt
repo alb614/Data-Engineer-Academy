@@ -1,0 +1,114 @@
+Introduction: 
+The SQL data types play a pivotal role in defining how data is stored, manipulated, and retrieved in a database. Each data type serves a specific purpose, ensuring data integrity, optimizing storage, and facilitating efficient query processing. This document provides an in-depth understanding of SQL data types, their classifications, and practical examples to empower you with the knowledge needed to effectively manage and utilize data in your edtech platform.
+
+ 
+
+Data Type Categories: 
+SQL data types are broadly classified into the following categories: a. Numeric Types: Integers and floating-point numbers. b. Character Strings: Variable-length and fixed-length text strings. c. Date and Time: Dates, times, and intervals. d. Boolean: Represents true or false values. e. Binary Data: Storage for binary objects like images or files. f. Miscellaneous: Data types such as UUID, JSON, XML, etc.
+
+ 
+
+Common Numeric Data Types: 
+a. INT: Integer data type for whole numbers.
+
+b. DECIMAL(p, s): Exact numeric type with defined precision and scale.
+
+c. FLOAT: Approximate numeric type for floating-point numbers.
+
+ 
+
+Character String Data Types: 
+a. CHAR(n): Fixed-length character string with a defined length.
+
+b. VARCHAR(n): Variable-length character string with a maximum length.
+
+ 
+
+Date and Time Data Types:
+a. DATE: Stores dates (year, month, day).
+
+b. TIME: Represents time of day.
+
+c. TIMESTAMP: Stores date and time.
+
+ 
+
+Boolean Data Type:
+a. BOOLEAN: Represents true or false values.
+
+ 
+
+Binary Data Types:
+a. BLOB: Stores binary large objects like images or documents.
+
+ 
+
+Considerations:
+a. Choose data types based on the nature of data and storage requirements.
+
+b. Be mindful of memory consumption and storage efficiency.
+
+c. Maintain data consistency by selecting appropriate data types.
+
+ 
+
+Advanced Data Types: 
+Explore advanced data types like JSON, XML, and arrays for more complex data storage needs.
+
+ 
+Conclusion: 
+SQL data types are the building blocks of effective data management in a database system. By understanding the classifications, characteristics, and practical usage of different data types, you can ensure accurate data representation, efficient storage, and optimized query performance in your edtech platform. This knowledge empowers you to create, manage, and analyze data effectively, contributing to the success of your platform.
+
+ 
+
+Question:
+Calculate the number of days between each order_date and '2023-06-01' as "days_since_order". Also display the customer_id, customer_name, order_id and order_date for customers only who have placed orders.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Constraints:
+The input tables (customers and orders) contain valid data.
+
+Sample Input:
+customers
+| customer_id | customer_name | age | city | email | address              |
+|-------------|---------------|-----|------|-------|----------------------|
+| 1           | John Doe      | 30  | NYC  | ...   | 123 Main Street      |
+| 2           | Jane Smith    | 25  | LA   | ...   | 456 Oak Avenue       |
+| 3           | Mike Johnson  | 35  | CHI  | ...   | 789 Pine Boulevard   |
+
+orders
+| order_id | order_date  | order_amount | customer_id | order_status | shipping_address    |
+|----------|-------------|--------------|-------------|--------------|----------------------|
+| 101      | 2023-05-15  | 500.00       | 1           | Shipped      | 123 Main Street      |
+| 102      | 2023-05-20  | 750.00       | 2           | Delivered    | 456 Oak Avenue       |
+| 103      | 2023-05-25  | 300.00       | 1           | Pending      | 123 Main Street      |
+| 104      | 2023-05-30  | 1000.00      | 3           | Shipped      | 789 Pine Boulevard   |
+
+Sample Output:
+| customer_id | customer_name | order_id | order_date | days_since_order |
+|-------------|---------------|----------|------------|------------------|
+| 1           | John Doe      | 101      | 2023-05-15 | 17               |
+| 2           | Jane Smith    | 102      | 2023-05-20 | 13               |
+| 1           | John Doe      | 103      | 2023-05-25 | 9                |
+| 3           | Mike Johnson  | 104      | 2023-05-30 | 3                |
+
+

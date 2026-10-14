@@ -1,0 +1,9 @@
+Question:
+Write an SQL query to calculate the total quantity of products sold from the sales_prc table.
+
+Tables: sales_prc
+
+ColumnName		Datatype
+saleid 			INT
+product 		VARCHAR
+quantitysold 		INT

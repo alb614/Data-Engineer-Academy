@@ -1,0 +1,13 @@
+Question:
+Find the employee with the highest salary in the Analytics department.
+
+Tables: employee_dimension
+
+ColumnName			Datatype
+employee_id 			INT
+role 				VARCHAR
+department 			VARCHAR
+experience_years 		INT
+salary 				INT
+previousyearsalary 		INT
+location 			VARCHAR

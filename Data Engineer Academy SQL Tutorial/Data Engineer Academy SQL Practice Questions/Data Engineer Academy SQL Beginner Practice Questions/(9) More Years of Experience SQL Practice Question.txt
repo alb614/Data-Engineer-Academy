@@ -1,0 +1,13 @@
+Question:
+Find out how many employees have experience greater than or equal to 5 years.
+
+
+Tables: employee_dimension
+ColumnName		Datatype
+employee_id 		INT
+role 			VARCHAR
+department 		VARCHAR
+experience_years 	INT
+salary 			INT
+previousyearsalary 	INT
+location 		VARCHAR

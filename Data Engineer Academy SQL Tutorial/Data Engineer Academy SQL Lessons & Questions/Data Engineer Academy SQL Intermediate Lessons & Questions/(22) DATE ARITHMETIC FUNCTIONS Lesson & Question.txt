@@ -1,0 +1,75 @@
+Introduction:
+Date arithmetic functions in SQL allow you to perform calculations on date and time values. These functions are essential for tasks like finding the difference between two dates, adding or subtracting days, months, or years, and manipulating timestamps to analyze time intervals.
+
+By mastering date arithmetic, you can calculate ages, measure durations, set expiration dates, or create reports that compare different time periods.
+
+In this lesson, we'll cover common date arithmetic functions such as DATEDIFF(), DATEADD() (or equivalents), and others that help you work efficiently with dates and times.
+
+Basic Syntax and Functions:
+1. DATEDIFF() – Calculate difference between two dates
+Returns the number of days (or other units) between two dates.
+
+MySQL:
+SELECT DATEDIFF('2025-08-15', '2025-08-09') AS days_diff;
+Returns: 6
+
+SQL Server:
+SELECT DATEDIFF(day, '2025-08-09', '2025-08-15') AS days_diff;
+Returns: 6
+
+PostgreSQL:
+Uses simple subtraction or AGE() function.
+SELECT '2025-08-15'::date - '2025-08-09'::date AS days_diff;
+Returns: 6
+2. DATE_ADD() / DATEADD() – Add interval to a date
+Add days, months, years, or other intervals to a date.
+
+MySQL:
+SELECT DATE_ADD('2025-08-09', INTERVAL 10 DAY) AS new_date;
+Returns: 2025-08-19
+
+SQL Server:
+SELECT DATEADD(day, 10, '2025-08-09') AS new_date;
+Returns: 2025-08-19
+
+PostgreSQL:
+SELECT '2025-08-09'::date + INTERVAL '10 days' AS new_date;
+Returns: 2025-08-19
+2. DATE_SUB() / DATEADD() with negative values – Subtract interval from a date
+MySQL:
+SELECT DATE_SUB('2025-08-09', INTERVAL 5 DAY) AS new_date;
+Returns: 2025-08-04
+
+SQL Server:
+SELECT DATEADD(day, -5, '2025-08-09') AS new_date;
+Returns: 2025-08-04
+
+PostgreSQL:
+SELECT '2025-08-09'::date - INTERVAL '5 days' AS new_date;
+Returns: 2025-08-04
+Exercise:
+Retrieve all orders displaying order_id, order_status, order_amount, and the original order_date. Additionally, calculate and display:
+
+The expected delivery date by adding 7 days to the order_date using DATE_ADD.
+The last cancellation date by subtracting 3 days from the order_date using DATE_SUB.
+Also include the customer_id and customer_name for each order.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar

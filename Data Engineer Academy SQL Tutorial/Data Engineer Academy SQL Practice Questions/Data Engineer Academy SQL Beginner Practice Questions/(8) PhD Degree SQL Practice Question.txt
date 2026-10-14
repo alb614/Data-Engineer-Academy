@@ -1,0 +1,11 @@
+Question:
+Display employee details who holds a Ph.D. degree in Data Science.
+
+Tables: qualificationandskills
+
+ColumnName		    Datatype
+employee_id 		int
+education_level 	VARCHAR
+graduation_year 	INT
+field_of_study 		VARCHAR
+technical_skills 	VARCHAR

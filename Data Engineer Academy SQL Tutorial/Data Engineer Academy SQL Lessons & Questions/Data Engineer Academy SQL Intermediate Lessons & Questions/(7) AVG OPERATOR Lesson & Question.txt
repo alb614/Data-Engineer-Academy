@@ -1,0 +1,98 @@
+Introduction: 
+The SQL AVG function is a powerful tool that allows you to calculate the mean or average value of numeric data in a specified column of a database table. This function is particularly useful when you need to perform numerical aggregations on your data, such as finding the average test score, calculating average revenue, or determining the mean salary. The AVG function is commonly used in conjunction with the SELECT statement to perform aggregations and generate meaningful insights from your data. In this document, we will explore the syntax and usage of the SQL AVG function to enhance your data analysis skills and make your queries more informative.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL AVG function is as follows:
+
+SELECT AVG(numeric_column) AS average_result FROM table_name;
+
+Calculating the Average of Numeric Values: 
+The AVG function is applied to a specific numeric column to calculate the mean or average of all its values. For example:
+
+SELECT AVG(test_score) AS average_score FROM student_scores;
+
+This query will retrieve the average test score from the "student_scores" table and display it as "average_score."
+
+ 
+
+Averaging Values with Conditions: 
+You can use the AVG function in combination with conditional statements, such as the WHERE clause, to calculate the average of values that meet specific criteria. For instance:
+
+SELECT AVG(rating) AS average_rating FROM product_reviews WHERE product_id = 101;
+
+This query will calculate the average rating for a specific product with ID 101 from the "product_reviews" table.
+
+ 
+
+Averaging Values with GROUP BY: 
+The AVG function can be used with the GROUP BY clause to calculate the average of numeric values within groups based on a particular column's values. This is useful for generating group-level statistics. For example:
+
+SELECT department, AVG(salary) AS average_salary FROM employees GROUP BY department;
+
+This query will group employees by their respective departments and calculate the average salary in each department.
+
+ 
+
+Handling NULL Values: 
+The AVG function ignores NULL values and only includes non-null values in its calculation. If all values in the specified column are NULL, the result will be NULL as well. For example:
+
+SELECT AVG(revenue) AS average_revenue FROM sales;
+
+This query will calculate the average revenue from the "sales" table, excluding any NULL values in the "revenue" column.
+
+ 
+
+Conclusion: 
+The SQL AVG function is a valuable tool for calculating the mean or average of numeric data and gaining valuable insights into your data. By understanding and utilizing the examples and concepts covered in this document, you can leverage the AVG function to perform data analysis effectively on your edtech platform.
+
+ 
+
+Question:
+Retrieve the year of the order_date as "order_year" along with the average order_amount (average of total amounts) as "AverageOrderAmount" for each year. Display the results in chronological order of the "order_year".
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+
+Sample Input:
+| orders                                      |
+|---------------------------------------------|
+| order_id | order_date | order_amount | customer_id | order_status | shipping_address |
+|----------|------------|--------------|-------------|--------------|-------------------|
+| 1        | 2022-05-15 | 100.00       | 101         | Completed    | Address1          |
+| 2        | 2023-01-20 | 150.00       | 102         | Completed    | Address2          |
+| 3        | 2022-05-15 | 120.00       | 103         | Pending      | Address3          |
+| 4        | 2023-02-10 | 200.00       | 104         | Completed    | Address4          |
+| 5        | 2022-10-05 | 180.00       | 105         | Pending      | Address5          |
+| 6        | 2023-01-20 | 220.00       | 106         | Completed    | Address6          |
+| 7        | 2022-10-05 | 250.00       | 107         | Completed    | Address7          |
+
+
+Constraints:
+The input table orders contains valid data.
+
+
+Output Format:
+A result set with columns:
+order_year (int)
+AverageOrderAmount (decimal)
+
+
+Sample Output:
+| order_year | AverageOrderAmount |
+|------------|---------------------|
+| 2022       | 162.50          |
+| 2023       | 190.00              |
+
+
+Explanation:
+The results include the order_year and the average order_amount for each year. The output is ordered in chronological order of the "order_year."

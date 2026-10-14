@@ -1,0 +1,101 @@
+Introduction: 
+The SQL LEFT and RIGHT functions are powerful tools used to extract a specific number of characters from the start (LEFT) or end (RIGHT) of a given string. These functions are crucial for tasks that involve isolating portions of text data to gain insights or manipulate information. By mastering the LEFT and RIGHT functions, you can efficiently extract relevant information, perform data analysis, and enhance your data processing capabilities. This document provides a comprehensive understanding of the LEFT and RIGHT functions, their syntax, use cases, and practical examples to empower your data manipulation skills on your edtech platform.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the LEFT function is as follows:
+
+LEFT(string_expression, length)
+
+The basic syntax of the RIGHT function is as follows:
+
+RIGHT(string_expression, length)
+
+ 
+
+Understanding LEFT & RIGHT:
+The LEFT function extracts a specific number of characters from the start of a string.
+
+The RIGHT function extracts a specific number of characters from the end of a string.
+
+Common Use Cases: a. Data Extraction: Isolating prefixes or suffixes from text data. b. Data Analysis: Analyzing the beginning or end of text for insights. c. Formatting: Preparing data for presentation by truncating long text.
+
+ 
+
+Practical Examples:
+Example 1 - Extracting Prefixes:
+
+SELECT LEFT(full_name, 10) AS short_name FROM employees;
+
+Example 2 - Extracting Suffixes:
+
+SELECT RIGHT(product_code, 4) AS last_digits FROM products;
+
+Example 3 - Data Presentation:
+
+SELECT LEFT(article_content, 100) + '...' AS summarized_content FROM articles;
+
+
+Specifying Length:
+The length parameter determines the number of characters to extract.
+
+Handling Variable-Length Data:
+
+Use LENGTH or LEN functions to calculate the length parameter dynamically.
+
+ 
+
+Best Practices:
+a. Utilize LEFT and RIGHT to efficiently extract relevant data.
+
+b. Combine LEFT and RIGHT with other functions for more advanced data manipulation.
+
+c. Consider handling cases where the specified length exceeds the actual string length.
+
+ 
+
+Conclusion: 
+SQL LEFT and RIGHT functions are invaluable for extracting substrings from the beginning and end of strings, enabling precise data extraction and analysis. By understanding the syntax, applications, and practical examples provided in this document, you can confidently extract relevant data segments, perform data analysis, and enhance your data processing capabilities on your edtech platform. This knowledge empowers you to efficiently manage textual content and gain meaningful insights from your database.
+
+ 
+
+Question:
+Retrieve three letter short form of all departments starting from first letter as "ShortDeptName", alongside display employee_id and first_name & last_name combined as "FullName".
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+Constraints:
+The input table employees contains valid data.
+
+Sample Input:
+employees                                      
+| employee_id | first_name | last_name | department | salary | manager_id |
+|-------------|------------|-----------|------------|--------|------------|
+| 1           | John       | Doe       | IT         | 5000.00| 3          |
+| 2           | Jane       | Smith     | Finance    | 6000.00| 4          |
+| 3           | Mike       | Johnson   | HR         | 7000.00| 5          |
+| 4           | Emily      | Davis     | Marketing  | 5500.00| 5          |
+| 5           | Robert     | Brown     | CEO        | 10000.00| NULL      |
+
+Sample Output:
+| ShortDeptName | employee_id | FullName       |
+|---------------|-------------|----------------|
+| IT            | 1           | John Doe       |
+| Fin           | 2           | Jane Smith     |
+| HR            | 3           | Mike Johnson   |
+| Mar           | 4           | Emily Davis    |
+| CEO           | 5           | Robert Brown   |
+
+Explanation:
+The "ShortDeptName" column contains the three-letter short form of the department.
+The "FullName" column contains the combined first_name and last_name for each employee.
+

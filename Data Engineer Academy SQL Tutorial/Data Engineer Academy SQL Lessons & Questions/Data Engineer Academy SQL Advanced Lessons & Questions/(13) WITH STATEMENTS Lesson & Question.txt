@@ -1,0 +1,149 @@
+Introduction:
+The SQL Common Table Expressions (CTEs) provide a powerful and readable mechanism to structure complex queries, enabling the breakdown of intricate calculations into manageable and logical steps. By leveraging CTEs, you can perform multi-stage data manipulations while maintaining clarity and efficiency in your SQL code. This document introduces the concept of using CTEs for multi-stage aggregation, providing syntax, use cases, and practical examples to enhance your data manipulation skills on your edtech platform.
+
+Introduction to CTEs:
+A Common Table Expression (CTE) is a temporary result set defined within the execution scope of a WITH statement. CTEs simplify complex queries by dividing them into smaller, reusable components.
+
+ 
+
+Syntax:
+WITH cte_name AS (
+    -- Query defining the CTE
+    SELECT ...
+)
+SELECT ...
+FROM cte_name;
+ 
+Common Use Cases:
+Simplifying Complex Queries: Breaking down a multi-step query into logical, readable parts.
+
+Reusability: Reusing the same logic multiple times in a single query.
+
+Hierarchical Data: Handling parent-child relationships with recursive CTEs.
+
+Data Aggregation: Performing aggregations and joining the results with other data.
+
+ 
+
+Stages of Aggregation with CTEs:
+a. Stage 1: Extract relevant data for each group.
+
+b. Stage 2: Perform aggregate functions on extracted data.
+
+c. Stage 3: Combine results or perform further calculations.
+
+ 
+
+Practical Examples:
+ 
+Example 1 - Cumulative Sales by Month:
+ 
+
+WITH Stage1 AS (
+    SELECT
+        DATE_FORMAT(order_date, '%Y-%m') AS month,
+        order_amount AS amount
+    FROM orders
+),
+CumulativeSales AS (
+    SELECT
+        month,
+        SUM(amount) AS monthly_sales
+    FROM Stage1
+    GROUP BY month
+)
+SELECT *
+FROM CumulativeSales;
+ 
+Example 2 - Incremental Average Rating:
+ 
+
+WITH Stage1 AS (
+    SELECT
+        rating_date,
+        AVG(rating) AS daily_avg_rating
+    FROM ratings
+    GROUP BY rating_date
+),
+IncrementalAverage AS (
+    SELECT
+        rating_date,
+        AVG(daily_avg_rating) OVER (ORDER BY rating_date) AS cumulative_avg_rating
+    FROM Stage1
+)
+SELECT *
+FROM IncrementalAverage;
+Example 3 - Comparative Revenue Growth:
+WITH Stage1 AS (
+    SELECT
+        region,
+        SUM(CASE WHEN year = 2022 THEN revenue END) AS revenue_2022,
+        SUM(CASE WHEN year = 2023 THEN revenue END) AS revenue_2023
+    FROM sales
+    GROUP BY region
+),
+GrowthCalculation AS (
+    SELECT
+        region,
+        revenue_2022,
+        revenue_2023,
+        (revenue_2023 - revenue_2022) / revenue_2022 AS growth_rate
+    FROM Stage1
+)
+SELECT *
+FROM GrowthCalculation;
+ 
+Benefits of CTEs:
+Improved Readability: Simplifies complex queries by breaking them into logical steps.
+
+Reusable Code: Avoids repeating logic by referencing the same CTE multiple times.
+
+Reduced Temporary Table Usage: Eliminates the need for temporary tables in some scenarios.
+
+ 
+Best Practices:
+Use meaningful names for CTEs to improve query clarity.
+
+Limit the scope of CTEs to a single query to avoid overcomplication.
+
+Optimize the CTE by ensuring it retrieves only the necessary data.
+
+Question:
+Retrieve department names, the total number of employees in each department, and the average salary, but include only those departments where the average salary exceeds the overall average salary across all employees.
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+
+Sample Input:
+| employees                                  |
+|--------------------------------------------|
+| employee_id | first_name | last_name | department | salary | manager_id |
+|-------------|------------|-----------|------------|--------|------------|
+| 1           | John       | Doe       | Sales      | 60000  | 3          |
+| 2           | Jane       | Smith     | Marketing  | 55000  | 4          |
+| 3           | Mike       | Johnson   | IT         | 70000  | 5          |
+| 4           | Emily      | Davis     | Finance    | 80000  | 6          |
+| 5           | Chris      | Evans     | Sales      | 65000  | 3          |
+| 6           | Emma       | Wilson    | Marketing  | 60000  | 4          |
+| 7           | David      | Lee       | IT         | 75000  | 5          |
+
+
+Output Format:
+A result set with the following columns:
+department (varchar)
+total_employees (int)
+avg_salary (decimal)
+
+Sample Output:
+| department   | total_employees | avg_salary   |
+|--------------|-----------------|--------------|
+| HR           | 1               | 90000,00     | 
+| Finance      | 1               | 75000,00     | 

@@ -1,0 +1,102 @@
+Introduction: 
+The SQL IS NULL operator is a crucial tool for identifying missing or NULL values in SQL queries. In databases, NULL represents the absence of data or an unknown value. The IS NULL operator allows you to check if a column contains NULL values, helping you to handle missing data and perform data quality checks. In this document, we will explore the syntax and usage of the SQL IS NULL operator to enhance your data handling skills.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL IS NULL operator is as follows:
+
+SELECT column1, column2, ... FROM table_name WHERE column_name IS NULL;
+
+Using the IS NULL Operator: 
+The IS NULL operator checks if the value of a column is NULL. For example:
+
+SELECT * FROM customers WHERE email IS NULL;
+
+This query will retrieve customers from the "customers" table whose email addresses are missing (i.e., NULL).
+
+ 
+
+Practical Examples:
+a. Identifying Missing Information: Suppose you have a table of products, and you want to find products without a description. You can use the IS NULL operator as follows:
+
+SELECT * FROM products WHERE description IS NULL;
+
+This query will retrieve products without a description.
+
+b. Data Quality Check: The IS NULL operator is also useful for data quality checks. For instance, if you have a table of employees and you want to ensure that all employees have an assigned manager, you can use the following query:
+
+SELECT * FROM employees WHERE manager_id IS NULL;
+
+This query will retrieve employees without an assigned manager.
+
+ 
+
+Combining IS NULL with Other Operators: 
+ The IS NULL operator can be combined with other operators and logical operators to create more complex conditions. For example:
+
+SELECT * FROM orders WHERE (order_amount > 1000 AND customer_id IS NULL) OR order_status = 'Pending';
+
+This query will retrieve orders with an order amount greater than 1000 and no assigned customer (NULL customer_id), or orders with a status of 'Pending.'
+
+ 
+
+IS NOT NULL Operator: 
+In addition to the IS NULL operator, there is an IS NOT NULL operator, which allows you to retrieve rows that do not contain NULL values. For example:
+
+SELECT * FROM employees WHERE manager_id IS NOT NULL;
+
+This query will retrieve employees with an assigned manager (non-NULL manager_id).
+
+ 
+
+Conclusion: 
+The SQL IS NULL operator is a valuable tool for identifying missing data and performing data quality checks in SQL queries. By understanding and utilizing the examples and concepts covered in this document, you can effectively handle NULL values in your database and ensure data accuracy.
+
+
+Question:
+A hospital management system tracks patient appointments. Sometimes, an appointment is scheduled before a specific physician is assigned to the case. The administrative team needs a list of these unassigned appointments to ensure every patient is seen by a doctor.
+
+Write a SQL query to retrieve the appointment_id and the appointment_datetime (rename as "scheduled_time") for all records where the doctor_id is missing or null.
+
+Table: patient_appointments
+
+ColumnName      DataType
+appointment_id        int
+appointment_datetime      datetime
+patient_id    int
+doctor_id     int
+department    varchar
+reason_for_visit   varchar
+
+
+Sample Input:
+patient_appointments
+| appointment_id | appointment_datetime  | patient_id | doctor_id |   department   |     reason_for_visit   |
+|-------------------|---------------------------|------------|------------|-----------------|-----------------------|
+|         1001           |   2026-05-01 09:00:00   |      501      |     202      |     Cardiology  |   Annual Checkup    |
+|         1003           |   2026-05-01 11:15:00   |      503      |     205      |     Pediatrics    |      Vaccination         |
+|         1005           |   2026-05-02 14:00:00   |      505      |     208      |    Neurology    | Migraine follow-up |
+|         1007           |   2026-05-03 10:00:00   |      507      |     NULL   |  Dermatology  |       Skin Rash           |
+|         1009           |   2026-05-04 11:00:00   |      509      |     215      |    Oncology     |   Routine Screening |
+
+
+Constraints:
+The input table orders contains valid data.
+
+
+Output Format:
+A result set with columns:
+appointment_id (int)
+scheduled_time (datetime)
+
+
+Sample Output:
+| appointment_id | scheduled_time |
+|----------------|----------------|
+|           2         |    2023-05-20   |
+|           4         |    2023-06-25   |
+
+
+Explanation:
+The appointments with appointment_id 1002 and 1004 have missing or null "doctor_id."

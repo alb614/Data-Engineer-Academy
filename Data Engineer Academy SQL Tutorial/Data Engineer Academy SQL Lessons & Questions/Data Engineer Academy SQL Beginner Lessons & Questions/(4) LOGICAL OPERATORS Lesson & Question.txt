@@ -1,0 +1,97 @@
+Introduction:
+The SQL Logical Operators are essential components in SQL queries that allow you to combine multiple conditions to create powerful and precise data retrieval statements. By using logical operators (AND, OR, NOT), you can perform complex filtering and make more sophisticated comparisons between data elements. In this document, we will explore the most commonly used SQL Logical Operators and learn how to apply them effectively to construct versatile queries.
+
+ 
+
+Basic Syntax: 
+Logical Operators in SQL are used in the WHERE clause to connect multiple conditions. The basic syntax is as follows:
+
+SELECT column1, column2, ... FROM table_name WHERE condition1 {logical_operator} condition2;
+
+Commonly Used Logical Operators:
+
+a. AND: The AND operator combine two or more conditions and returns true if all conditions are met. For example:
+
+SELECT * FROM employees WHERE department = 'Sales' AND salary > 50000;
+
+This query will retrieve employees from the "Sales" department with a salary greater than 50000.
+
+b. OR: The OR operator combines two or more conditions and returns true if at least one condition is met. For example:
+
+SELECT * FROM products WHERE category = 'Electronics' OR category = 'Appliances';
+
+This query will retrieve products belonging to either the 'Electronics' or 'Appliances' category.
+
+c. NOT: The NOT operator negates a condition and returns true if the condition is false. For example:
+
+SELECT * FROM customers WHERE NOT country = 'USA';
+
+This query will retrieve customers who are not from the 'USA.'
+
+ 
+
+Combining Logical Operators: 
+Logical operators can be combined to create more complex conditions in the WHERE clause. For example:
+
+SELECT * FROM orders WHERE (order_amount > 1000 AND order_status = 'Pending') OR (order_status = 'Processing');
+
+This query will retrieve orders with an order amount greater than 1000 and a status of 'Pending,' or orders with a status of 'Processing.'
+
+ 
+
+Operator Precedence: 
+When combining multiple logical operators, it is essential to consider operator precedence. The order of evaluation is typically: NOT, AND, OR. However, parentheses can be used to control the order of evaluation explicitly.
+
+ 
+
+Conclusion: 
+SQL Logical Operators provide a powerful way to combine conditions and perform sophisticated data filtering in SQL queries. By understanding and utilizing the examples and concepts covered in this document, you can construct versatile queries to retrieve the precise data you need from a database.
+
+ 
+Question:
+Retrieve the employee_id, first_name, and last_name of employees who either have a salary greater than 70,000 or are in the 'Finance' department.
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+
+Constraints:
+The input table employees contains valid data.
+
+
+Sample Input:
+employees
+| employee_id | first_name | last_name | department | salary | manager_id |
+|-------------|------------|-----------|------------|--------|------------|
+| 1           | John       | Doe       | IT         | 60000.00| 3          |
+| 2           | Jane       | Smith     | Finance    | 75000.00| 4          |
+| 3           | Mike       | Johnson   | IT         | 80000.00| 5          |
+| 4           | Emily      | Davis     | Finance    | 70000.00| 5          |
+| 5           | Robert     | Brown     | HR         | 90000.00| NULL      |
+
+
+Output Format:
+A result set with columns:
+employee_id (int)
+first_name (varchar)
+last_name (varchar)
+
+
+Sample Output:
+| employee_id | first_name | last_name |
+|-------------|------------|-----------|
+| 2           | Jane       | Smith     |
+| 3           | Mike       | Johnson   |
+| 4           | Emily      | Davis     |
+| 5           | Robert     | Brown     |
+
+
+Explanation:
+The employees either have a salary greater than 70,000 or are in the 'Finance' department.

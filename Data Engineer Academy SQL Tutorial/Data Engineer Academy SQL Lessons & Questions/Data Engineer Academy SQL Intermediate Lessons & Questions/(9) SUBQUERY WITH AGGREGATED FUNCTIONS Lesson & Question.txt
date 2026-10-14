@@ -1,0 +1,125 @@
+Introduction: 
+
+The SQL Subquery with Aggregated Function provide a powerful mechanism to aggregate data in multiple stages, enabling complex analyses that involve step-by-step calculations and comparisons. By using subqueries to aggregate data in stages, you can break down intricate processes into manageable steps, gaining deeper insights and facilitating more advanced data analysis. This document provides a comprehensive understanding of using subqueries to aggregate data in multiple stages, along with syntax, use cases, and practical examples, empowering your data manipulation skills on your edtech platform.
+
+ 
+
+Introduction to Aggregating Data in Stages:
+Aggregating data in multiple stages involves breaking down complex calculations into sequential steps.
+
+Subqueries help achieve stage-by-stage data manipulation for more refined analysis.
+
+ 
+
+Common Use Cases:
+a. Cumulative Summation: Calculating running totals for various groups.
+
+b. Incremental Averages: Finding the average as new data points are added.
+
+c. Comparative Analysis: Comparing aggregates between different groups.
+
+Stages of Aggregation: a. Stage 1: Extract relevant data for each group. b. Stage 2: Perform aggregate functions on extracted data. c. Stage 3: Combine results or perform further calculations.
+
+ 
+
+Practical Examples:
+ 
+
+Example 1 - Sales Aggregated by Month:
+SELECT month, SUM(amount) AS monthly_sales FROM (SELECT DATE_FORMAT(order_date, '%Y-%m') AS month, order_amount AS amount FROM orders ) AS stage1 GROUP BY month;
+
+Example 2 - Running Average of Daily Average Ratings:
+SELECT rating_date, AVG(rating) OVER (ORDER BY rating_date) AS avg_rating FROM (SELECT rating_date, AVG(rating) AS rating FROM ratings GROUP BY rating_date ) AS stage1;
+
+Example 3 - Year-over-Year Revenue Growth by Region:
+SELECT region, revenue_2022, revenue_2023, (revenue_2023 - revenue_2022) / NULLIF(revenue_2022,0) AS growth_rate FROM 
+(SELECT region, SUM(CASE WHEN year = 2022 THEN revenue ELSE 0 END) AS revenue_2022, SUM(CASE WHEN year = 2023 THEN revenue ELSE 0 END) AS revenue_2023 FROM sales GROUP BY region) t;
+ 
+
+ 
+
+Benefits of Aggregating in Stages:
+a. Complex Analysis: Break down intricate calculations into simpler steps.
+
+b. Improved Efficiency: Optimize queries for performance in each stage.
+
+c. Granular Control: Gain a deeper understanding of each data manipulation step.
+
+ 
+
+Best Practices:
+ a. Plan your aggregation process step by step before implementing subqueries.
+
+b. Optimize queries for performance by using appropriate indexes.
+
+c. Test and validate the results of each stage for accuracy.
+
+ 
+
+Conclusion: 
+Using SQL subqueries to aggregate data in multiple stages enhances your ability to perform intricate calculations and comparisons, leading to more refined and insightful data analysis. By understanding the stages of aggregation, use cases, and practical examples provided in this document, you can confidently structure and execute complex analyses using subqueries on your edtech platform. This knowledge empowers you to handle multi-stage data manipulation scenarios and derive valuable insights from your database.
+
+Question:
+Retrieve the customer_name of customers who have placed orders with a total amount greater than the average amount of all orders.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address             varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+
+Sample Input:
+| customers                                      |
+|-----------------------------------------------|
+| customer_id | customer_name | age | city | email        | address            |
+|-------------|---------------|-----|-----|--------------|--------------------|
+| 101         | Alice         | 30  | NYC | alice@email  | 123 Main Street    |
+| 102         | Bob           | 35  | LA  | bob@email    | 456 Oak Avenue     |
+| 103         | Charlie       | 28  | SF  | charlie@email| 789 Pine Boulevard |
+| 104         | David         | 40  | NYC | david@email  | 101 Elm Lane       |
+| 105         | Emily         | 25  | LA  | emily@email  | 202 Maple Street   |
+
+| orders                                        |
+|-----------------------------------------------|
+| order_id | order_date | order_amount | customer_id | order_status | shipping_address  |
+|----------|------------|--------------|-------------|--------------|-------------------|
+| 1        | 2023-03-15 | 100.00       | 101         | Pending      | 123 Main Street   |
+| 2        | 2023-05-20 | 150.00       | 102         | Completed    | 456 Oak Avenue    |
+| 3        | 2023-02-10 | 200.00       | 103         | Shipped      | 789 Pine Boulevard|
+| 4        | 2023-06-25 | 80.00        | 104         | Pending      | 101 Elm Lane      |
+| 5        | 2023-04-05 | 120.00       | 105         | Completed    | 202 Maple Street  |
+
+
+Constraints:
+The input tables customers and orders contain valid data.
+
+
+Output Format:
+A result set with columns:
+customer_name (varchar)
+
+
+Sample Output:
+| customer_name |
+|---------------|
+| Charlie       |
+| Emily         |
+
+
+Explanation:
+Customers Charlie and Emily have placed orders with a total amount greater than the average total amount of all orders.

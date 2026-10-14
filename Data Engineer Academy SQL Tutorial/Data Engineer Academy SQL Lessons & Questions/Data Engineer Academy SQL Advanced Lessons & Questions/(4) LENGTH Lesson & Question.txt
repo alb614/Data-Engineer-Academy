@@ -1,0 +1,114 @@
+Introduction: 
+The SQL LENGTH function is a valuable tool used to determine the length (number of characters) of a given string. This function is essential for tasks that involve assessing the size of text data and making informed decisions based on string length. By mastering the LENGTH function, you can efficiently measure string length, validate data, and enhance your data analysis capabilities. This document provides a comprehensive understanding of the LENGTH function, its syntax, use cases, and practical examples to empower your data manipulation skills on your edtech platform.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the LENGTH function is as follows:
+
+LENGTH(string_expression)
+
+Understanding LENGTH: The LENGTH function is utilized to calculate the number of characters in a given string.
+
+ 
+
+Common Use Cases:
+a. Data Validation: Ensuring text fields meet length requirements.
+
+b. Data Analysis: Assessing the length of textual content for insights.
+
+c. Formatting: Identifying overlong content for formatting adjustments.
+
+ 
+
+Practical Examples:
+Example 1 - Data Validation:
+
+SELECT product_name FROM products WHERE LENGTH(product_description) <= 100;
+
+Example 2 - Data Analysis:
+
+SELECT article_title, LENGTH(article_content) AS content_length FROM articles ORDER BY content_length DESC;
+
+Example 3 - Formatting Adjustment:
+
+SELECT CASE WHEN LENGTH(username) > 15 THEN LEFT(username, 15) + '...' ELSE username END AS adjusted_username FROM users;
+
+Result Interpretation:
+The LENGTH function returns the count of characters in the given string.
+
+Spaces are included in the character count.
+
+ 
+
+Handling Multibyte Characters:
+Depending on the database and character encoding, LENGTH might behave differently with multibyte characters.
+
+ 
+
+Best Practices:
+a. Utilize LENGTH to validate data length effectively.
+
+b. Combine LENGTH with other functions for more sophisticated data analysis.
+
+c. Consider the impact of multibyte characters on the result.
+
+ 
+
+Conclusion: 
+SQL LENGTH function is a valuable tool for assessing string length, enabling accurate data validation and analysis. By understanding the LENGTH function's syntax, applications, and practical examples provided in this document, you can confidently measure string length, make informed decisions, and enhance your data analysis capabilities on your edtech platform. This knowledge empowers you to effectively manage textual content and extract meaningful insights from your database.
+
+ 
+
+Question:
+Retrieve order_id, order_date and order_amount along with customer_name and customer_id where customer name is of odd length for all customers who ordered.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Constraints:
+The input tables (customers and orders) contain valid data.
+
+Sample Input:
+customers
+| customer_id | customer_name | age | city | email | address              |
+|-------------|---------------|-----|------|-------|----------------------|
+| 1           | John Doe      | 30  | NYC  | ...   | 123 Main Street      |
+| 2           | Jane Smith    | 25  | LA   | ...   | 456 Oak Avenue       |
+| 3           | Mike Johnson  | 35  | CHI  | ...   | 789 Pine Boulevard   |
+
+orders
+| order_id | order_date  | order_amount | customer_id | order_status | shipping_address    |
+|----------|-------------|--------------|-------------|--------------|----------------------|
+| 101      | 2023-05-15  | 500.00       | 1           | Shipped      | 123 Main Street      |
+| 102      | 2023-05-20  | 750.00       | 2           | Completed    | 456 Oak Avenue       |
+| 103      | 2023-05-25  | 300.00       | 1           | Completed    | 123 Main Street      |
+| 104      | 2023-05-30  | 1000.00      | 3           | Shipped      | 789 Pine Boulevard   |
+
+Sample Output:
+| order_id | order_date  | order_amount | customer_id | customer_name |
+|----------|-------------|--------------|-------------|----------------|
+| 102      | 2023-05-20  | 750.00       | 2           | Jane Smith     |
+| 103      | 2023-05-25  | 300.00       | 1           | John Doe       |
+| 104      | 2023-05-30  | 1000.00      | 3           | Mike Johnson   |
+
+Explanation:
+Only orders with customers who have placed orders are considered.
+Customers with odd-length names are selected.

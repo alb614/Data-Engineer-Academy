@@ -1,0 +1,245 @@
+-- This selects the role to use with this account.
+USE ROLE ACCOUNTADMIN;
+
+-- This selects the warehouse to use with this account for 
+-- extracting, loading and transforming the loaded data.
+USE WAREHOUSE COMPUTE_WH;
+
+-- This creates the database in which the user seeks to 
+-- create the data objects.
+CREATE OR REPLACE DATABASE SCD1_DB;
+
+-- This creates a storage integration between Snowflake and 
+-- the AWS S3 bucket created for the purpose of loading data
+-- into the S3 bucket which can then be accessed by Snowflake.
+CREATE OR REPLACE STORAGE INTEGRATION SCD1_INT
+    TYPE = EXTERNAL_STAGE
+    STORAGE_PROVIDER = 'S3'
+    ENABLED = TRUE
+    STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::422725201341:role/scd1role'
+    STORAGE_ALLOWED_LOCATIONS = ('s3://scd1-data-bucket-alb2147deastudent1/data/');
+
+-- This provides information on the storage integration.
+-- This is useful to retrieve the IAM user ARN and the 
+-- AWS external ID.  These can be used to update the 
+-- trust policy under the trust relationship tab in the
+-- IAM roles page.
+    DESC INTEGRATION SCD1_INT;
+
+-- This is to create an external stage that allows for the
+-- loading of data into the AWS S3 bucket for accessibility
+-- through Snowflake.
+CREATE OR REPLACE STAGE SCD1_DB.PUBLIC.SCD1_STAGE
+STORAGE_INTEGRATION = SCD1_INT
+URL = 's3://scd1-data-bucket-alb2147deastudent1/data/';
+
+-- This is to check to make sure that the storage integration
+-- and the external stage are working as they should.
+ls @SCD1_DB.PUBLIC.SCD1_STAGE;
+
+--------------------------------------------------------------------------------------------------------
+
+USE SCHEMA SCD1_DB.PUBLIC;
+
+-- This creates the source table for the data to be loaded 
+-- from the AWS S3 bucket via the external stage.
+CREATE OR REPLACE TABLE SCD1_DB.PUBLIC.CUSTOMER_SOURCE
+(
+    CUSTOMERNAME STRING,
+    PHONE STRING,
+    ADDRESSLINE1 STRING,
+    ADDRESSLINE2 STRING,
+    CITY STRING,
+    STATE STRING,
+    POSTALCODE STRING,
+    COUNTRY STRING,
+    TERRITORY STRING,
+    CONTACTFIRSTNAME STRING,
+    CONTACTLASTNAME STRING
+);
+
+-- Creates snowpipe
+CREATE OR REPLACE PIPE SCD1_DB.PUBLIC.SCD1PIPE
+AUTO_INGEST = TRUE AS
+COPY INTO SCD1_DB.PUBLIC.CUSTOMER_SOURCE
+FROM
+(
+    SELECT
+    $1 AS CUSTOMERNAME,
+    $2 AS PHONE,
+    $3 AS ADDRESSLINE1,
+    $4 AS ADDRESSLINE2,
+    $5 AS CITY,
+    $6 AS STATE,
+    $7 AS POSTALCODE,
+    $8 AS COUNTRY,
+    $9 AS TERRITORY,
+    $10 AS CONTACTFIRSTNAME,
+    $11 AS CONTACTLASTNAME
+    FROM @SCD1_DB.PUBLIC.SCD1_STAGE
+)
+FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"');
+
+-- Check to see that the pipe is in the "run" state.
+SELECT SYSTEM$PIPE_STATUS('SCD1_DB.PUBLIC.SCD1PIPE');
+
+-- Configure the notification channel for the snowpipe.
+-- Once the SQL query is run, look at the "notification channel"
+-- column in the output.
+USE SCHEMA SCD1_DB.PUBLIC;
+SHOW PIPES;
+
+--------------------------------------------------------------------------------------------------------
+
+-- Create the stream on the source table.
+CREATE OR REPLACE STREAM SCD1_DB.PUBLIC.CUSTOMER_STREAM
+ON TABLE SCD1_DB.PUBLIC.CUSTOMER_SOURCE
+APPEND_ONLY = TRUE;
+
+-- Test to see if the stream was created successfully.
+SELECT * FROM SCD1_DB.PUBLIC.CUSTOMER_STREAM;
+
+--------------------------------------------------------------------------------------------------------
+
+-- This creates the target table for the transformed data 
+-- from the source table.
+CREATE OR REPLACE TABLE SCD1_DB.PUBLIC.CUSTOMER
+(
+    CONTACTFIRSTNAME STRING,
+    CONTACTLASTNAME STRING,
+    CUSTOMERNAME STRING,
+    PHONE STRING,
+    ADDRESSLINE1 STRING,
+    ADDRESSLINE2 STRING,
+    CITY STRING,
+    STATE STRING,
+    POSTALCODE STRING,
+    COUNTRY STRING,
+    TERRITORY STRING,
+    INSERT_DTS TIMESTAMP(6),
+    UPDATE_DTS TIMESTAMP(6)
+);
+
+-- Create the stored procedure that updates the target table 
+-- with new data received by the source table from the AWS S3
+-- bucket via the snowpipe.
+CREATE OR REPLACE PROCEDURE SCD1_DB.PUBLIC.CUSTOMER_SP()
+RETURNS VARCHAR(50)
+LANGUAGE JAVASCRIPT
+EXECUTE AS CALLER
+AS
+$$
+try {
+
+//Create statement BEGIN, Begins a transaction in the current session
+
+snowflake.execute({sqlText: 'BEGIN TRANSACTION;'});
+
+//load data from Customer Stream to a temp table 
+
+snowflake.execute({sqlText: 'CREATE OR REPLACE TEMPORARY TABLE SCD1_DB.PUBLIC.CUSTOMER_TEMP
+AS
+SELECT
+CONTACTFIRSTNAME,
+CONTACTLASTNAME,
+CUSTOMERNAME,
+PHONE,
+ADDRESSLINE1,
+ADDRESSLINE2,
+CITY,
+STATE,
+POSTALCODE,
+COUNTRY,
+TERRITORY,
+CURRENT_TIMESTAMP(6) AS INSERT_DTS,
+CURRENT_TIMESTAMP(6) AS UPDATE_DTS
+FROM
+SCD1_DB.PUBLIC.CUSTOMER_STREAM;'});
+
+//Perform the required SCD1 logic on the Customer Target table based on the primary column 
+
+snowflake.execute({sqlText: 'MERGE INTO SCD1_DB.PUBLIC.CUSTOMER TGT
+USING SCD1_DB.PUBLIC.CUSTOMER_TEMP TMP
+ON TGT.CONTACTFIRSTNAME = TMP.CONTACTFIRSTNAME
+AND TGT.CONTACTLASTNAME = TMP.CONTACTLASTNAME
+
+WHEN MATCHED THEN UPDATE SET
+TGT.CUSTOMERNAME = TMP.CUSTOMERNAME,
+TGT.PHONE = TMP.PHONE,
+TGT.ADDRESSLINE1 = TMP.ADDRESSLINE1,
+TGT.ADDRESSLINE2 = TMP.ADDRESSLINE2,
+TGT.CITY = TMP.CITY,
+TGT.STATE = TMP.STATE,
+TGT.POSTALCODE = TMP.POSTALCODE,
+TGT.COUNTRY = TMP.COUNTRY,
+TGT.TERRITORY = TMP.TERRITORY,
+TGT.UPDATE_DTS = TMP.UPDATE_DTS
+
+WHEN NOT MATCHED THEN INSERT
+(
+    CONTACTFIRSTNAME,
+    CONTACTLASTNAME,
+    CUSTOMERNAME,
+    PHONE,
+    ADDRESSLINE1,
+    ADDRESSLINE2,
+    CITY,
+    STATE,
+    POSTALCODE,
+    COUNTRY,
+    TERRITORY,
+    INSERT_DTS,
+    UPDATE_DTS
+)
+VALUES
+(
+    TMP.CONTACTFIRSTNAME,
+    TMP.CONTACTLASTNAME,
+    TMP.CUSTOMERNAME,
+    TMP.PHONE,
+    TMP.ADDRESSLINE1,
+    TMP.ADDRESSLINE2,
+    TMP.CITY,
+    TMP.STATE,
+    TMP.POSTALCODE,
+    TMP.COUNTRY,
+    TMP.TERRITORY,
+    TMP.INSERT_DTS,
+    TMP.UPDATE_DTS
+);
+'});
+
+//Create statement COMMIT, Commits an open transaction in the current session
+
+snowflake.execute({sqlText: 'COMMIT;'});
+
+//Statement returned for info and debugging purposes
+
+return "Store procedure executed successfully";
+
+}
+
+catch (err)
+{
+    result = "Error: " + err
+    snowflake.execute({sqlText: 'ROLLBACK;'});
+    throw result;
+}
+$$;
+
+-- Create the task that executes the procedure on a schedule.
+CREATE OR REPLACE TASK SCD1_DB.PUBLIC.CUSTOMER_TASK
+WAREHOUSE = COMPUTE_WH
+SCHEDULE = '1 MINUTE'
+WHEN SYSTEM$STREAM_HAS_DATA('SCD1_DB.PUBLIC.CUSTOMER_STREAM')
+AS CALL SCD1_DB.PUBLIC.CUSTOMER_SP();
+
+
+
+-- Alter the task to change the state of the task to a "running" state
+-- since tasks are initialized in the "suspended" state when created.
+ALTER TASK SCD1_DB.PUBLIC.CUSTOMER_TASK RESUME;
+
+-- Check to see if the task is running.  Look at the "state" column 
+-- to get the status of the task.
+SHOW TASKS;

@@ -1,0 +1,100 @@
+Introduction: 
+In SQL, the CAST function plays a crucial role in data manipulation by allowing you to convert data from one data type to another. This process is particularly valuable when performing calculations, comparisons, or aggregations involving data of different types. By mastering the CAST function, you can enhance your ability to perform versatile queries and gain more meaningful insights from your database. This document provides a comprehensive understanding of the CAST function, its syntax, use cases, and practical examples to empower your data manipulation skills on your edtech platform.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the CAST function is as follows:
+
+SELECT CAST(expression AS target_data_type) AS alias_name;
+
+ 
+Understanding CAST:
+The CAST function is used to convert data from one data type to another, ensuring compatibility for operations that involve mixed data types.
+
+ 
+Common Use Cases: 
+a. Data Type Conversion: Converting data types for accurate calculations. b. Data Presentation: Formatting data for more meaningful presentation. c. Comparison Operations: Facilitating comparisons between different data types. d. Aggregations: Ensuring consistency in aggregated results.
+
+ 
+
+Practical Examples:
+Example 1 - Data Type Conversion:
+
+SELECT CAST('123.45' AS DECIMAL(5, 2)) AS converted_value;
+
+Example 2 - Comparison of Different Data Types:
+
+SELECT product_name, unit_price FROM products WHERE CAST(unit_price AS DECIMAL(8, 2)) > 50.00;
+
+Example 3 - Presenting Data with CAST:
+
+SELECT order_id, CAST(order_date AS DATE) AS formatted_date FROM orders;
+
+ 
+Implicit vs. Explicit Conversion:
+Implicit Conversion: Some databases automatically perform type conversions. However, explicit conversions using CAST provide better control and clarity.
+
+Explicit Conversion: Use CAST for intentional data type conversion, reducing ambiguity and ensuring expected outcomes.
+
+Handling Conversion Errors: CAST may fail if the data cannot be converted to the target type. Consider using TRY_CAST or handling exceptions to manage potential errors.
+
+ 
+
+Best Practices: 
+a. Specify the target data type explicitly for clarity and control.
+
+b. Be cautious when converting data types, as it may impact query performance.
+
+c. Test conversions and validate results to ensure accuracy.
+
+ 
+
+Conclusion:
+SQL CAST is a powerful tool for converting data types, enabling versatile data manipulation and enhancing the flexibility of your queries. By understanding the CAST function's syntax, applications, and practical examples detailed in this document, you can confidently convert data types, perform accurate calculations, and effectively manage data on your edtech platform. This knowledge empowers you to leverage your database's full potential for better data analysis and decision-making.
+
+ 
+
+Question:
+Calculate total amount for orders with order status = 'Completed' and cast as string with '$' prefix. Display column name as "total_amount_string".
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Constraints:
+The input table orders contains valid data.
+
+Sample Input:
+orders 
+| order_id | order_date  | order_amount | customer_id | order_status | shipping_address    |
+|----------|-------------|--------------|-------------|--------------|----------------------|
+| 101      | 2023-05-15  | 500.00       | 1           | Shipped      | 123 Main Street      |
+| 102      | 2023-05-20  | 750.00       | 2           | Completed    | 456 Oak Avenue       |
+| 103      | 2023-05-25  | 300.00       | 1           | Completed    | 123 Main Street      |
+| 104      | 2023-05-30  | 1000.00      | 3           | Shipped      | 789 Pine Boulevard   |
+
+
+Output Format:
+A result set with a single column:
+total_amount_string (varchar)
+
+
+Sample Output:
+| total_amount_string |
+|---------------------|
+| $1050.00            |
+
+Explanation:
+Only orders with order_status = 'Completed' are considered.
+The total amount is calculated and cast as a string with a '$' prefix.
+ 
+
+ 
+

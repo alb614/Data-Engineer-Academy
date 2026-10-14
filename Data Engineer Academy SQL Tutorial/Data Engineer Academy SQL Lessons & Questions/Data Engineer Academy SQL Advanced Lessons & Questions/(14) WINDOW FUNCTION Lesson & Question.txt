@@ -1,0 +1,126 @@
+Introduction: 
+SQL Window Functions are a powerful feature that enable advanced data analysis and manipulation by allowing you to perform calculations across a "window" of rows related to the current row. Window functions offer a level of flexibility and insight that traditional aggregate functions cannot achieve. By mastering window functions, you can efficiently calculate rankings, running totals, moving averages, and more, enhancing your data analysis capabilities. This document provides a comprehensive understanding of SQL Window Functions, their syntax, types, use cases, and practical examples to empower your data manipulation skills on your edtech platform.
+
+ 
+
+Introduction to Window Functions:
+Window Functions operate within a specified "window" of rows around the current row.
+
+Window functions can calculate results without changing the result set.
+
+ 
+
+Common Use Cases:
+a. Ranking and Ordering: Determining rankings based on specific criteria.
+
+b. Aggregations: Computing running totals, moving averages, and cumulative sums.
+
+c. Analytical Insights: Identifying trends and patterns within a dataset.
+
+ 
+
+Window Function Syntax:
+The basic syntax of a window function is:
+
+function_name() OVER (PARTITION BY partition_expression ORDER BY order_expression ROWS/RANGE frame_specification)
+
+ 
+
+Practical Examples:
+Example 1 - Calculating Row Number:
+
+SELECT product_name, unit_price, ROW_NUMBER() OVER (ORDER BY unit_price DESC) AS row_num FROM products;
+
+Example 2 - Calculating Running Total:
+
+SELECT order_date, order_amount, SUM(order_amount) OVER (ORDER BY order_date) AS running_total FROM orders;
+
+Example 3 - Calculating Moving Average:
+
+SELECT date, revenue, AVG(revenue) OVER (ORDER BY date ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING) AS moving_avg FROM sales;
+
+ 
+
+Window Function Types:
+a. Ranking Functions: RANK(), DENSE_RANK(), NTILE()
+
+b. Aggregate Functions: SUM(), AVG(), COUNT(), MIN(), MAX()
+
+c. Analytical Functions: LEAD(), LAG(), FIRST_VALUE(), LAST_VALUE()
+
+Customizing Window Frame:
+
+The frame specification defines which rows are included in the window frame.
+
+ 
+
+Best Practices:
+a. Understand the logic and purpose of each window function.
+
+b. Use appropriate ordering and partitioning to get desired results.
+
+c. Optimize queries for performance when using window functions.
+
+ 
+
+Conclusion: 
+SQL Window Functions offer a sophisticated approach to data analysis, providing insights into various aspects of your dataset. By grasping the syntax, types, and practical examples presented in this document, you can confidently utilize window functions to calculate rankings, aggregates, and analytical insights on your edtech platform. This knowledge empowers you to perform in-depth data analysis and uncover valuable patterns and trends that contribute to more informed decision-making.
+
+ 
+
+Question:
+Calculate the rank of customers as "rank" based on their total order_amount (from highest to lowest). Display customer_id, customer_name, order_amount and rank for all customers who ordered.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+
+Constraints:
+The input tables (customers and orders) contain valid data.
+
+
+Sample Input:
+customers                                    
+| customer_id | customer_name | age | city | email | address              |
+|-------------|---------------|-----|------|-------|----------------------|
+| 1           | John Doe      | 30  | NYC  | ...   | 123 Main Street      |
+| 2           | Jane Smith    | 25  | LA   | ...   | 456 Oak Avenue       |
+| 3           | Mike Johnson  | 35  | CHI  | ...   | 789 Pine Boulevard   |
+
+orders                                       
+| order_id | order_date  | order_amount | customer_id | order_status | shipping_address    |
+|----------|-------------|--------------|-------------|--------------|----------------------|
+| 101      | 2023-05-15  | 500.00       | 1           | Shipped      | 123 Main Street      |
+| 102      | 2023-06-20  | 750.00       | 2           | Delivered    | 456 Oak Avenue       |
+| 103      | 2023-07-25  | 300.00       | 1           | Pending      | 123 Main Street      |
+| 104      | 2023-08-30  | 1000.00      | 3           | Shipped      | 789 Pine Boulevard   |
+
+
+Sample Output:
+| customer_id | customer_name | order_amount | rank |
+|-------------|---------------|--------------|------|
+| 1           | John Doe      | 800.00       | 2    |
+| 2           | Jane Smith    | 750.00       | 3    |
+| 3           | Mike Johnson  | 1000.00      | 1    |
+
+
+Explanation:
+The "order_amount" column contains the total order amount for each customer.
+The "rank" column represents the rank of customers based on their total order amount (highest to lowest).

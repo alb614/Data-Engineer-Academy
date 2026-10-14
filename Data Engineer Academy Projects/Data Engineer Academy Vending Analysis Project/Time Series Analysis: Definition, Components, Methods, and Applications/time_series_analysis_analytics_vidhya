@@ -1,0 +1,182 @@
+#####################################################################################
+#--------------------------- Simple Moving Average (SMA) ---------------------------#
+#####################################################################################
+
+import pandas as pd
+from matplotlib import pyplot as plt
+from statsmodels.graphics.tsaplots import plot_acf
+df_temperature = pd.read_csv('temperature_TSA.csv', encoding='utf-8')
+df_temperature.head()
+
+#---------------------------------------------------------------------------------------#
+
+df_temperature.info()
+
+#---------------------------------------------------------------------------------------#
+
+# set index for year column
+df_temperature.set_index('Any', inplace=True)
+df_temperature.index.name = 'year'
+# Yearly average air temperature - calculation
+df_temperature['average_temperature'] = df_temperature.mean(axis=1)
+# drop unwanted columns and resetting the datafreame
+df_temperature = df_temperature[['average_temperature']]
+df_temperature.head()
+
+#---------------------------------------------------------------------------------------#
+
+# SMA over a period of 10 and 20 years 
+df_temperature['SMA_10'] = df_temperature.average_temperature.rolling(10, min_periods=1).mean()
+df_temperature['SMA_20'] = df_temperature.average_temperature.rolling(20, min_periods=1).mean()
+
+# Grean = Avg Air Temp, RED = 10 yrs, ORANG colors for the line plot
+colors = ['green', 'red', 'orange']
+# Line plot 
+df_temperature.plot(color=colors, linewidth=3, figsize=(12,6))
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+plt.legend(labels =['Average air temperature', '10-years SMA', '20-years SMA'], fontsize=14)
+plt.title('The yearly average air temperature in city', fontsize=20)
+plt.xlabel('Year', fontsize=16)
+plt.ylabel('Temperature [°C]', fontsize=16)
+
+#########################################################################################
+#--------------------------- Cumulative Moving Average (CMA) ---------------------------#
+#########################################################################################
+
+# CMA Air temperature
+df_temperature['CMA'] = df_temperature.average_temperature.expanding().mean()
+
+# green -Avg Air Temp and Orange -CMA
+colors = ['green', 'orange']
+# line plot
+df_temperature[['average_temperature', 'CMA']].plot(color=colors, linewidth=3, figsize=(12,6))
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+plt.legend(labels =['Average Air Temperature', 'CMA'], fontsize=14)
+plt.title('The yearly average air temperature in city', fontsize=20)
+plt.xlabel('Year', fontsize=16)
+plt.ylabel('Temperature [°C]', fontsize=16)
+
+##########################################################################################
+#--------------------------- Exponential Moving Average (EMA) ---------------------------#
+##########################################################################################
+
+# EMA Air Temperature
+# Let's smoothing factor - 0.1
+df_temperature['EMA_0.1'] = df_temperature.average_temperature.ewm(alpha=0.1, adjust=False).mean()
+# Let's smoothing factor  - 0.3
+df_temperature['EMA_0.3'] = df_temperature.average_temperature.ewm(alpha=0.3, adjust=False).mean()
+
+# green - Avg Air Temp, red- smoothing factor - 0.1, yellow - smoothing factor  - 0.3
+colors = ['green', 'red', 'yellow']
+df_temperature[['average_temperature', 'EMA_0.1', 'EMA_0.3']].plot(color=colors, linewidth=3, figsize=(12,6), alpha=0.8)
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+plt.legend(labels=['Average air temperature', 'EMA - alpha=0.1', 'EMA - alpha=0.3'], fontsize=14)
+plt.title('The yearly average air temperature in city', fontsize=20)
+plt.xlabel('Year', fontsize=16)
+plt.ylabel('Temperature [°C]', fontsize=16)
+
+#######################################################################################################
+#--------------------------- Auto-Correlation and Partial Auto-Correlation ---------------------------#
+#######################################################################################################
+
+plot_acf(df_temperature)
+plt.show()
+
+plot_acf(df_temperature, lags=30)
+plt.show()
+
+###############################################################################
+#--------------------------- Auto-Regressive Model ---------------------------#
+###############################################################################
+
+# Check to see if the given dataset or time series is random or not
+# by viewing its plot
+
+from matplotlib import pyplot
+from pandas.plotting import lag_plot
+lag_plot(df_temperature)
+pyplot.show()
+
+#-----------------------------------------------------------------------------#
+
+# Implementation of auto-regressive model
+
+#import libraries
+from matplotlib import pyplot
+from statsmodels.tsa.ar_model import AutoReg
+from sklearn.metrics import mean_squared_error
+from math import sqrt
+# load csv as dataset
+#series = read_csv('daily-min-temperatures.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
+# split dataset for test and training
+X = df_temperature.values
+train, test = X[1:len(X)-7], X[len(X)-7:]
+# train autoregression
+model = AutoReg(train, lags=20)
+model_fit = model.fit()
+print('Coefficients: %s' % model_fit.params)
+# Predictions
+predictions = model_fit.predict(start=len(train), end=len(train)+len(test)-1, dynamic=False)
+for i in range(len(predictions)):
+    print('predicted=%f, expected=%f' % (predictions[i], test[i]))
+rmse = sqrt(mean_squared_error(test, predictions))
+print('Test RMSE: %.3f' % rmse)
+# plot results
+pyplot.plot(test)
+pyplot.plot(predictions, color='red')
+pyplot.show()
+
+# Output:
+# predicted=15.893972, expected=16.275000
+# predicted=15.917959, expected=16.600000
+# predicted=15.812741, expected=16.475000
+# predicted=15.787555, expected=16.375000
+# predicted=16.023780, expected=16.283333
+# predicted=15.940271, expected=16.525000
+# predicted=15.831538, expected=16.758333
+# Test RMSE: 0.617
+
+############################################################################################################################
+#--------------------------- Implementation of Moving Average (Weights - Simple Moving Average) ---------------------------#
+############################################################################################################################
+
+import numpy as np
+alpha= 0.3
+n = 10
+w_sma = np.repeat(1/n, n)
+colors = ['green', 'yellow']
+# weights - exponential moving average alpha=0.3 adjust=False
+w_ema = [(1-ALPHA)**i if i==N-1 else alpha*(1-alpha)**i for i in range(n)]
+pd.DataFrame({'w_sma': w_sma, 'w_ema': w_ema}).plot(color=colors, kind='bar', figsize=(8,5))
+plt.xticks([])
+plt.yticks(fontsize=10)
+plt.legend(labels=['Simple moving average', 'Exponential moving average (α=0.3)'], fontsize=10)
+# title and labels
+plt.title('Moving Average Weights', fontsize=10)
+plt.ylabel('Weights', fontsize=10)
+
+############################################################################################################################
+#--------------------------- Auto Regressive Integrated Moving Average (ARIMA) ---------------------------#
+############################################################################################################################
+
+# Implementation of Auto Regressive Integrated Moving Average (ARIMA) in Python
+
+from statsmodels.tsa.arima_model import ARIMA
+model = ARIMA(df_temperature, order=(0, 1, 1)) 
+results_ARIMA = model.fit()
+
+results_ARIMA.summary()
+
+# Generate ARIMA forecast
+results_ARIMA.forecast(3)[0]
+
+# Output of ARIMA forecast
+# array([16.47648941, 16.48621826, 16.49594711])
+
+# Generate ARIMA prediction plot & display plot
+results_ARIMA.plot_predict(start=200)
+plt.show()
+

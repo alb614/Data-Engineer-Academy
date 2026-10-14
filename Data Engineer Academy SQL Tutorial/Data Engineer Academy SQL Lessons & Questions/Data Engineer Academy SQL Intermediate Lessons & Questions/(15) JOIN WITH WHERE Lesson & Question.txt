@@ -1,0 +1,119 @@
+Introduction: 
+The SQL JOIN operation with a WHERE condition is a powerful tool that allows you to combine data from two or more tables based on a common column while also applying additional filtering criteria. This function is particularly useful when you need to retrieve specific data from your database by joining multiple tables. The JOIN operation, in conjunction with the WHERE condition, enables you to merge data and gain precise insights from your database. In this document, we will explore the syntax and usage of the SQL JOIN with a WHERE condition to enhance your data retrieval skills and make your queries more informative on your edtech platform.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL JOIN with WHERE condition is as follows:
+
+SELECT column1, column2, ... FROM table1 JOIN table2 ON table1.columnX = table2.columnY WHERE condition;
+
+Combining Tables with a WHERE Condition: 
+The JOIN operation combines data from two or more tables based on the specified condition in the ON clause. The WHERE condition further filters the results to include only those records that meet the additional criteria specified. For example:
+
+SELECT orders.order_id, orders.order_date, customers.customer_name FROM orders JOIN customers ON orders.customer_id = customers.customer_id WHERE orders.order_date >= '2023-01-01';
+
+This query will retrieve the order ID, order date, and customer name for orders placed on or after January 1, 2023.
+
+ 
+
+JOIN with Multiple Tables and WHERE:
+ You can use the JOIN operation with more than two tables and apply the WHERE condition to filter data across the joined tables. For example:
+
+SELECT orders.order_id, order_items.product_name, customers.customer_name FROM orders JOIN order_items ON orders.order_id = order_items.order_id JOIN customers ON orders.customer_id = customers.customer_id WHERE order_items.unit_price > 50;
+
+This query will retrieve the order ID, product name, and customer name for all order items where the unit price is greater than 50.
+
+ 
+
+Filtering on Non-Joined Columns: 
+The WHERE condition can filter data on columns that are not involved in the JOIN operation, allowing you to perform additional filtering as needed. For example:
+
+SELECT orders.order_id, orders.order_date, customers.customer_name FROM orders JOIN customers ON orders.customer_id = customers.customer_id WHERE orders.order_date >= '2023-01-01' AND customers.country = 'USA';
+
+This query will retrieve the order ID, order date, and customer name for orders placed on or after January 1, 2023, by customers located in the USA.
+
+ 
+
+Combining JOIN with Other Clauses: 
+The JOIN with WHERE condition can be combined with other clauses like GROUP BY, HAVING, ORDER BY, etc., to perform more complex data analysis.
+
+ 
+
+Conclusion: 
+The SQL JOIN with WHERE condition is a valuable tool for combining data from multiple tables while applying additional filtering criteria to retrieve specific data. By understanding and utilizing the examples and concepts covered in this document, you can leverage the JOIN with WHERE condition to merge data effectively and perform precise data analysis on your edtech platform.
+
+ 
+
+Question:
+Retrieve a list of customer_id and customer_name and their corresponding order_id, order_date and order_amount, but only for orders placed between '2023-01-01' and '2023-06-30'.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+
+
+Sample Input:
+| customers                                     |
+|-----------------------------------------------|
+| customer_id | customer_name | age | city | email             | address               |
+|-------------|----------------|-----|------|-------------------|-----------------------|
+| 1           | John Doe       | 30  | NY   | john.doe@email.com| 123 Main Street       |
+| 2           | Jane Smith     | 25  | LA   | jane.smith@email.com| 456 Oak Avenue        |
+| 3           | Mike Johnson   | 35  | SF   | mike.j@email.com  | 789 Pine Boulevard    |
+
+| orders                                  |
+|----------------------------------------|
+| order_id | order_date | order_amount  | customer_id | order_status | shipping_address     |
+|----------|------------|---------------|-------------|--------------|-----------------------|
+| 101      | 2023-01-15 | 120.00        | 1           | Completed    | 123 Main Street       |
+| 102      | 2023-02-20 | 250.00        | 1           | Shipped      | 123 Main Street       |
+| 103      | 2023-03-10 | 180.00        | 2           | Completed    | 456 Oak Avenue        |
+| 104      | 2023-04-05 | 300.00        | 3           | Completed    | 789 Pine Boulevard    |
+| 105      | 2023-05-12 | 150.00        | 2           | Shipped      | 456 Oak Avenue        |
+| 106      | 2023-06-08 | 200.00        | 1           | Completed    | 123 Main Street       |
+| 107      | 2023-07-15 | 220.00        | 2           | Shipped      | 456 Oak Avenue        |
+
+
+Constraints:
+The input tables customers and orders contain valid data.
+
+
+Output Format:
+A result set with columns:
+customer_id (int)
+customer_name (varchar)
+order_id (int)
+order_date (date)
+order_amount (decimal)
+shipping_address   varchar
+
+
+Sample Output:
+| customer_id | customer_name | order_id | order_date | order_amount |
+|-------------|----------------|----------|------------|--------------|
+| 1           | John Doe       | 101      | 2023-01-15 | 120.00       |
+| 1           | John Doe       | 102      | 2023-02-20 | 250.00       |
+| 2           | Jane Smith     | 103      | 2023-03-10 | 180.00       |
+| 3           | Mike Johnson   | 104      | 2023-04-05 | 300.00       |
+| 2           | Jane Smith     | 105      | 2023-05-12 | 150.00       |
+| 1           | John Doe       | 106      | 2023-06-08 | 200.00       |
+
+
+Explanation:
+The output includes the customer_id, customer_name, order_id, order_date, and order_amount for orders placed between '2023-01-01' and '2023-06-30'. The additional order with order_id 107 and order_date '2023-07-15' is not included in the results as it falls outside the specified date range.

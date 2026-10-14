@@ -1,0 +1,96 @@
+Introduction:
+SQL CONCAT function is a valuable tool used to combine multiple strings into a single string. This function is essential for tasks that involve creating meaningful and informative text by merging different pieces of information. By mastering the CONCAT function, you can efficiently generate composite strings, enhance data presentation, and enrich your data manipulation capabilities. This document provides a comprehensive understanding of the CONCAT function, its syntax, use cases, and practical examples to empower your data processing skills on your edtech platform.
+
+Basic Syntax: The basic syntax of the CONCAT function is as follows:
+
+CONCAT(string1, string2, ...)
+
+Understanding CONCAT:
+The CONCAT function is used to concatenate two or more strings into a single string.
+
+ 
+
+Common Use Cases:
+a. Data Presentation: Creating informative and well-structured text.
+
+b. Displaying Full Names: Combining first names and last names.
+
+c. Generating Custom Messages: Constructing personalized messages.
+
+ 
+
+Practical Examples:
+Example 1 - Concatenating Names:
+
+SELECT CONCAT(first_name, ' ', last_name) AS full_name FROM students;
+
+Example 2 - Creating Custom Messages:
+
+SELECT CONCAT('Hello, ', first_name, '! Your order #', order_id, ' is confirmed.') AS confirmation_message FROM orders;
+
+Example 3 - Displaying Address:
+
+SELECT CONCAT(street_address, ', ', city, ', ', state, ' ', postal_code) AS full_address FROM customers;
+
+ 
+Handling Null Values:
+CONCAT treats null values as empty strings. To handle nulls, use the ISNULL or COALESCE functions.
+
+Combining Multiple Strings:
+
+CONCAT allows you to combine multiple strings by separating them with commas.
+
+ 
+
+Best Practices:
+a. Utilize CONCAT for creating informative and personalized text.
+
+b. Test CONCAT with various string combinations to achieve the desired output.
+
+c. Consider null handling to ensure accurate results.
+
+
+Conclusion:
+SQL CONCAT function is a valuable asset for combining strings, facilitating data presentation and communication. By understanding the CONCAT function's syntax, applications, and practical examples provided in this document, you can confidently create composite strings, enhance data presentation, and enrich your data manipulation capabilities on your edtech platform. This knowledge empowers you to efficiently manage textual content and craft informative messages from your database.
+
+ 
+
+Question:
+Retrieve customer_name, customer_id and customer address as "full address" as a column using address and city combined one after the other.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Output Format:
+A result set with columns:
+customer_name (varchar)
+customer_id (int)
+full_address (varchar)
+
+Constraints:
+The input table customers contains valid data.
+
+Sample Input:
+customers                                    
+| customer_id | customer_name | age | city | email | address              |
+|-------------|---------------|-----|------|-------|----------------------|
+| 1           | John Doe      | 30  | NYC  | jdoe@gmail.com | 123 Main Street      |
+| 2           | Jane Smith    | 25  | LA   | jsmith@yahoo.com | 456 Oak Avenue       |
+| 3           | Mike Johnson  | 35  | CHI  | mjohnson@gmail.com | 789 Pine Boulevard   |
+
+Sample Output:
+| customer_name | customer_id | full_address                  |
+|---------------|-------------|-------------------------------|
+| John Doe      | 1           | 123 Main Street NYC           |
+| Jane Smith    | 2           | 456 Oak Avenue LA             |
+| Mike Johnson  | 3           | 789 Pine Boulevard CHI        |
+
+Explanation:
+The "full_address" column contains the combination of address and city for each customer.

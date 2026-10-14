@@ -1,0 +1,95 @@
+Introduction: 
+The SQL LIKE operator is a powerful tool that allows you to perform pattern matching on text data in SQL queries. It enables you to retrieve data based on specific patterns or substrings present in a column's values. Whether you need to search for a specific word, find similar names, or filter data based on partial information, the LIKE operator is an essential feature to master. In this document, we will explore the syntax and usage of the SQL LIKE operator to enhance your data retrieval skills.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL LIKE operator is as follows:
+
+SELECT column1, column2, ... FROM table_name WHERE column_name LIKE pattern;
+
+Using Wildcards with LIKE: 
+The true power of the LIKE operator lies in its ability to use wildcard characters for pattern matching. The two most commonly used wildcards are:
+
+a. % (Percent Sign): The percent sign represents zero, one, or multiple characters. For example:
+
+SELECT * FROM customers WHERE customer_name LIKE 'Joh%';
+
+This query will retrieve all customers with names starting with "Joh," followed by any number of characters.
+
+b. _ (Underscore): The underscore represents a single character. For example:
+
+SELECT * FROM employees WHERE last_name LIKE 'Sm_th';
+
+This query will retrieve employees with last names starting with "Sm" followed by any single character and ending with "th".
+
+ 
+
+Practical Examples:
+a. Finding Specific Words: To find all products with names containing the word "phone," you can use the LIKE operator as follows:
+
+SELECT * FROM products WHERE product_name LIKE '%phone%';
+
+This query will retrieve products with names containing the word "phone" anywhere in the product name.
+
+b. Similar Names: To find customers with similar names, such as "Smith" and "Smyth," you can use the LIKE operator with the underscore wildcard:
+
+SELECT * FROM customers WHERE last_name LIKE 'Sm_th';
+
+This query will retrieve customers with last names starting with "Smi," followed by any single character.
+
+Combining LIKE with Other Operators: The LIKE operator can be combined with other operators and logical operators to create more complex conditions. For example:
+
+SELECT * FROM products WHERE product_name LIKE 'A%' OR (unit_price > 100 AND product_name LIKE '%phone%');
+
+This query will retrieve products with names starting with 'A' or products with unit prices greater than 100 and names containing the word "phone."
+
+ 
+
+Conclusion: 
+The SQL LIKE operator is a versatile tool for pattern matching and flexible data retrieval in SQL queries. By understanding and utilizing the examples and concepts covered in this document, you can effectively search for specific patterns, find similar information, and filter data based on partial values in your database.
+
+
+Question:
+Retrieve the product_id, product_name, and category of products whose names end with the letter "e" and belong to either the "Electronics" or "Appliances" category.
+
+Table: products 
+
+ColumnName          DataType
+product_id          int
+product_name        varchar 
+category            varchar
+unit_price          decimal
+
+
+Constraints:
+The input table products contains valid data.
+
+
+Sample Input:
+products
+| product_id | product_name | category  | unit_price |
+|------------|--------------|-----------|------------|
+| 1          | Laptop       | Electronics | 800.00    |
+| 2          | Smartphone   | Electronics | 500.00    |
+| 3          | Coffee Maker | Appliances  | 50.00     |
+| 4          | Blender       | Appliances | 200.00    |
+| 5          | Headphones    | Electronics | 120.00    |
+
+
+Output Format:
+A result set with columns:
+product_id (int)
+product_name (varchar)
+category (varchar)
+
+
+Sample Output:
+| product_id | product_name | category    |
+|------------|--------------|-------------|
+| 2          | Smartphone   | Electronics |
+
+
+
+Explanation:
+The products with names ending with the letter "e" and belonging to either the "Electronics" or "Appliances" category.

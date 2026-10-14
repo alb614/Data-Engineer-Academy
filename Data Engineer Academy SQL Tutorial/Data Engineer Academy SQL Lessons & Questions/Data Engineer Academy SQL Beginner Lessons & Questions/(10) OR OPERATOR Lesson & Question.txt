@@ -1,0 +1,102 @@
+Introduction: 
+The SQL OR operator is a powerful tool that allows you to combine multiple conditions in SQL queries to perform more flexible data retrieval. It is used in the WHERE clause to specify that at least one of the conditions must be true for a row to be included in the result set. The OR operator plays a crucial role in broadening data filtering, providing alternative options, and handling various scenarios. In this document, we will explore the syntax and usage of the SQL OR operator to enhance your data filtering skills.
+
+ 
+
+Basic Syntax: 
+The basic syntax of the SQL OR operator is as follows:
+
+SELECT column1, column2, ... FROM table_name WHERE condition1 OR condition2 OR condition3 ...;
+
+Using the OR Operator: 
+The OR operator is used to combine multiple conditions, and if any of the conditions connected by OR is true, the row will be included in the result set. For example:
+
+SELECT * FROM employees WHERE department = 'Sales' OR salary > 50000;
+
+This query will retrieve employees from the "employees" table who work in the 'Sales' department or have a salary greater than 50000.
+
+ 
+
+Practical Examples:
+a. Combining Multiple Conditions: Suppose you have a table of products, and you want to retrieve products either from the 'Electronics' category or with a unit price greater than 1000. You can use the OR operator as follows:
+
+SELECT * FROM products WHERE category = 'Electronics' OR unit_price > 1000;
+
+This query will retrieve products that satisfy either of the conditions.
+
+b. Handling Different Scenarios: The OR operator can be used to handle various scenarios. For instance, if you have a table of customers, and you want to retrieve customers from either 'New York' or 'Los Angeles,' you can use the following query:
+
+SELECT * FROM customers WHERE city = 'New York' OR city = 'Los Angeles';
+
+This query will retrieve customers from either of the specified cities.
+
+ 
+
+Combining OR With Other Operators:
+The OR operator can be combined with other operators and logical operators to create even more complex conditions. For example:
+
+SELECT * FROM orders WHERE (order_amount > 1000 OR order_status = 'Pending') AND customer_id IS NOT NULL;
+
+This query will retrieve orders with an order amount greater than 1000 or with a status of 'Pending,' and the customer_id must not be NULL.
+
+ 
+
+Operator Precedence: 
+When combining multiple logical operators like AND and OR, it's essential to consider operator precedence. Parentheses can be used to control the order of evaluation explicitly.
+
+ 
+
+Conclusion: 
+The SQL OR operator is a valuable tool for combining multiple conditions and broadening data filtering in SQL queries. By understanding and utilizing the examples and concepts covered in this document, you can effectively retrieve flexible and relevant data from your database.
+
+ 
+
+Question:
+Retrieve the employee_id, first_name, last_name, and salary of employees who work in the "Sales" department or have a salary greater than 60000.
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+
+Sample Input:
+employees  
+| employee_id | first_name | last_name | department | salary | manager_id |
+|-------------|------------|-----------|------------|--------|------------|
+| 1           | John       | Doe       | Sales      | 65000.00| 3          |
+| 2           | Jane       | Smith     | Finance    | 75000.00| 4          |
+| 3           | Mike       | Johnson   | Sales      | 80000.00| 5          |
+| 4           | Emily      | Davis     | Finance    | 70000.00| 5          |
+| 5           | Robert     | Brown     | HR         | 90000.00| NULL       |
+
+
+Constraints:
+The input table employees contains valid data.
+
+
+Output Format:
+A result set with columns:
+employee_id (int)
+first_name (varchar)
+last_name (varchar)
+salary (decimal)
+
+
+Sample Output:
+| employee_id | first_name | last_name | salary   |
+|-------------|------------|-----------|----------|
+| 1           | John       | Doe       | 65000.00 |
+| 2           | Jane       | Smith     | 75000.00 |
+| 3           | Mike       | Johnson   | 80000.00 |
+| 4           | Emily      | Davis     | 70000.00 |
+| 5           | Robert     | Brown     | 90000.00 |
+
+
+Explanation:
+The employees who work in the "Sales" department or have a salary greater than 60000 are retrieved.

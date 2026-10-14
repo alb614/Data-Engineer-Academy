@@ -1,0 +1,80 @@
+-- Selects all fields from the source table.
+SELECT * FROM SCD1_DB.PUBLIC.CUSTOMER_SOURCE;
+
+-- Select all fields from the target table.
+SELECT * FROM SCD1_DB.PUBLIC.CUSTOMER;
+
+----------------------------------------------------------------------------------------------------------
+
+-- Counts the number of records in the source table. 
+SELECT COUNT(*) AS source_count
+FROM SCD1_DB.PUBLIC.CUSTOMER_SOURCE;
+
+-- Counts the number of records in the stream. 
+SELECT COUNT(*) AS stream_count
+FROM SCD1_DB.PUBLIC.CUSTOMER_STREAM;
+
+-- Counts the number of records in the target table. 
+SELECT COUNT(*) AS target_count
+FROM SCD1_DB.PUBLIC.CUSTOMER;
+
+-- Checks to see if the stream has data or not. 
+SELECT SYSTEM$STREAM_HAS_DATA('SCD1_DB.PUBLIC.CUSTOMER_STREAM') AS stream_has_data;
+
+----------------------------------------------------------------------------------------------------------
+
+-- Selects specific fields from the task history table.
+SELECT
+    NAME,
+    STATE,
+    SCHEDULED_TIME,
+    COMPLETED_TIME,
+    ERROR_CODE,
+    ERROR_MESSAGE,
+    QUERY_ID
+FROM TABLE(
+    SCD1_DB.INFORMATION_SCHEMA.TASK_HISTORY(
+        TASK_NAME => 'CUSTOMER_TASK',
+        RESULT_LIMIT => 20
+    )
+)
+ORDER BY SCHEDULED_TIME DESC;
+
+----------------------------------------------------------------------------------------------------------
+
+-- Shows the tasks in the specified schema. 
+SHOW TASKS LIKE 'CUSTOMER_TASK'
+IN SCHEMA SCD1_DB.PUBLIC;
+
+-- Refreshes pipe (snowpipe) to ensure that it is ingesting data. 
+ALTER PIPE SCD1_DB.PUBLIC.SCD1PIPE REFRESH;
+
+----------------------------------------------------------------------------------------------------------
+
+-- CALL SCD1_DB.PUBLIC.CUSTOMER_SP(); /* Manual call to customer_sp procedure */
+
+-- The following allows the user to view the task history for a specific task.
+SELECT *
+FROM SNOWFLAKE.ACCOUNT_USAGE.TASK_HISTORY
+WHERE NAME = 'CUSTOMER_TASK'
+  AND DATABASE_NAME = 'SCD1_DB'
+  AND SCHEMA_NAME = 'PUBLIC'
+ORDER BY SCHEDULED_TIME DESC;
+
+----------------------------------------------------------------------------------------------------------
+
+SELECT * FROM SCD1_DB.PUBLIC.CUSTOMER
+WHERE CONTACTFIRSTNAME = 'Elizabeth'
+    AND CONTACTLASTNAME = 'Yu'; -- Old phone #: 5085552555
+
+----------------------------------------------------------------------------------------------------------
+
+SELECT * FROM SCD1_DB.PUBLIC.CUSTOMER
+WHERE CONTACTFIRSTNAME = 'Kyung'
+    AND CONTACTLASTNAME = 'Benitez'; -- Old city: NYC
+
+----------------------------------------------------------------------------------------------------------
+
+SELECT * FROM SCD1_DB.PUBLIC.CUSTOMER
+WHERE CONTACTFIRSTNAME = 'John'
+    AND CONTACTLASTNAME = 'Wick'; -- This record does not exist in the full data (prior to change).
