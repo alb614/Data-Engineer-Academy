@@ -1,0 +1,11 @@
+Question:
+Find employees who have a technical skill in Hadoop and graduated in or after 2015.
+
+Tables: qualificationandskills
+
+ColumnName		    	Datatype
+employee_id 			INT
+education_level 		VARCHAR
+graduation_year 		INT
+field_of_study 			VARCHAR
+technical_skills 		VARCHAR

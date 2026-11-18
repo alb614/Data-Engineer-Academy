@@ -1,0 +1,22 @@
+Question:
+List employees who have both a Master's degree and expertise in "Hadoop."
+
+Table: employee_dimension
+
+ColumnName		    Datatype
+employee_id 		INT
+role 			    VARCHAR
+department 		    VARCHAR
+experience_years 	INT
+salary 			    INT
+previousyearsalary 	INT
+location 		    VARCHAR
+
+Table: qualificationandskills 
+
+ColumnName		    	Datatype
+employee_id 			INT
+education_level 		VARCHAR
+graduation_year 		INT
+field_of_study 			VARCHAR
+technical_skills 		VARCHAR

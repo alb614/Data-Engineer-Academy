@@ -1,0 +1,19 @@
+Question:
+Calculate the total revenue for each customer.
+
+Tables: orders_prc
+
+ColumnName		Datatype
+order_id 		INT
+customer_id     INT
+order_date 		DATE
+amount 			INT
+
+Table: customers_prc
+
+ColumnName		Datatype
+customerid 		INT
+name 			VARCHAR
+email 			VARCHAR
+age 			INT
+city 			VARCHAR

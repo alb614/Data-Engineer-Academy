@@ -1,0 +1,11 @@
+Question:
+Identify products from the products_prc table that have a quantity less than 170 and need to be reordered.
+
+Tables: products_prc
+
+ColumnName		    Datatype
+productid 		    INT
+productname 		VARCHAR
+price 			    DECIMAL
+category 		    VARCHAR
+quantityinstock 	INT

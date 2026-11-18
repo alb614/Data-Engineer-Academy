@@ -1,0 +1,13 @@
+Question:
+List all employees in the "Engineering" department along with their experience years.
+
+Tables: employee_dimension
+
+ColumnName		    Datatype
+employee_id 		INT
+role 			    VARCHAR
+department 		    VARCHAR
+experience_years 	INT
+salary 			    INT
+previousyearsalary 	INT
+location 		    VARCHAR

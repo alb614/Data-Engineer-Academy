@@ -1,0 +1,12 @@
+Question:
+Find the youngest employee in each department in the employees_prc table.
+
+Tables: employees_prc
+
+ColumnName		Datatype
+employeeid 		INT
+name 			VARCHAR
+age 			INT
+salary 			DECIMAL
+previousyearsalary DECIMAL
+department 		VARCHAR

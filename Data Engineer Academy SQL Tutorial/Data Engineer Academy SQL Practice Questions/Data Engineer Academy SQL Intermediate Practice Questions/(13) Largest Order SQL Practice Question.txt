@@ -1,0 +1,18 @@
+Question:
+Find the largest order (maximum amount) for each customer and list the customer's name along with the order amount.
+
+Table: orders_prc
+
+ColumnName		Datatype
+order_id 		INT
+customer_id     INT
+order_date 		DATE
+amount 			INT
+
+Table: customers_prc
+
+ColumnName		Datatype
+customerid 		INT
+name 			VARCHAR
+age 			INT
+city 			VARCHAR

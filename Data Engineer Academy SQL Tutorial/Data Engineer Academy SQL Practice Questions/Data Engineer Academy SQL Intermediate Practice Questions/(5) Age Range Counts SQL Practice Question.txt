@@ -1,0 +1,10 @@
+Question:
+Write an SQL query to count the number of customers in three age ranges: under 30, 30 to 40, and over 40, in the customers_prc table.
+
+Tables: customers_prc
+
+ColumnName		Datatype
+customerid 		INT
+name 			VARCHAR
+age 			INT
+city 			VARCHAR

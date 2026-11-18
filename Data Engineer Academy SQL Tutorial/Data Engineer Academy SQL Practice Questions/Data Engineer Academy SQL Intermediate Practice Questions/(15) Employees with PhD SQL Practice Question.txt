@@ -1,0 +1,13 @@
+Question:
+List employees who have a Ph.D. and expertise in both Python and R. 
+
+Hint: Use R, to search for R
+
+Tables: qualificationandskills
+
+ColumnName		    	Datatype
+employee_id 			INT
+education_level 		VARCHAR
+graduation_year 		INT
+field_of_study 			VARCHAR
+technical_skills 		VARCHAR

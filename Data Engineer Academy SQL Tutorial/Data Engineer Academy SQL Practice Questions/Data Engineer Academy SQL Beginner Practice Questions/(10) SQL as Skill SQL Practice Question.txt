@@ -1,0 +1,12 @@
+Question:
+List employees who have SQL as one of their technical skills.
+
+Tables: qualificationandskills
+
+ColumnName		    Datatype
+employee_id 		int
+education_level 	VARCHAR
+graduation_year 	INT
+field_of_study 		VARCHAR
+technical_skills 	VARCHAR
+ 

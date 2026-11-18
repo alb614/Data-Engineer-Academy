@@ -1,0 +1,30 @@
+Question:
+
+
+Calculate the average hours worked by all employees in January 2023.
+
+Tables: employee_performance_fact
+
+Table Structure:
+
+employee_performance_fact 
+
+(
+
+employee_id INT,
+
+month VARCHAR(20),
+
+year INT,
+
+projects_completed INT,
+
+hours_worked INT,
+
+revenue_generated INT
+
+
+
+)
+
+

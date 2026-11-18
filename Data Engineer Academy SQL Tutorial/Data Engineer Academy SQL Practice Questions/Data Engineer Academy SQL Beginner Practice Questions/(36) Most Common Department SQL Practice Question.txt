@@ -1,0 +1,13 @@
+Question:
+Find out the most common department among the employees. If there are ties, display the department name that is alphabetically first.
+
+Tables: employee_dimension
+
+ColumnName		    Datatype
+employee_id 		INT
+role 			    VARCHAR
+department 		    VARCHAR
+experience_years 	INT
+salary 			    INT
+previousyearsalary 	INT
+location 		    VARCHAR

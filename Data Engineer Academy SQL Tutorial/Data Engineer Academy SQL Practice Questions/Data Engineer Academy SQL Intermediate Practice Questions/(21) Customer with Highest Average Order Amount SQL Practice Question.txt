@@ -1,0 +1,18 @@
+Question:
+Find the customer with the highest average order amount and provide their name and the average amount. You may assume there is a single customer with the highest average order amount. Ties do not need to be handled.
+
+Tables: customers_prc
+
+ColumnName		Datatype
+customerid 		INT
+name 			VARCHAR
+age 			INT
+city 			VARCHAR
+
+Table: orders_prc
+
+ColumnName		Datatype
+order_id 		INT
+customer_id     INT
+order_date 		DATE
+amount 			INT

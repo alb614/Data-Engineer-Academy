@@ -1,0 +1,9 @@
+Question:
+Write an SQL query to find the date of the most recent order in the orders_prc table.
+
+Tables: orders_prc
+ColumnName		Datatype
+order_id 		INT
+customer_id     INT
+order_date 		DATE
+amount 			INT

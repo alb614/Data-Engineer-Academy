@@ -1,0 +1,12 @@
+Question:
+Display how many employees generated revenue above $100,000 in January 2023.
+
+Tables: employee_performance_fact
+
+ColumnName		Datatype
+employee_id 		INT
+month 			VARCHAR
+year 			INT
+projects_completed 	INT
+hours_worked 		INT
+revenue_generated 	INT

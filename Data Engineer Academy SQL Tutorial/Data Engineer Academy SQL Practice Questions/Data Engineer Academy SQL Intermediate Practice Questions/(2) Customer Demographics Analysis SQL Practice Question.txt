@@ -1,0 +1,10 @@
+Question:
+Find the average age of customers in each city from the customers_prc table to understand the age demographics of different locations.
+
+Tables: customers_prc
+
+ColumnName		Datatype
+customerid 		INT
+name 			VARCHAR
+age 			INT
+city 			VARCHAR

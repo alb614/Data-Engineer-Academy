@@ -1,0 +1,10 @@
+Question:
+Write an SQL query to find the highest salary in each department in the employees_prc table.
+
+Tables: employees_prc
+
+ColumnName		Datatype
+employeeid 		INT
+name 			VARCHAR
+salary 			DECIMAL
+department 		VARCHAR

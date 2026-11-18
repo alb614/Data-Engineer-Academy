@@ -1,0 +1,13 @@
+Question:
+Calculate the average experience (in years) of data scientists.
+
+Tables: employee_dimension
+
+ColumnName		    Datatype
+employee_id 		INT
+role 			    VARCHAR
+department 		    VARCHAR
+experience_years 	INT
+salary 			    INT
+previousyearsalary 	INT
+location 		    VARCHAR

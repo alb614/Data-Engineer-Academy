@@ -1,0 +1,10 @@
+Question:
+Identify the city with the most customers in the customers_prc table.
+
+Tables: customers_prc
+
+ColumnName		Datatype
+customerid 		INT
+name 			VARCHAR
+age 			INT
+city 			VARCHAR

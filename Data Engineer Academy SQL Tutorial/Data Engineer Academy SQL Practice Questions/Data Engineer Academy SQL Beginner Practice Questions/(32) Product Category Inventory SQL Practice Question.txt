@@ -1,0 +1,11 @@
+Question:
+Determine the total quantity of products available in each category in the products_prc table to manage inventory.
+
+Tables: products_prc
+
+ColumnName		    Datatype
+productid 		    INT
+productname 		VARCHAR
+price 			    DECIMAL
+category 		    VARCHAR
+quantityinstock 	INT

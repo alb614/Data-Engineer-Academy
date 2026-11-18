@@ -1,0 +1,10 @@
+Question:
+List the number of orders placed in each month of 2022.
+
+Tables: orders_prc
+
+ColumnName		Datatype
+order_id 		INT
+customer_id     INT
+order_date 		DATE
+amount 			INT

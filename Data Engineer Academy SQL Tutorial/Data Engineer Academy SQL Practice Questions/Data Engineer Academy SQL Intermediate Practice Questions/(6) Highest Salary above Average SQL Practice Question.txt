@@ -1,0 +1,10 @@
+Question:
+Write an SQL query to identify the employee with the highest salary in the employees_src table, but only if their salary is above the average salary of all employees.
+
+Tables: employees_prc
+
+ColumnName		    	Datatype
+employeeid 			INT
+name 				VARCHAR
+salary 				DECIMAL
+department 			VARCHAR

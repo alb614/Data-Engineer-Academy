@@ -1,0 +1,10 @@
+Question:
+Find the largest order amount and the order date for that order.
+
+Tables: orders_prc
+
+ColumnName		Datatype
+order_id 		INT
+customer_id     INT
+order_date 		DATE
+amount 			INT

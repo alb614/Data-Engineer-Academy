@@ -1,0 +1,29 @@
+Question:
+
+List all employees who have a salary greater than 70000 and work in the Engineering department.
+
+Tables: employee_dimension
+
+Table Structure:
+
+employee_dimension
+
+(
+
+employee_id INT PRIMARY KEY,
+
+role VARCHAR(50),
+
+department VARCHAR(50),
+
+experience_years INT,
+
+salary INT,
+
+previousyearsalary INT,
+
+location VARCHAR(50)
+
+
+
+)

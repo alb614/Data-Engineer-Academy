@@ -1,0 +1,14 @@
+Question:
+Categorize customers into regions based on their city from the customers_prc table, such as "East Coast," "West Coast," and "Midwest."
+
+Note: East Coast(New York, Boston, Philadelphia), West Coast(Los Angeles, San Francisco, Seattle)
+
+ 
+
+Tables: customers_prc
+
+ColumnName		Datatype
+customerid 		INT
+name 			VARCHAR
+age 			INT
+city 			VARCHAR

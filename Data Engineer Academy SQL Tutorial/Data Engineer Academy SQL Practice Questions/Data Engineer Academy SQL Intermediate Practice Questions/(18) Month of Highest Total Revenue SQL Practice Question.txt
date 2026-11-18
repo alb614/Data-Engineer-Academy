@@ -1,0 +1,10 @@
+Question:
+Determine the month with the highest total revenue in 2022 and provide the total revenue for that month
+
+Tables: orders_prc
+
+ColumnName		Datatype
+order_id 		INT
+customer_id     INT
+order_date 		DATE
+amount 			INT

@@ -1,0 +1,13 @@
+Question:
+Calculate and display the 10 % increase in the price of all products in 'Electronics' category in the products_prc table.
+
+Note: Round the increased price to 3 decimals
+
+Tables: products_prc
+
+ColumnName		Datatype
+productid 		INT
+productname 		VARCHAR
+price 			DECIMAL
+category 		VARCHAR
+quantityinstock 	INT

@@ -1,0 +1,23 @@
+Question:
+Calculate and display 5% bonus amount for employees in the employee_dimension table who have generated more than $75000 in revenue. Round the employee bonus to 2 decimals.
+
+Tables: employee_dimension
+
+ColumnName		    Datatype
+employee_id 		INT
+role 			    VARCHAR
+department 		    VARCHAR
+experience_years 	INT
+salary 			    INT
+previousyearsalary 	INT
+location 		    VARCHAR
+
+Table: employee_performance_fact 
+
+ColumnName		    	Datatype
+employee_id 			INT
+month 				    VARCHAR
+year 				    INT
+projects_completed 		INT
+hours_worked 			INT
+revenue_generated 		INT

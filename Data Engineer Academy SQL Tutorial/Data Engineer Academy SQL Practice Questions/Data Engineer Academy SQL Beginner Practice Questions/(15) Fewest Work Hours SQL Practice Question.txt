@@ -1,0 +1,12 @@
+Question:
+Find out who worked the fewest hours in January 2023.
+
+Tables: employee_performance_fact
+
+ColumnName		    Datatype
+employee_id 		INT
+month 			    VARCHAR
+year 			    INT
+projects_completed 	INT
+hours_worked 		INT
+revenue_generated 	INT

@@ -1,0 +1,11 @@
+Question:
+Generate a list of customer names and their email addresses from the customers_prc table to create a contact list for email marketing.
+
+Tables: customers_prc
+
+ColumnName		Datatype
+customerid 		INT
+name 			VARCHAR
+email 			VARCHAR
+age 			INT
+city 			VARCHAR

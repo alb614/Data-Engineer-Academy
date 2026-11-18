@@ -1,0 +1,18 @@
+Question:
+Calculate the total quantity sold, average price, and the maximum price for each product category in the sales_prc and products_prc tables.
+
+Tables: sales_prc
+
+ColumnName		    	Datatype
+saleid 				    INT
+product 			    VARCHAR
+quantitysold 			INT
+
+Table: products_prc
+
+ColumnName		    	Datatype
+productid 			    INT
+productname 			VARCHAR
+price 				    DECIMAL
+category 			    VARCHAR
+quantityinstock 		INT

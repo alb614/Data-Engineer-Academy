@@ -1,0 +1,8 @@
+Question:
+Find the name of the best-selling product (the product with the most units sold) in the sales_prc table.
+
+Tables: sales_prc
+ColumnName		Datatype
+saleid 			INT
+product 		VARCHAR
+quantitysold    INT

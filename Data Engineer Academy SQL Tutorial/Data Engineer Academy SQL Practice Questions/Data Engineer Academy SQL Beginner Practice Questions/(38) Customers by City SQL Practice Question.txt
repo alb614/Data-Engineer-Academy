@@ -1,0 +1,10 @@
+Question:
+List the number of customers in each city.
+
+Tables : customers_prc
+
+ColumnName		Datatype
+customerid 		INT
+name 			VARCHAR
+age 			INT
+city 			VARCHAR

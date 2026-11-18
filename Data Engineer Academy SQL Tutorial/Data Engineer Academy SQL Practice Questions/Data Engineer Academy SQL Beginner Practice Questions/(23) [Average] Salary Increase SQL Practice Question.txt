@@ -1,0 +1,24 @@
+Question:
+Find the salary increase for employees by calculating the difference between their current salary and the previous year's salary (assuming there is a previous-year salary column).
+
+Tables: employees_prc
+
+Table Structure:
+
+employees_prc
+
+(
+
+employeeid INT PRIMARY KEY,
+
+name VARCHAR(50),
+
+salary DECIMAL(10, 2),
+
+previousyearsalary DECIMAL(10, 2),
+
+department VARCHAR(50)
+
+
+
+)

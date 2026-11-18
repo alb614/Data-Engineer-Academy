@@ -1,0 +1,10 @@
+Question:
+List the names of customers in New York.
+
+Tables: customers_prc
+
+ColumnName		Datatype
+customerid 		INT
+name 			VARCHAR
+age 			INT
+city 			VARCHAR

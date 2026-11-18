@@ -1,0 +1,10 @@
+Question:
+List cities with more than one customer, and for each city, provide the number of customers.
+
+Tables: customers_prc
+
+ColumnName		Datatype
+customerid 		INT
+name 			VARCHAR
+age 			INT
+city 			VARCHAR
