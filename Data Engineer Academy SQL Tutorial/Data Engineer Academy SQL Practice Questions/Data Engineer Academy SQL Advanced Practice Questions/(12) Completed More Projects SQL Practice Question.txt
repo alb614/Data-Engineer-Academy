@@ -1,0 +1,23 @@
+Question:
+List the employees who completed more than 5 projects in January 2023, along with their roles and salaries.
+
+Tables: employee_dimension
+
+ColumnName		    Datatype
+employee_id 		INT
+role 			    VARCHAR
+department 		    VARCHAR
+experience_years 	INT
+salary 			    INT
+previousyearsalary 	INT
+location 		    VARCHAR
+
+Tables: employee_performance_fact 
+
+ColumnName		    	Datatype
+employee_id 			INT
+month 				    VARCHAR
+year 				    INT
+projects_completed 		INT
+hours_worked 			INT
+revenue_generated 		INT

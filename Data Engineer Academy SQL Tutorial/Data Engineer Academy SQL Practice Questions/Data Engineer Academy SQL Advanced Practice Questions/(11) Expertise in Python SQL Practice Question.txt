@@ -1,0 +1,28 @@
+Question:
+List all employees who have expertise in Python among those who work in the "Data Science" department.
+
+Output:
+
+The result should have employee_id, role & department as the columns to display
+
+Tables: qualificationandskills
+
+
+ColumnName		    	Datatype
+employee_id 			INT
+education_level 		VARCHAR
+graduation_year 		INT
+field_of_study 			VARCHAR
+technical_skills 		VARCHAR
+
+
+Tables: employee_dimension
+
+ColumnName		    Datatype
+employee_id 		INT
+role 			    VARCHAR
+department 		    VARCHAR
+experience_years 	INT
+salary 			    INT
+previousyearsalary 	INT
+location 		    VARCHAR

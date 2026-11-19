@@ -1,0 +1,34 @@
+Question:
+Find the employees who have a Master's degree and worked more than 150 hours in January 2023, along with their roles.
+
+Tables: employee_performance_fact
+
+ColumnName		    	Datatype
+employee_id 			INT
+month 				    VARCHAR
+year 				    INT
+projects_completed 		INT
+hours_worked 			INT
+revenue_generated 		INT
+
+
+Tables: employee_dimension
+
+ColumnName		    Datatype
+employee_id 		INT
+role 			    VARCHAR
+department 		    VARCHAR
+experience_years 	INT
+salary 			    INT
+previousyearsalary 	INT
+location 		    VARCHAR
+
+
+Table: qualificationandskills 
+
+ColumnName		    	Datatype
+employee_id 			INT
+education_level 		VARCHAR
+graduation_year 		INT
+field_of_study 			VARCHAR
+technical_skills 		VARCHAR

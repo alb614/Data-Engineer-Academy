@@ -1,0 +1,10 @@
+Question:
+Analyze the quarterly revenue trends for 2022 & 2023 and provide the total revenue for each quarter.
+
+Table: orders_prc
+
+ColumnName		Datatype
+order_id 		INT
+customer_id     INT
+order_date 		DATE
+amount 			INT

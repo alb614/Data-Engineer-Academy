@@ -1,0 +1,33 @@
+Question:
+Find the employee with the highest average revenue per project completed in January 2023, considering only employees with a Master's degree.
+
+Tables: employee_dimension
+
+ColumnName		    Datatype
+employee_id 		INT
+role 			    VARCHAR
+department 		    VARCHAR
+experience_years 	INT
+salary 			    INT
+previousyearsalary 	INT
+location 		    VARCHAR
+
+Table: employee_performance_fact 
+
+ColumnName		    	Datatype
+employee_id 			INT
+month 				    VARCHAR
+year 				    INT
+projects_completed 		INT
+hours_worked 			INT
+revenue_generated 		INT
+
+
+Table: qualificationandskills 
+
+ColumnName		    	Datatype
+employee_id 			INT
+education_level 		VARCHAR
+graduation_year 		INT
+field_of_study 			VARCHAR
+technical_skills 		VARCHAR

@@ -1,0 +1,9 @@
+Question:
+Calculate the percentage increase in total sales from the previous year to the current year using the orders_prc table.
+
+ColumnName		Datatype
+
+order_id 		INT
+customer_id     INT
+order_date 		DATE
+amount 			INT

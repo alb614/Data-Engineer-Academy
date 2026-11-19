@@ -1,0 +1,34 @@
+Question:
+Identify the employees who have a Ph.D. degree and generated more than $100,000 in revenue in January 2023.
+
+Expected Output Columns: employee_id, role
+
+Tables: employee_dimension
+
+ColumnName		    Datatype
+employee_id 		INT
+role 			    VARCHAR
+department 		    VARCHAR
+experience_years 	INT
+salary 			    INT
+previousyearsalary 	INT
+location 		    VARCHAR
+
+Tables: employee_performance_fact 
+
+ColumnName		    	Datatype
+employee_id 			INT
+month 				    VARCHAR
+year 				    INT
+projects_completed 		INT
+hours_worked 			INT
+revenue_generated 		INT
+
+Tables: qualificationandskills 
+
+ColumnName		    	Datatype
+employee_id 			INT
+education_level 		VARCHAR
+graduation_year 		INT
+field_of_study 			VARCHAR
+technical_skills 		VARCHAR

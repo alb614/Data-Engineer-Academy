@@ -1,0 +1,18 @@
+Question:
+Identify the customer with the most fluctuating order amounts. Calculate the difference between their highest and lowest order amounts.
+
+Tables: customers_prc
+
+ColumnName		Datatype
+customerid 		INT
+name 			VARCHAR
+age 			INT
+city 			VARCHAR
+
+Table: orders_prc
+
+ColumnName		Datatype
+order_id 		INT
+customer_id     INT
+order_date 		DATE
+amount 			INT

@@ -1,0 +1,18 @@
+Question:
+Identify the customer who had the longest gap between first and last orders. Provide their name and the duration of the gap.
+
+Tables: customers_prc
+
+ColumnName		Datatype
+customerid 		INT
+name 			VARCHAR
+age 			INT
+city 			VARCHAR
+
+Table: orders_prc
+
+ColumnName		Datatype
+order_id 		INT
+customer_id     INT
+order_date 		DATE
+amount 			INT

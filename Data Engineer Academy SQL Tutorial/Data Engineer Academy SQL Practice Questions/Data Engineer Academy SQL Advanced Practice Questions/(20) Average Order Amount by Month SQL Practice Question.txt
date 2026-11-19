@@ -1,0 +1,10 @@
+Question:
+Calculate the average order amount for each month in 2022 and list the results.
+
+Table: orders_prc
+
+ColumnName		Datatype
+order_id 		INT
+customer_id     INT
+order_date 		DATE
+amount 			INT

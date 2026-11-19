@@ -1,0 +1,10 @@
+Question:
+Determine if there are any orders placed on U.S. federal holidays (e.g., Independence Day, Thanksgiving) and list them.
+
+Table: orders_prc
+
+ColumnName		Datatype
+order_id 		INT
+customer_id     INT
+order_date 		DATE
+amount 			INT

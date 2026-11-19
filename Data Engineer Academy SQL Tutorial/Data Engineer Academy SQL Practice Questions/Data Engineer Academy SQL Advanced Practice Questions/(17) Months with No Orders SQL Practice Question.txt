@@ -1,0 +1,10 @@
+Question:
+Identify the months in 2023 with no orders and provide a list of these months.
+
+Table: orders_prc
+
+ColumnName		Datatype
+order_id 		INT
+customer_id     INT
+order_date 		DATE
+amount 			INT

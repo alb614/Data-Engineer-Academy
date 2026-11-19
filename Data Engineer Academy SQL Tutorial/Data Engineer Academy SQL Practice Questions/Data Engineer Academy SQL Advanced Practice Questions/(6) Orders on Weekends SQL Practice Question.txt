@@ -1,0 +1,10 @@
+Question:
+Calculate the number of orders placed on weekends (Saturday and Sunday). Display the number of orders on weekends and total number of orders.
+
+Table: orders_prc
+
+ColumnName		Datatype
+order_id 		INT
+customer_id     INT
+order_date 		DATE
+amount 			INT
